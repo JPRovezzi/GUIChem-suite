@@ -13,13 +13,15 @@
 # Tkinter is a standard GUI library for Python.
 import tkinter as tk
 import ctypes as ct
+import customtkinter as ctk
+
 # Configparser is used to read configuration files.
 import configparser
 
 # frameWelcome is a module that provides functions to create and manage the welcome frame of the GUI.
 import modules.guiFrames.frameWelcome as frameWelcome
 
-#import modules.guiFrames.frameSavePicture as frameSavePicture
+import modules.imageHandler as imageHandler
 
 #------------------------------------------------------------
 # Read configuration file
@@ -28,6 +30,8 @@ config.read('config.cfg')
 
 # Get background color from configuration file
 bg_color = config.get('Settings', 'bg_color')
+ctk.set_appearance_mode("light")
+ctk.set_default_color_theme("dark-blue")
 
 #------------------------------------------------------------
 
@@ -35,67 +39,44 @@ bg_color = config.get('Settings', 'bg_color')
 #------------------------------------------------------------
 # Function definitions
 
-def dark_title_bar(window):
-    """
-    MORE INFO:
-    https://learn.microsoft.com/en-us/windows/win32/api/dwmapi/ne-dwmapi-dwmwindowattribute
-    """
-    window.update()
-    set_window_attribute = ct.windll.dwmapi.DwmSetWindowAttribute
-    get_parent = ct.windll.user32.GetParent
-    hwnd = get_parent(window.winfo_id())
-    value = 2
-    value = ct.c_int(value)
-    set_window_attribute(hwnd, 20, ct.byref(value),
-                         4)
+
 
 def create_gui():
 
     '''Create the main GUI window and frames.'''
-    global root, frame_welcome, frame_selection, frame_getName, frame_result, frames
-    root = tk.Tk()
-    root.title("UGROpyGUI")
+    global root, frame_welcome, frame_selection, frame_getName, frame_result, frames, appearance_menu
+    root = ctk.CTk()
+    root.title("Flash-Calc")
     root.resizable(0, 0)  # Disable resizing
-    #dark_title_bar(root)
     root.eval("tk::PlaceWindow . center")
+    root.geometry("640x480")
+    imageHandler.place_image(root, 0, 0, "assets/backgrounds")
+
+    #Frames
+    menuframe = ctk.CTkFrame(master=root)
 
     # Create a menu bar
-    menu_bar = tk.Menu(root)
+    file_menu = ctk.CTkOptionMenu(menuframe,corner_radius=0, values=["New", "Open", "Save", "Close","","Exit"])
+    file_menu.grid(row=0, column=0, pady=10, padx=10)
+    file_menu.set("File")
+    appearance_menu = ctk.CTkOptionMenu(menuframe,corner_radius=0, values=["Light", "Dark", "System"], command=imageHandler.change_appearance_mode_event)
+    appearance_menu.grid(row=0, column=1, pady=10, padx=10)
+    appearance_menu.set("Theme")
+    menuframe.pack(anchor="w",fill="both",padx=0, pady=0)
     
-    # Create a file menu
-    file_menu = tk.Menu(menu_bar, tearoff=0)
-    #file_menu.add_command(label="Save last picture", command=lambda: frameSavePicture.load())
-    file_menu.add_separator()
-    file_menu.add_command(label="Exit", command=root.quit)
-    menu_bar.add_cascade(label="File", menu=file_menu)
-    # Create an options menu
-    options_menu = tk.Menu(menu_bar, tearoff=0)
-    options_menu.add_command(label="Preferences", command=lambda: print("Option 1 selected"))
-    menu_bar.add_cascade(label="Settings", menu=options_menu)
-    # Add the menu bar to the root window
-    root.config(menu=menu_bar)
 
+    
     # Create frames
-    frame_welcome = tk.Frame(root, width=640, height=480, bg=bg_color)
-
-
-
-    frame_selection = tk.Frame(root, width=640, height=480, bg=bg_color)
-    frame_getName = tk.Frame(root, width=640, height=480, bg=bg_color)
-    frame_result = tk.Frame(root, width=640, height=480, bg=bg_color)
+    frame_welcome = ctk.CTkFrame(master=root)
+    frame_selection = ctk.CTkFrame(master=root, width=640, height=480)
+    frame_getName = ctk.CTkFrame(master=root, width=640, height=480)
+    frame_result = ctk.CTkFrame(master=root, width=640, height=480)
     frames = (frame_welcome, frame_selection, frame_getName, frame_result)
 
-    for frame in frames:
-        frame.grid_rowconfigure(0, weight=1)
-        frame.grid_columnconfigure(0, weight=1)
-        frame.grid(row=0, column=0, sticky="nesw")
-
+    
     #Load the welcome frame
-    
 
-    
-
-    frameWelcome.load()
+    #frameWelcome.load()
 
     # Start the main loop
     root.mainloop()
