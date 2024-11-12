@@ -77,6 +77,9 @@ def create_gui():
 
     # Create frames
     frame_welcome = tk.Frame(root, width=640, height=480, bg=bg_color)
+
+
+
     frame_selection = tk.Frame(root, width=640, height=480, bg=bg_color)
     frame_getName = tk.Frame(root, width=640, height=480, bg=bg_color)
     frame_result = tk.Frame(root, width=640, height=480, bg=bg_color)
@@ -88,6 +91,10 @@ def create_gui():
         frame.grid(row=0, column=0, sticky="nesw")
 
     #Load the welcome frame
+    
+
+    
+
     frameWelcome.load()
 
     # Start the main loop

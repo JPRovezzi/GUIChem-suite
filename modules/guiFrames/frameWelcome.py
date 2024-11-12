@@ -9,6 +9,7 @@
 # Tkinter is a standard GUI library for Python.
 import tkinter as tk
 
+
 # widgetClasses is a module that provides classes for GUI widgets.
 import modules.widgetClasses as widgetClasses
 
@@ -18,6 +19,7 @@ import modules.guiFrames.frameRoot as frameRoot
 #import modules.guiFrames.frameSelection as frameSelection
 # functions is a module that provides common functions to create and manage the GUI.
 import modules.guiFrames.functions as functions
+import modules.imageHandler as imageHandler
 
 #------------------------------------------------------------
 
@@ -27,7 +29,9 @@ def load():
     frameRoot.frame_welcome.tkraise()
     frameRoot.frame_welcome.pack_propagate(False)
     # frame_welcome widgets
-    
+    # Add image file 
+    imageHandler.place_image(frameRoot.frame_welcome, 0, 0, imageHandler.random_image("assets/backgrounds"))
+    #imageHandler.place_image(frameRoot.frame_welcome, 0, 0, "assets/backgrounds/gray_lines.png")
     widgetClasses.TitleLabel(
         frameRoot.frame_welcome,
         text="\nWelcome to Flash-Calc!\n"
@@ -54,5 +58,9 @@ def load():
     activebackground="gray",
     command=lambda:frameRoot.root.destroy()
     ).pack(pady=10)
+    
+    
+
 
     return None
+
