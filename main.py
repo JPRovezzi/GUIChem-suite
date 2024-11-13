@@ -1,8 +1,9 @@
-# Description: This script is the main script for the Flash-Calc application. 
+'''This script is the main script for the GUIChem-suite application.'''
 
 # Import the required libraries
 
-# guiFrames is a module that provides functions to create and manage a graphical user interface (GUI) for UGROpyGUI.
+# guiFrames is a module that provides functions to create and manage a
+# graphical user interface (GUI) for UGROpyGUI.
 import modules.guiFrames.frameRoot as frameRoot
 #------------------------------------------------------------
 

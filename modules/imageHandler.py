@@ -1,7 +1,7 @@
 
 # Importing required libraries
 
-# Tkinter is a standard GUI library for Python.
+# CustomTkinter is a custom GUI library for Python.
 import tkinter as tk
 import customtkinter as ctk
 import random
