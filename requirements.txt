@@ -1,0 +1,9 @@
+# To install the packages listed in this file, use the command:
+# pip install -r requirements.txt
+numpy           ==  2.1.3
+pillow          ==  11.0.0
+pandas          ==  2.2.3
+rdkit           ==  2024.3.6
+pubchempy       ==  1.0.4
+customtkinter   ==  5.2.2
+pulp            ==  2.9.0
