@@ -4,7 +4,6 @@
 
 # guiFrames is a module that provides functions to create and manage a graphical user interface (GUI) for UGROpyGUI.
 import modules.guiFrames.frameRoot as frameRoot
-
 #------------------------------------------------------------
 
 # Create the main window
