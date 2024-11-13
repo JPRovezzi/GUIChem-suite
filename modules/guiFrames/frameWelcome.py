@@ -9,6 +9,7 @@
 # Tkinter is a standard GUI library for Python.
 #import tkinter as tk
 import customtkinter as ctk
+import pywinstyles
 
 
 # widgetClasses is a module that provides classes for GUI widgets.
@@ -24,11 +25,19 @@ import modules.imageHandler as imageHandler
 import modules.toolHandler as toolHandler
 
 #------------------------------------------------------------
-
+bg_color = "#000000"
 
 def load(tool):
     global frame_welcome
-    frame_welcome = ctk.CTkFrame(master=frameRoot.root)
+    frame_welcome = ctk.CTkFrame(
+        master=frameRoot.root,
+        corner_radius=50, 
+        #border_color="black", 
+        #border_width=2, 
+        #fg_color="transparent",
+        bg_color=bg_color,
+        )
+     # just add this line
     #functions.clear_widgets_except(frame_welcome,frameRoot.frames)
     frame_welcome.tkraise()
     frame_welcome.pack_propagate(False)
@@ -40,7 +49,11 @@ def load(tool):
     #imageHandler.place_image(frameRoot.frame_welcome, 0, 0, "assets/backgrounds/gray_lines.png")
     widgetClasses.TitleLabel(
         frame_welcome,
-        text=f"Welcome to {tool}!\n"
+        text=""
+        ).pack(pady=0)
+    widgetClasses.TitleLabel(
+        frame_welcome,
+        text=f"Welcome to {tool}!"
         ).pack(pady=0)
 
     ctk.CTkButton(
@@ -48,7 +61,7 @@ def load(tool):
         text="START",
         #fg="black",
         #font=("TkMenuFont",12),
-        #bg="white",
+        #bg_color=bg_color,
         cursor="hand2",
         #activebackground="gray",
         command=lambda:toolHandler.startTool_event(tool)
@@ -65,7 +78,10 @@ def load(tool):
     command=lambda:frame_welcome.destroy()
     ).pack(pady=10)
     
-    frame_welcome.pack()
+    pywinstyles.set_opacity(frame_welcome, color=bg_color)
+    
+    
+    frame_welcome.pack(pady=100)
 
 
     return None

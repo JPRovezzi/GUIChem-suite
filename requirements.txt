@@ -7,3 +7,4 @@ rdkit           ==  2024.3.6
 pubchempy       ==  1.0.4
 customtkinter   ==  5.2.2
 pulp            ==  2.9.0
+pywinstyles     ==  1.8

@@ -7,7 +7,8 @@
 # Import the required libraries:
 
 # Tkinter is a standard GUI library for Python.
-import tkinter as tk
+#import tkinter as tk
+import customtkinter as ctk
 # Configparser is used to read configuration files.
 import configparser
 
@@ -21,6 +22,7 @@ import modules.guiFrames.frameRoot as frameRoot
 import modules.guiFrames.functions as functions
 # frameWelcome is a module that provides functions to create and manage the welcome frame of the GUI.
 import modules.guiFrames.frameWelcome as frameWelcome
+import modules.toolHandler as toolHandler
 
 
 
@@ -34,30 +36,33 @@ bg_color = config.get('Settings', 'bg_color')
 
 #------------------------------------------------------------
 def load(molecule):
+    toolHandler.destroy_all_frames()
+    frame_result = ctk.CTkFrame(master=frameRoot.root)
+    #functions.clear_widgets_except(frame_result,frameRoot.frames)
+    frame_result.tkraise()
     
-    functions.clear_widgets_except(frameRoot.frame_result,frameRoot.frames)
-    frameRoot.frame_result.tkraise()
-    
-    tk.Label(
-        frameRoot.frame_result,
+    ctk.CTkLabel(
+        frame_result,
         text="The molecule groups are displayed below.",
-        bg=bg_color,
-        fg="white",
-        font=("TkMenuFont",14)
+        #bg=bg_color,
+        #fg="white",
+        #font=("TkMenuFont",14)
         ).pack(pady=20)
     
-    imageHandler.insert_image(frameRoot.frame_result, "output.png")
+    imageHandler.insert_image(frame_result, "output.png")
 
-    tk.Label(
-        frameRoot.frame_result,
+    ctk.CTkLabel(
+        frame_result,
         text = molecule.unifac.subgroups,
-        bg=bg_color,
-        fg="white",
+        #bg=bg_color,
+        #fg="white",
         ).pack()
 
     widgetClasses.GoBackButton(
-        frameRoot.frame_result,
-        command=lambda:frameWelcome.load()
+        frame_result,
+        command=lambda:toolHandler.startTool_event("UgropyGUI")
     ).pack(pady=50)
+
+    frame_result.pack()
     
     return None

@@ -44,6 +44,7 @@ def load(error_message=None):
         outcome = svgHandler.get_results(molecule_id,input_type)
         molecule,error = outcome
         if error == None and molecule != None:
+            frame_selection.destroy()
             frameResult.load(molecule)
             error_message = ""
         elif error == 1:
@@ -56,7 +57,7 @@ def load(error_message=None):
             load(error_message)
         else: 
             error_message = "Unknown error. Please try again."
-            functions.clear_widgets_except(None, frameRoot.frames)
+            #functions.clear_widgets_except(None, frameRoot.frames)
             load(error_message)
 
     def select_smiles():
@@ -65,21 +66,22 @@ def load(error_message=None):
         outcome = svgHandler.get_results(molecule_id,input_type)
         molecule,error = outcome
         if error == None and molecule != None:
+            frame_selection.destroy()
             frameResult.load(molecule)
             error_message = ""
         elif error == 1:
-            functions.clear_widgets_except(None, frameRoot.frames)
+            #functions.clear_widgets_except(None, frameRoot.frames)
             error_message = "The SMILES identifier is not valid. Please try again."
             load(error_message)
         elif error == 2:
-            functions.clear_widgets_except(None, frameRoot.frames)
+            #functions.clear_widgets_except(None, frameRoot.frames)
             error_message = "You must enter a SMILES identifier. Please try again."
             load(error_message)
         else: 
             error_message = "Unknown error. Please try again."
-            functions.clear_widgets_except(None, frameRoot.frames)
+            #functions.clear_widgets_except(None, frameRoot.frames)
             load(error_message)
-    
+    toolHandler.destroy_all_frames()
     frame_selection = ctk.CTkFrame(master=frameRoot.root)
     #functions.clear_widgets_except(frame_selection, frameRoot.frames)
     frame_selection.tkraise()

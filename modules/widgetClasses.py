@@ -16,16 +16,16 @@ bg_color = config.get('Settings', 'bg_color')
 # Class definitions
 
 
-class GoBackButton(tk.Button):
+class GoBackButton(ctk.CTkButton):
         def __init__(self, parent, **kwargs):
             super().__init__(
                 parent, 
                 text="BACK", 
-                fg="black", 
-                font=("TkMenuFont", 12), 
-                bg="white", 
+                #fg="black", 
+                #font=("TkMenuFont", 12), 
+                #bg="white", 
                 cursor="hand2", 
-                activebackground="gray", 
+                #activebackground="gray", 
                 **kwargs
                 )
 
