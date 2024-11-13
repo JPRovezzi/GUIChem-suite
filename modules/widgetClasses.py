@@ -1,6 +1,7 @@
 ''' This module contains the class definitions for the custom widgets used in UGROpyGUI. '''
 # Tkinter is a standard GUI library for Python.
 import tkinter as tk
+import customtkinter as ctk
 # Configparser is used to read configuration files.
 import configparser
 
@@ -28,12 +29,12 @@ class GoBackButton(tk.Button):
                 **kwargs
                 )
 
-class TitleLabel(tk.Label):
+class TitleLabel(ctk.CTkLabel):
     def __init__(self, parent, **kwargs):
         super().__init__(
             parent,
-            bg=bg_color,
-            fg="white",
+            #bg=bg_color,
+            #fg="white",
             font=("TkMenuFont",14),
             **kwargs
             )

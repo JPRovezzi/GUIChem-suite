@@ -7,7 +7,8 @@
 # Import the required libraries:
 
 # Tkinter is a standard GUI library for Python.
-import tkinter as tk
+#import tkinter as tk
+import customtkinter as ctk
 
 
 # widgetClasses is a module that provides classes for GUI widgets.
@@ -20,46 +21,51 @@ import modules.guiFrames.frameRoot as frameRoot
 # functions is a module that provides common functions to create and manage the GUI.
 import modules.guiFrames.functions as functions
 import modules.imageHandler as imageHandler
+import modules.toolHandler as toolHandler
 
 #------------------------------------------------------------
 
 
-def load():
-    functions.clear_widgets_except(frameRoot.frameWelcome,frameRoot.frames)
-    frameRoot.frame_welcome.tkraise()
-    frameRoot.frame_welcome.pack_propagate(False)
+def load(tool):
+    global frame_welcome
+    frame_welcome = ctk.CTkFrame(master=frameRoot.root)
+    #functions.clear_widgets_except(frame_welcome,frameRoot.frames)
+    frame_welcome.tkraise()
+    frame_welcome.pack_propagate(False)
+    
+    
     # frame_welcome widgets
     # Add image file 
-    imageHandler.place_image(frameRoot.frame_welcome, 0, 0, imageHandler.random_image("assets/backgrounds"))
+    #imageHandler.place_image(frameRoot.frame_welcome, 0, 0, imageHandler.random_image("assets/backgrounds"))
     #imageHandler.place_image(frameRoot.frame_welcome, 0, 0, "assets/backgrounds/gray_lines.png")
     widgetClasses.TitleLabel(
-        frameRoot.frame_welcome,
-        text="\nWelcome to Flash-Calc!\n"
+        frame_welcome,
+        text=f"Welcome to {tool}!\n"
         ).pack(pady=0)
 
-    tk.Button(
-        frameRoot.frame_welcome,
+    ctk.CTkButton(
+        frame_welcome,
         text="START",
-        fg="black",
-        font=("TkMenuFont",12),
-        bg="white",
+        #fg="black",
+        #font=("TkMenuFont",12),
+        #bg="white",
         cursor="hand2",
-        activebackground="gray",
-        command=lambda:frameSelection.load()
+        #activebackground="gray",
+        command=lambda:toolHandler.startTool_event(tool)
         ).pack(pady=10)
     
-    tk.Button(
-    frameRoot.frame_welcome,
-    text="EXIT",
-    fg="black",
-    font=("TkMenuFont",12),
-    bg="white",
+    ctk.CTkButton(
+    frame_welcome,
+    text="CLOSE",
+    #fg="black",
+    #font=("TkMenuFont",12),
+    #bg="white",
     cursor="hand2",
-    activebackground="gray",
-    command=lambda:frameRoot.root.destroy()
+    #activebackground="gray",
+    command=lambda:frame_welcome.destroy()
     ).pack(pady=10)
     
-    
+    frame_welcome.pack()
 
 
     return None

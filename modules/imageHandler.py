@@ -65,7 +65,7 @@ def change_appearance_mode_event(new_appearance_mode: str):
     dark_image=Image.open(random_image("assets/backgrounds/dark")).rotate(random.choice([0,90,180,270]))
     image = ctk.CTkImage(light_image=light_image, dark_image=dark_image,size=(640,640))
     image_widget.configure(image=image)
-    frameRoot.appearance_menu.set("CTk Option Menu")
+    frameRoot.appearance_menu.set("Theme")
     if new_appearance_mode == "Light":
         ctk.set_default_color_theme("blue")
     else:
