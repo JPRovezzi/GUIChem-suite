@@ -11,3 +11,5 @@ modules/__pycache__/imageHandler.cpython-312.pyc
 modules/guiFrames/__pycache__/frameRoot.cpython-312.pyc
 modules/guiFrames/__pycache__/frameWelcome.cpython-312.pyc
 >>>>>>> 03cca5c356a8077ce4a6bedebb9e23243bedeaeb
+input.svg
+output.png
