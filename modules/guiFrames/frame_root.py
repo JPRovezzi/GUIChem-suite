@@ -10,12 +10,14 @@ import customtkinter as ctk
 import modules.image_handler as image_handler
 # ToolHandler is a module that provides functions to handle tools.
 import modules.tool_handler as tool_handler
+# FileMenuHandler is a module that provides functions to handle the file menu.
+import modules.guiFrames.file_menu_handler as file_menu_handler
 
 #------------------------------------------------------------
 # Function definitions
 def create_gui():
     '''Create the main GUI window and frames.'''
-    global root, appearance_menu
+    global root, appearance_menu, file_menu, tools_menu
     root = ctk.CTk()
     root.title("GUIChem suite")
     root.resizable(0, 0)  # Disable resizing
@@ -29,7 +31,9 @@ def create_gui():
     file_menu = ctk.CTkOptionMenu(
         menuframe,
         corner_radius=0,
-        values=["New", "Open", "Save", "Close","","Exit"])
+        values=["New", "Open", "Save", "Close","","Exit"],
+        command = file_menu_handler.file_menu_event
+        )
     file_menu.grid(
         row=0,
         column=0,
@@ -41,7 +45,8 @@ def create_gui():
         menuframe,
         corner_radius=0,
         values=["Light", "Dark", "System"],
-        command=image_handler.change_appearance_mode_event)
+        command = image_handler.change_appearance_mode_event
+        )
     appearance_menu.grid(
         row=0,
         column=2,
@@ -53,7 +58,7 @@ def create_gui():
         menuframe,
         corner_radius=0,
         values=["UgropyGUI","Flash-Calc"],
-        command=tool_handler.select_tool_event)
+        command = tool_handler.select_tool_event)
     tools_menu.grid(
         row=0,
         column=1,

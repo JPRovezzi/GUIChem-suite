@@ -41,8 +41,6 @@ def load(error_message=None):
         molecule_id = molecule_id_var.get()
         outcome = svg_handler.get_results(molecule_id,input_type)
         molecule,error = outcome
-        print(molecule)
-        print(error)
         if error is None and molecule is not None:
             frame_selection.destroy()
             frame_result.load(molecule)
@@ -62,8 +60,6 @@ def load(error_message=None):
         molecule_id = molecule_id_var.get()
         outcome = svg_handler.get_results(molecule_id,input_type)
         molecule,error = outcome
-        print(molecule)
-        print(error)
         if error is None and molecule is not None:
             frame_selection.destroy()
             frame_result.load(molecule)
@@ -85,7 +81,6 @@ def load(error_message=None):
     # frame_selection widgets
     ctk.CTkLabel(frame_selection,
                  text="",
-                 #bg=bg_color
                  ).pack(pady=0)
     widget_classes.TitleLabel(
         frame_selection,
@@ -101,9 +96,6 @@ def load(error_message=None):
     ctk.CTkLabel(
         frame_selection,
         text = error_message,
-        #bg=bg_color,
-        #fg="red",
-        #font=(14)
         ).pack(pady=0)
 
     widget_classes.TitleLabel(
@@ -114,9 +106,6 @@ def load(error_message=None):
     ctk.CTkButton(
         frame_selection,
         text="NAME",
-        #fg="black",
-        #font=("TkMenuFont",12),
-        #bg="white",
         cursor="hand2",
         #activebackground="gray",
         command=lambda:select_name()
@@ -125,11 +114,7 @@ def load(error_message=None):
     ctk.CTkButton(
         frame_selection,
         text="SMILES",
-        #fg="black",
-        #font=("TkMenuFont",12),
-        #bg="white",
         cursor="hand2",
-        #activebackground="gray",
         command=lambda:select_smiles()
         ).pack(pady=10)
 

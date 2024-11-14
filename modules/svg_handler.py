@@ -64,7 +64,6 @@ def get_results(molecule_id,input_type):
                 )
         except (IndexError,TypeError):
             error = 1 # The identifier is not valid
-            print("The identifier is not valid")
             outcome = (None, error)
             return outcome
         # Get the SVG information
@@ -81,7 +80,6 @@ def get_results(molecule_id,input_type):
         return outcome
     else:
         error = 2 # The identifier is empty
-        print("The identifier is empty")
         outcome = (None,error)
         return outcome
     
