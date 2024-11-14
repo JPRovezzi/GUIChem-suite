@@ -2,12 +2,11 @@
 
 # Import the required libraries
 
-# guiFrames is a module that provides functions to create and manage a
-# graphical user interface (GUI) for UGROpyGUI.
-import modules.guiFrames.frameRoot as frameRoot
+# frameRoot is the main frame of the GUIChem-suite application
+import modules.guiFrames.frame_root as frame_root
 #------------------------------------------------------------
 
 # Create the main window
 
 if __name__ == "__main__":
-    frameRoot.create_gui()
+    frame_root.create_gui()
