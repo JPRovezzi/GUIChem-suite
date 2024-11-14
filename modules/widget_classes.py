@@ -1,17 +1,9 @@
 ''' This module contains the class definitions for the custom widgets used in UGROpyGUI. '''
 #------------------------------------------------------------
 # Import the required libraries:
-# Configparser is used to read configuration files.
-import configparser
 # CustomTkinter is a custom GUI library for Python.
 import customtkinter as ctk
 #------------------------------------------------------------
-# Read configuration file
-config = configparser.ConfigParser()
-config.read('config.cfg')
-
-# Get background color from configuration file
-bg_color = config.get('Settings', 'bg_color')
 
 # Class definitions
 class GoBackButton(ctk.CTkButton):
