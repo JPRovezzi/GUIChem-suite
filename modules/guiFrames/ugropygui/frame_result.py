@@ -28,9 +28,6 @@ def load(molecule):
     ctk.CTkLabel(
         frame_result,
         text="The molecule groups are displayed below.",
-        #bg=bg_color,
-        #fg="white",
-        #font=("TkMenuFont",14)
         ).pack(pady=20)
 
     image_handler.insert_image(frame_result, "output.png")
@@ -38,8 +35,6 @@ def load(molecule):
     ctk.CTkLabel(
         frame_result,
         text = molecule.unifac.subgroups,
-        #bg=bg_color,
-        #fg="white",
         ).pack()
 
     widget_classes.GoBackButton(

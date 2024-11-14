@@ -41,6 +41,8 @@ def load(error_message=None):
         molecule_id = molecule_id_var.get()
         outcome = svg_handler.get_results(molecule_id,input_type)
         molecule,error = outcome
+        print(molecule)
+        print(error)
         if error is None and molecule is not None:
             frame_selection.destroy()
             frame_result.load(molecule)
@@ -60,7 +62,9 @@ def load(error_message=None):
         molecule_id = molecule_id_var.get()
         outcome = svg_handler.get_results(molecule_id,input_type)
         molecule,error = outcome
-        if error is not None and molecule is not None:
+        print(molecule)
+        print(error)
+        if error is None and molecule is not None:
             frame_selection.destroy()
             frame_result.load(molecule)
             error_message = ""
