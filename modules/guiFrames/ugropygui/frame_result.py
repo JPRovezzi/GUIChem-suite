@@ -56,22 +56,22 @@ def load(molecule, name = None, smiles = None):
 
     ctk.CTkLabel(
         result_table,
-        text = str(smiles if smiles is not None 
+        text = str(smiles if smiles is not None
                               else pubchempy.get_compounds(
                                   name,
                                   namespace='name')[0].canonical_smiles)
         ).grid(row=1, column=1, sticky="w")
-    
+
     ctk.CTkLabel(
         result_table,
         text = "Molecular formula: "
         ).grid(row=2, column=0, sticky="w")
-    
+
     ctk.CTkLabel(
         result_table,
         text = pubchempy.get_compounds(
            smiles if smiles is not None else name,
-           namespace = 
+           namespace =
            'smiles' if smiles is not None else "name")[0].molecular_formula
         ).grid(row=2, column=1, sticky="w")
 
