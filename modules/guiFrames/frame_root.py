@@ -22,7 +22,7 @@ def create_gui():
     root.title("GUIChem suite")
     root.resizable(0, 0)  # Disable resizing
     root.eval("tk::PlaceWindow . center")
-    root.geometry("640x480")
+    root.geometry("800x600")
     root.after(201, lambda :root.iconbitmap('assets/icons/GUIChem.ico'))
     image_handler.place_image(root, 0, 0, "assets/backgrounds")
     #Frames
@@ -57,8 +57,9 @@ def create_gui():
     tools_menu = ctk.CTkOptionMenu(
         menuframe,
         corner_radius=0,
-        values=["UgropyGUI","Flash-Calc"],
-        command = tool_handler.select_tool_event)
+        values=["UgropyGUI","Flash-Calc"]
+        #command = tool_handler.select_tool_event
+        )
     tools_menu.grid(
         row=0,
         column=1,

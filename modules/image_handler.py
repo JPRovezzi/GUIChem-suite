@@ -37,7 +37,7 @@ def place_image(where, posx, posy, image_path):
     '''Insert an image into a frame.'''
     light_image=Image.open(random_image(image_path+"/light")).rotate(random.choice([0,90,180,270]))
     dark_image=Image.open(random_image(image_path+"/dark")).rotate(random.choice([0,90,180,270]))
-    image = ctk.CTkImage(light_image=light_image, dark_image=dark_image,size=(640,640))
+    image = ctk.CTkImage(light_image=light_image, dark_image=dark_image,size=(800,800))
     image_widget = ctk.CTkLabel(
         where,
         image = image, text=None
@@ -69,7 +69,7 @@ def change_appearance_mode_event(new_appearance_mode: str):
     image = ctk.CTkImage(
         light_image=light_image,
         dark_image=dark_image,
-        size=(640,640))
+        size=(800,600))
     # Change the image of the main frame
     frame_root.root.winfo_children()[0].configure(image=image)
     return None
