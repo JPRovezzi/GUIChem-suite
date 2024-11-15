@@ -43,7 +43,7 @@ def load(error_message=None):
         molecule,error = outcome
         if error is None and molecule is not None:
             frame_selection.destroy()
-            frame_result.load(molecule)
+            frame_result.load(molecule, name = molecule_id)
             error_message = ""
         elif error == 1:
             error_message = "The NAME identifier is not valid. Please try again."
@@ -62,7 +62,7 @@ def load(error_message=None):
         molecule,error = outcome
         if error is None and molecule is not None:
             frame_selection.destroy()
-            frame_result.load(molecule)
+            frame_result.load(molecule, smiles = molecule_id)
             error_message = ""
         elif error == 1:
             error_message = "The SMILES identifier is not valid. Please try again."
