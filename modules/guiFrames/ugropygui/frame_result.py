@@ -61,11 +61,29 @@ def load(molecule, name = None, smiles = None):
                                   name,
                                   namespace='name')[0].canonical_smiles)
         ).grid(row=1, column=1, sticky="w")
+    
+    ctk.CTkLabel(
+        result_table,
+        text = "Molecular formula: "
+        ).grid(row=2, column=0, sticky="w")
+    
+    ctk.CTkLabel(
+        result_table,
+        text = pubchempy.get_compounds(
+           smiles if smiles is not None else name,
+           namespace = 
+           'smiles' if smiles is not None else "name")[0].molecular_formula
+        ).grid(row=2, column=1, sticky="w")
+
+    ctk.CTkLabel(
+        result_table,
+        text = "UNIFAC Subgroups: ",
+        ).grid(row=3, column=0, sticky="w")
 
     ctk.CTkLabel(
         result_table,
         text = molecule.unifac.subgroups,
-        ).grid(row=2, column=1, sticky="w")
+        ).grid(row=3, column=1, sticky="w")
 
     result_table.pack(fill="both")
 
