@@ -22,8 +22,9 @@ def destroy_all_frames():
 
 def select_tool_event(tool: str):
     '''This function is used to select the tool that the user wants to use.'''
-    destroy_all_frames()
-    frame_welcome.load(tool)
+    if tool != "Tools":
+        destroy_all_frames()
+        frame_welcome.load(tool)
 def start_tool_event(tool: str):
     '''This function is used to start the tool that the user wants to use.'''
     if tool == "UgropyGUI":
