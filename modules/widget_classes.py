@@ -39,6 +39,7 @@ class CopyTextBox(ctk.CTkTextbox):
          # Create labels and commands
         self.bind('<Button-3>',self.popup) # Bind a func to right click
         self.menu = tk.Menu(self,tearoff=0) # Create a menu
+        self.menu.add_command(label='Select all',command=self.select_all)
         self.menu.add_command(label='Copy',command=self.copy)
     def popup(self,event):
         ''' This function creates a popup menu when the user right-clicks on
@@ -54,3 +55,8 @@ class CopyTextBox(ctk.CTkTextbox):
         self.clipboard_clear() # Clear the tkinter clipboard
         text = self.selection_get()
         self.clipboard_append(text) # Append to system clipboard
+    def select_all(self):
+        ''' This function selects all the text in the textbox.'''
+        self.tag_add('sel', '1.0', 'end')
+        self.mark_set('insert', '1.0')
+        self.see('insert')
