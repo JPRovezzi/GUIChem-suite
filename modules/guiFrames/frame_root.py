@@ -8,8 +8,6 @@
 import customtkinter as ctk
 # ImageHandler is a module that provides functions to handle images.
 import modules.image_handler as image_handler
-# ToolHandler is a module that provides functions to handle tools.
-import modules.tool_handler as tool_handler
 # FileMenuHandler is a module that provides functions to handle the file menu.
 import modules.guiFrames.file_menu_handler as file_menu_handler
 
@@ -58,7 +56,6 @@ def create_gui():
         menuframe,
         corner_radius=0,
         values=["UgropyGUI","Flash-Calc"]
-        #command = tool_handler.select_tool_event
         )
     tools_menu.grid(
         row=0,
