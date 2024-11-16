@@ -69,7 +69,7 @@ def change_appearance_mode_event(new_appearance_mode: str):
     image = ctk.CTkImage(
         light_image=light_image,
         dark_image=dark_image,
-        size=(800,600))
+        size=(800,800))
     # Change the image of the main frame
     frame_root.root.winfo_children()[0].configure(image=image)
     return None
