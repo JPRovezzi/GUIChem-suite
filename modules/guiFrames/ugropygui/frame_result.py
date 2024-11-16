@@ -64,24 +64,20 @@ def load(
 
     result_table = ctk.CTkFrame(master=frame_result)
     i = 0
+    result_table_info = []
     for key,value in mol_data.items():
         ctk.CTkLabel(
             result_table,
             text=key.capitalize() + ": ",
             ).grid(row=i, column=0, sticky="w")
-        ctk.CTkTextbox(
+        widget_classes.CopyTextBox(
             result_table,
             width=300,
             height=10,
             activate_scrollbars=False)
         result_table.winfo_children()[-1].grid(row=i, column=1, sticky="w")
         result_table.winfo_children()[-1].insert("0.0", text=value)
-        copy_button = ctk.CTkButton(
-            result_table,
-            text="C",
-            command=lambda value=value: frame_root.root.clipboard_append(value)
-        )
-        copy_button.grid(row=i, column=2, sticky="w")
+        result_table_info.append(result_table.winfo_children()[-1])
         i += 1
     result_table.pack(fill="both")
 
