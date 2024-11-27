@@ -16,15 +16,19 @@ from ugropy import unifac
 # Function definitions
 def run_c_script(c_script_path: str, output_path: str):
     '''Compile and run a C script.'''
-    if os.name == 'nt' and not os.path.exists("SvgToPng.exe"):
-        # Compile the C script
-        compile_command = f"gcc {c_script_path} -o {output_path}"
-        subprocess.run(compile_command, shell=True, check=True)
+    if os.name == 'nt':
+        run_command = f"{output_path}.exe"
+        if not os.path.exists("SvgToPng.exe"):
+            # Compile the C script
+            compile_command = f"gcc {c_script_path} -o {output_path}"
+            subprocess.run(compile_command, shell=True, check=True)
     else:
-        compile_command = f"gcc {c_script_path} -o {output_path} -lm"
-        subprocess.run(compile_command, shell=True, check=True)
+        run_command = f"./{output_path}"
+        if not os.path.exists("SvgToPng"):
+            # Compile the C script
+            compile_command = f"gcc {c_script_path} -o {output_path} -lm"
+            subprocess.run(compile_command, shell=True, check=True)
     # Run the compiled C script
-    run_command = f"./{output_path}"
     run_process = subprocess.run(run_command, shell=True, check=False)
     return run_process.stdout
 
