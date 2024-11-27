@@ -7,7 +7,10 @@
 # CustomTkinter is a custom GUI library for Python.
 import customtkinter as ctk
 # pywinstyles is a library that provides functions to set the opacity of a window.
-import pywinstyles
+import os
+if os.name == 'nt':
+    import pywinstyles
+
 # widget_classes is a module that provides classes for GUI widgets.
 import modules.widget_classes as widget_classes
 # frameRoot is a module that provides functions the root frame of the GUI.
@@ -49,6 +52,7 @@ def load(tool):
     cursor="hand2",
     command=frame_welcome.destroy
     ).pack(pady=10)
-    pywinstyles.set_opacity(frame_welcome, color=BG_COLOR)
+    if os.name == 'nt':  # Check if the OS is Windows
+        pywinstyles.set_opacity(frame_welcome, color=BG_COLOR)
     frame_welcome.pack(pady=100)
     return None

@@ -18,9 +18,10 @@ def create_gui():
     global root, appearance_menu, file_menu, tools_menu
     root = ctk.CTk()
     root.title("GUIChem suite")
-    root.resizable(0, 0)  # Disable resizing
+    
     root.eval("tk::PlaceWindow . center")
     root.geometry("800x600")
+    root.resizable(0, 0)  # Disable resizing
     root.after(201, lambda :root.iconbitmap('assets/icons/GUIChem.ico'))
     image_handler.place_image(root, 0, 0, "assets/backgrounds")
     #Frames
