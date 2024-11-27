@@ -45,6 +45,7 @@ class CopyTextBox(ctk.CTkTextbox):
         ''' This function creates a popup menu when the user right-clicks on
         the textbox.'''
         try:
+            self.focus_set() # Give focus to the textbox
             self.menu.tk_popup(event.x_root,event.y_root) # Pop the menu up in the given coordinates
         finally:
             self.menu.grab_release() # Release it once an option is selected
@@ -53,7 +54,10 @@ class CopyTextBox(ctk.CTkTextbox):
         ''' This function copies the text in the textbox to the clipboard.'''
         #inp = root.get() # Get the text inside entry widget
         self.clipboard_clear() # Clear the tkinter clipboard
-        text = self.selection_get()
+        try:
+            text = self.selection_get() # Get the selected text
+        except tk.TclError:
+            text = self.get(1.0,"end") # if no text is selected, copy all text
         self.clipboard_append(text) # Append to system clipboard
     def select_all(self):
         ''' This function selects all the text in the textbox.'''
