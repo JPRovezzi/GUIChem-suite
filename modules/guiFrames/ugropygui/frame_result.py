@@ -28,6 +28,7 @@ def load(
         name = None,
         smiles = None,
         formula = None,
+        subgroups = None,
         picture = None
         ):
     ''' This function creates the result frame of the GUI. '''
@@ -36,7 +37,7 @@ def load(
         "name": [name],
         "smiles": [smiles],
         "formula": [formula],
-        "UNIFAC Subgroups": molecule.unifac.subgroups}
+        "UNIFAC Subgroups": subgroups}
     if name is None:
         mol_data["name"] = pubchempy.get_compounds(
             mol_data["smiles"],
@@ -50,6 +51,9 @@ def load(
         smiles if smiles is not None else name,
         namespace =
         'smiles' if smiles is not None else "name")[0].molecular_formula
+
+    if subgroups is None:
+        mol_data["UNIFAC Subgroups"] = molecule.unifac.subgroups
 
     tool_handler.destroy_all_frames()
     frame_result = ctk.CTkFrame(master=frame_root.root)
@@ -88,30 +92,21 @@ def load(
     frame_result.pack()
 
 # Save data to a file
-    if False:
-        xml_root = ET.Element("MoleculeData")
+    xml_root = ET.Element("MoleculeData")
 
-        xml_name_element = ET.SubElement(xml_root, "Name")
-        xml_name_element.text = str(name if name is not None else
-                                    pubchempy.get_compounds(
-                                        smiles,
-                                        namespace ='smiles')[0].iupac_name)
+    xml_name_element = ET.SubElement(xml_root, "Name")
+    xml_name_element.text = str(mol_data["name"][0])
 
-        smiles_element = ET.SubElement(xml_root, "SMILES")
-        smiles_element.text = str(smiles if smiles is not None else
-                                pubchempy.get_compounds(
-                                        name,
-                                        namespace='name')[0].canonical_smiles)
+    smiles_element = ET.SubElement(xml_root, "SMILES")
+    smiles_element.text = str(mol_data["smiles"][0])
 
-        formula_element = ET.SubElement(xml_root, "MolecularFormula")
-        formula_element.text = pubchempy.get_compounds(
-            smiles if smiles is not None else name,
-            namespace='smiles' if smiles is not None else "name"
-            )[0].molecular_formula
+    formula_element = ET.SubElement(xml_root, "MolecularFormula")
+    formula_element.text = str(mol_data["formula"])
 
-        subgroups_element = ET.SubElement(xml_root, "UNIFACSubgroups")
-        subgroups_element.text = molecule.unifac.subgroups
+    subgroups_element = ET.SubElement(xml_root, "UNIFACSubgroups")
+    subgroups_element.text = str(mol_data["UNIFAC Subgroups"])
 
-        tree = ET.ElementTree(xml_root)
-        tree.write("ugropy.session")
-    return None
+    tree = ET.ElementTree(xml_root)
+    tree.write("ugropy.session")
+
+

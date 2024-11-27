@@ -22,3 +22,15 @@ def save_image(file_format):
         shutil.copy("input.svg", path)
     elif file_format == "png":
         shutil.copy("output.png", path)
+
+def save_data(file_format):
+    '''Implement the logic to save the image in the specified file_format'''
+    path = filedialog.asksaveasfilename(
+        defaultextension = f".{file_format}",
+        filetypes = [(f"{file_format.upper()} files", f"*.{file_format}")])
+    if not path:
+        return
+    if file_format == "svg":
+        shutil.copy("input.svg", path)
+    elif file_format == "png":
+        shutil.copy("output.png", path)
