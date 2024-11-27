@@ -88,7 +88,7 @@ def load(error_message=None):
         ).pack(pady=0)
 
     molecule_id_var = ctk.StringVar()
-    ctk.CTkEntry(
+    widget_classes.TextEntry(
         frame_selection,
         textvariable = molecule_id_var
         ).pack(pady=20)

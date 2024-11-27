@@ -28,6 +28,38 @@ class TitleLabel(ctk.CTkLabel):
             font=("TkMenuFont",14),
             **kwargs
             )
+        
+class TextEntry(ctk.CTkEntry):
+    ''' This class is a custom entry widget that is used to get text input from
+    the user.'''
+    def __init__(self, parent, **kwargs):
+        super().__init__(
+            parent,
+            **kwargs
+            )
+         # Create labels and commands
+        self.bind('<Button-3>',self.popup) # Bind a func to right click
+        self.menu = tk.Menu(self,tearoff=0) # Create a menu
+        self.menu.add_command(label='Paste',command=self.paste)
+        self.menu.add_command(label='Clear',command=self.clear)
+
+    def popup(self,event):
+        ''' This function creates a popup menu when the user right-clicks on
+        the textbox.'''
+        try:
+            self.focus_set() # Give focus to the textbox
+            self.menu.tk_popup(event.x_root,event.y_root) # Pop the menu up in the given coordinates
+        finally:
+            self.menu.grab_release() # Release it once an option is selected
+
+    def paste(self):
+        ''' This function pastes the text from the clipboard to the textbox.'''
+        self.clipboard_get()
+        self.insert(tk.END, self.clipboard_get())
+
+    def clear(self):
+        ''' This function clears the text in the textbox.'''
+        self.delete(0, tk.END)
 
 class CopyTextBox(ctk.CTkTextbox):
     ''' This class is a custom textbox widget that is allowed to copy the text'''
