@@ -1,12 +1,14 @@
 import pytest
-from modules.guiFrames.frame_root import create_gui
-import main
+import importlib
+
+import modules.guiFrames.frame_root as frame_root
 
 def test_create_gui(mocker):
-    # Mock the create_gui function
     mock_create_gui = mocker.patch('modules.guiFrames.frame_root.create_gui')
-    
-    # Import the main script to trigger the __main__ block
-    
-    # Assert that create_gui was called once
+    frame_root.create_gui()
     mock_create_gui.assert_called_once()
+
+
+
+
+
