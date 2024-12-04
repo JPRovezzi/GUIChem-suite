@@ -1,0 +1,9 @@
+{
+    "FILENAME": {
+        "icon": "GUIChem.ico"
+    },
+    "PATH": {
+        "icons": "res/assets/icons",
+        "backgrounds": "res/assets/backgrounds"
+    }
+}

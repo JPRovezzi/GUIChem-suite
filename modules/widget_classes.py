@@ -5,6 +5,9 @@
 import tkinter as tk
 # CustomTkinter is a custom GUI library for Python.
 import customtkinter as ctk
+import modules.guiFrames.frame_root as frame_root
+import modules.tool_handler as tool_handler
+import modules.save_handler as save_handler
 
 #------------------------------------------------------------
 
@@ -28,7 +31,7 @@ class TitleLabel(ctk.CTkLabel):
             font=("TkMenuFont",14),
             **kwargs
             )
-        
+
 class TextEntry(ctk.CTkEntry):
     ''' This class is a custom entry widget that is used to get text input from
     the user.'''
@@ -96,3 +99,42 @@ class CopyTextBox(ctk.CTkTextbox):
         self.tag_add('sel', '1.0', 'end')
         self.mark_set('insert', '1.0')
         self.see('insert')
+
+class FileMenu(ctk.CTkOptionMenu):
+    ''' This class is a custom option menu widget that is used to display a list
+    of options to the user.'''
+    def __init__(self, parent, **kwargs):
+        super().__init__(
+            parent,
+            values = self.options(),
+            command = self.events,
+            **kwargs
+            )
+        self.set("File")
+        self.grid(
+            row=0,
+            column=0,
+            pady=10,
+            padx=10)
+    def events(self, event):
+        ''' This function is called when an option is selected from the menu.'''
+        self.set("File")
+        match event:
+            case "New":
+                tool_handler.select_tool_event(frame_root.tools_menu.get())
+            case "Open":
+                print("Open file")
+            case "Save":
+                save_handler.load(frame_root.tools_menu.get())
+                print("Save file")
+            case "Close":
+                tool_handler.destroy_all_frames()
+            case "Exit":
+                frame_root.root.destroy()
+            case _:
+                print("Invalid option")
+
+
+    def options(self):
+        ''' This function returns the list of options in the menu.'''
+        return ["New", "Open", "Save", "Close","","Exit"]

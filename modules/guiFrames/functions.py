@@ -9,7 +9,15 @@ Functions:
 import shutil
 # import filedialog from tkinter module to save files
 from tkinter import filedialog
+# import json module to read the configuration file
+import json
 #---------------------------------------------------------
+def read_appcfg(section, key):
+    '''Read the value from the configuration JSON file.'''
+    with open('res/app.json', 'r', encoding='utf-8') as f:
+        config = json.load(f)
+    f.close()
+    return config[section][key]
 
 def save_image(file_format):
     '''Implement the logic to save the image in the specified file_format'''

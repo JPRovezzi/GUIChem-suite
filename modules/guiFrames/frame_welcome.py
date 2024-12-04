@@ -4,19 +4,20 @@
 """
 # Import the required libraries:
 
+# OS module provides functions to interact with the operating system.
+import os
 # CustomTkinter is a custom GUI library for Python.
 import customtkinter as ctk
-# pywinstyles is a library that provides functions to set the opacity of a window.
-import os
-if os.name == 'nt':
-    import pywinstyles
-
 # widget_classes is a module that provides classes for GUI widgets.
 import modules.widget_classes as widget_classes
 # frameRoot is a module that provides functions the root frame of the GUI.
 import modules.guiFrames.frame_root as frame_root
 # tool_handler is a module that provides functions to handle the tools.
 import modules.tool_handler as tool_handler
+
+# pywinstyles is a library that provides functions to set the opacity of a window.
+if os.name == 'nt':
+    import pywinstyles
 
 #------------------------------------------------------------
 BG_COLOR = "#000000"

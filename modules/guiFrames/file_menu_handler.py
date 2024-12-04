@@ -28,3 +28,7 @@ def file_menu_event(file_option:str):
             frame_root.root.destroy()
         case _:
             print("Invalid option")
+
+def file_menu_options():
+    '''Return the file menu options.'''
+    return ["New", "Open", "Save", "Close","","Exit"]

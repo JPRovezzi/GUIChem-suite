@@ -8,37 +8,40 @@
 import customtkinter as ctk
 # ImageHandler is a module that provides functions to handle images.
 import modules.image_handler as image_handler
-# FileMenuHandler is a module that provides functions to handle the file menu.
-import modules.guiFrames.file_menu_handler as file_menu_handler
+# import the required functions to read the configuration files
+from modules.guiFrames.functions import read_appcfg
+
+from modules.widget_classes import FileMenu
 
 #------------------------------------------------------------
 # Function definitions
+
+
 def create_gui():
     '''Create the main GUI window and frames.'''
     global root, appearance_menu, file_menu, tools_menu
+
+    background_path = read_appcfg("PATH","backgrounds")
+    icon_path = "/".join((
+        read_appcfg("PATH","icons"),
+        read_appcfg("FILENAME","icon")
+        ))
+
     root = ctk.CTk()
     root.title("GUIChem suite")
-    
     root.eval("tk::PlaceWindow . center")
     root.geometry("800x600")
     root.resizable(0, 0)  # Disable resizing
-    root.after(201, lambda :root.iconbitmap('assets/icons/GUIChem.ico'))
-    image_handler.place_image(root, 0, 0, "assets/backgrounds")
+    root.after(
+        201,
+        lambda :root.iconbitmap(icon_path))
+    image_handler.place_image(root, 0, 0, background_path)
     #Frames
     menuframe = ctk.CTkFrame(master=root)
-    # Create a menu bar
-    file_menu = ctk.CTkOptionMenu(
+    file_menu = FileMenu(
         menuframe,
         corner_radius=0,
-        values=["New", "Open", "Save", "Close","","Exit"],
-        command = file_menu_handler.file_menu_event
         )
-    file_menu.grid(
-        row=0,
-        column=0,
-        pady=10,
-        padx=10)
-    file_menu.set("File")
 
     appearance_menu = ctk.CTkOptionMenu(
         menuframe,

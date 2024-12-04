@@ -14,6 +14,9 @@ import customtkinter as ctk
 from PIL import ImageTk, Image
 # frameRoot is the main frame of the GUIChem-suite application
 import modules.guiFrames.frame_root as frame_root
+# import the required functions to read the configuration files
+from modules.guiFrames.functions import read_appcfg
+
 #------------------------------------------------------------
 def insert_image(where, image_path):
     '''Insert an image into a frame.'''
@@ -61,11 +64,13 @@ def change_appearance_mode_event(new_appearance_mode: str):
         ctk.set_default_color_theme("dark-blue")
     # Change light and dark mode images
     light_image=Image.open(
-        random_image("assets/backgrounds/light")
-        ).rotate(random.choice([0,90,180,270]))
+        random_image(
+            "/".join((read_appcfg("PATH","backgrounds"),"light")))
+            ).rotate(random.choice([0,90,180,270]))
     dark_image=Image.open(
-        random_image("assets/backgrounds/dark")
-        ).rotate(random.choice([0,90,180,270]))
+        random_image(
+            "/".join((read_appcfg("PATH","backgrounds"),"dark")))
+            ).rotate(random.choice([0,90,180,270]))
     image = ctk.CTkImage(
         light_image=light_image,
         dark_image=dark_image,
