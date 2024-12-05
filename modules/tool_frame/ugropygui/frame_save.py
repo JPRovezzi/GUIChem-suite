@@ -1,4 +1,5 @@
 import tkinter as tk
+import os
 import modules.main_frame.functions as functions
 import modules.main_frame.frame_root as frameRoot
 import modules.image_handler as imageHandler
@@ -14,7 +15,12 @@ def load():
         
         # Display the output PNG as a widget
         
-        imageHandler.insert_image(save_window, "output.png")
+        if os.path.exists("output.png"):
+            imageHandler.insert_image(save_window, "output.png")
+        else:
+             save_window.destroy()
+             return
+
         
         # Entry box to write the path to save
         #tk.Label(save_window, text="Save Path:").pack(pady=5)

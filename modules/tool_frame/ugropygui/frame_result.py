@@ -6,6 +6,7 @@ GUI.
 # Import the required libraries:
 import xml.etree.ElementTree as ET
 
+import os
 # CustomTkinter is a custom GUI library for Python.
 import customtkinter as ctk
 # pubchempy is a module that provides functions to interact with the PubChem
@@ -17,6 +18,8 @@ import modules.widget_classes as widget_classes
 # FrameRoot is a module that provides functions the root frame of the GUI.
 import modules.main_frame.frame_root as frame_root
 import modules.tool_handler as tool_handler
+
+from modules.main_frame.functions import read_json
 
 
 
@@ -32,6 +35,18 @@ def load(
         picture = None
         ):
     ''' This function creates the result frame of the GUI. '''
+    # Read the configuration file to get the constants
+    script_location = os.path.dirname(os.path.abspath(__file__))
+    print(f"The script is located at: {script_location}")
+    output_picture = "/".join((
+        read_json(section = "PATH",key = "temp"),
+        read_json(
+            path = script_location,
+            filename = "tool",
+            section = "FILENAME",
+            key = "pict_out"),
+        ))
+    
     # Get the informations of the molecule
     mol_data = {
         "name": [name],

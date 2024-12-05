@@ -15,7 +15,7 @@ from PIL import ImageTk, Image
 # frameRoot is the main frame of the GUIChem-suite application
 import modules.main_frame.frame_root as frame_root
 # import the required functions to read the configuration files
-from modules.main_frame.functions import read_appcfg
+from modules.main_frame.functions import read_json
 
 #------------------------------------------------------------
 def insert_image(where, image_path):
@@ -53,6 +53,9 @@ def place_image(where, posx, posy, image_path):
 
 def change_appearance_mode_event(new_appearance_mode: str):
     '''Change the appearance mode of the GUI.'''
+    
+    backgrounds_path = read_json(section = "PATH",key = "backgrounds")
+    
     # Reset the appearance menu label
     frame_root.appearance_menu.set("Theme")
     # Change the appearance mode
@@ -64,12 +67,10 @@ def change_appearance_mode_event(new_appearance_mode: str):
         ctk.set_default_color_theme("dark-blue")
     # Change light and dark mode images
     light_image=Image.open(
-        random_image(
-            "/".join((read_appcfg("PATH","backgrounds"),"light")))
+        random_image(f"{backgrounds_path}/light")
             ).rotate(random.choice([0,90,180,270]))
     dark_image=Image.open(
-        random_image(
-            "/".join((read_appcfg("PATH","backgrounds"),"dark")))
+        random_image(f"{backgrounds_path}/dark")
             ).rotate(random.choice([0,90,180,270]))
     image = ctk.CTkImage(
         light_image=light_image,
