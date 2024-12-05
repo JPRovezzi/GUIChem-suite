@@ -3,13 +3,13 @@ is used to load the tools and destroy the previous frames.'''
 #------------------------------------------------------------
 # Importing the required modules:
 # frameRoot is a module that provides functions the root frame of the GUI.
-import modules.guiFrames.frame_root as frame_root
+import modules.main_frame.frame_root as frame_root
 # frameWelcome is a module that provides functions to create and manage the
 # welcome frame of the GUI.
-import modules.guiFrames.frame_welcome as frame_welcome
+import modules.main_frame.frame_welcome as frame_welcome
 # ugroypygui is a module that provides functions to create and manage the
 # UGROpyGUI tool.
-import modules.guiFrames.ugropygui.frame_selection as frame_selection
+import modules.tool_frame.ugropygui.frame_selection as frame_selection
 #------------------------------------------------------------
 def destroy_all_frames():
     '''This function is used to destroy all the frames except the first two

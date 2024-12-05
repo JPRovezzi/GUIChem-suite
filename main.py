@@ -3,7 +3,7 @@
 # Import the required libraries
 
 # frameRoot is the main frame of the GUIChem-suite application
-import modules.guiFrames.frame_root as frame_root
+import modules.main_frame.frame_root as frame_root
 #------------------------------------------------------------
 
 # Create the main window

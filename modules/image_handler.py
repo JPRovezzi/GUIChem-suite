@@ -13,9 +13,9 @@ import customtkinter as ctk
 # The PIL library is used to work with images.
 from PIL import ImageTk, Image
 # frameRoot is the main frame of the GUIChem-suite application
-import modules.guiFrames.frame_root as frame_root
+import modules.main_frame.frame_root as frame_root
 # import the required functions to read the configuration files
-from modules.guiFrames.functions import read_appcfg
+from modules.main_frame.functions import read_appcfg
 
 #------------------------------------------------------------
 def insert_image(where, image_path):

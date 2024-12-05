@@ -15,7 +15,7 @@ import modules.image_handler as image_handler
 # widget_classes is a module that provides classes for GUI widgets.
 import modules.widget_classes as widget_classes
 # FrameRoot is a module that provides functions the root frame of the GUI.
-import modules.guiFrames.frame_root as frame_root
+import modules.main_frame.frame_root as frame_root
 import modules.tool_handler as tool_handler
 
 

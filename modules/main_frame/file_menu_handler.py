@@ -3,7 +3,7 @@
     saving, and closing files.
 '''
 # Import the required libraries:
-import modules.guiFrames.frame_root as frame_root
+import modules.main_frame.frame_root as frame_root
 import modules.tool_handler as tool_handler
 import modules.save_handler as save_handler
 #------------------------------------------------------------

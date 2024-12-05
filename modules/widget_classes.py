@@ -5,7 +5,7 @@
 import tkinter as tk
 # CustomTkinter is a custom GUI library for Python.
 import customtkinter as ctk
-import modules.guiFrames.frame_root as frame_root
+import modules.main_frame.frame_root as frame_root
 import modules.tool_handler as tool_handler
 import modules.save_handler as save_handler
 

@@ -1,8 +1,8 @@
 import tkinter as tk
-import modules.guiFrames.functions as functions
-import modules.guiFrames.frame_root as frameRoot
+import modules.main_frame.functions as functions
+import modules.main_frame.frame_root as frameRoot
 import modules.image_handler as imageHandler
-import modules.guiFrames.ugropygui.frame_result as frameResult
+import modules.tool_frame.ugropygui.frame_result as frameResult
 
 def load():
         save_window = tk.Toplevel(frameRoot.root)

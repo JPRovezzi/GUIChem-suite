@@ -13,10 +13,10 @@ import modules.svg_handler as svg_handler
 # widget_classes is a module that provides classes for GUI widgets.
 import modules.widget_classes as widget_classes
 # FrameRoot is a module that provides functions the root frame of the GUI.
-import modules.guiFrames.frame_root as frame_root
+import modules.main_frame.frame_root as frame_root
 # frameResult is a module that provides functions to create and manage the
 # result frame of the GUI.
-import modules.guiFrames.ugropygui.frame_result as frame_result
+import modules.tool_frame.ugropygui.frame_result as frame_result
 
 import modules.tool_handler as tool_handler
 

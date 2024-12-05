@@ -5,5 +5,11 @@
     "PATH": {
         "icons": "res/assets/icons",
         "backgrounds": "res/assets/backgrounds"
+    },
+    "WINDOW": {
+        "width": "800",
+        "height": "600",
+        "title": "GUIChem",
+        "resizable": "false"
     }
 }

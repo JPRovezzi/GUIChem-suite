@@ -9,7 +9,7 @@ import customtkinter as ctk
 # ImageHandler is a module that provides functions to handle images.
 import modules.image_handler as image_handler
 # import the required functions to read the configuration files
-from modules.guiFrames.functions import read_appcfg
+from modules.main_frame.functions import read_appcfg
 
 from modules.widget_classes import FileMenu
 
@@ -21,17 +21,24 @@ def create_gui():
     '''Create the main GUI window and frames.'''
     global root, appearance_menu, file_menu, tools_menu
 
+    # Read the configuration file to get the constants
     background_path = read_appcfg("PATH","backgrounds")
     icon_path = "/".join((
         read_appcfg("PATH","icons"),
         read_appcfg("FILENAME","icon")
         ))
+    window_width = read_appcfg("WINDOW","width")
+    window_height = read_appcfg("WINDOW","height")
+    is_resizable = read_appcfg("WINDOW","resizable")
+    window_title = read_appcfg("WINDOW","title")
 
+    # Create the main window
     root = ctk.CTk()
-    root.title("GUIChem suite")
+    root.title(window_title)
     root.eval("tk::PlaceWindow . center")
-    root.geometry("800x600")
-    root.resizable(0, 0)  # Disable resizing
+    root.geometry("x".join((window_width, window_height)))
+    if is_resizable == "false":
+        root.resizable(0, 0)  # Disable resizing
     root.after(
         201,
         lambda :root.iconbitmap(icon_path))
