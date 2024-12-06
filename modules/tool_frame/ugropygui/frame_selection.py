@@ -8,7 +8,7 @@
 # CustomTkinter is a custom GUI library for Python.
 import customtkinter as ctk
 # svg_handler is a module that provides functions to handle SVG files.
-import modules.svg_handler as svg_handler
+import modules.tool_frame.ugropygui.svg_handler as svg_handler
 
 # widget_classes is a module that provides classes for GUI widgets.
 import modules.widget_classes as widget_classes

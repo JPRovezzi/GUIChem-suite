@@ -14,19 +14,34 @@ from ugropy import Groups
 from ugropy import unifac
 #------------------------------------------------------------
 # Function definitions
-def run_c_script(c_script_path: str, output_path: str):
+def compile_c_script(
+        c_script_path: str = None,
+        c_script_name : str = None,
+        output_path: str = None,
+        output_name: str = None):
     '''Compile and run a C script.'''
+    if output_name is None:
+        output_name = c_script_name
+    if output_path is None:
+        output_path = c_script_path
+
     if os.name == 'nt':
-        run_command = f"{output_path}.exe"
-        if not os.path.exists("SvgToPng.exe"):
+        run_command = f"{output_path}{output_name}.exe"
+        if not os.path.exists(f"{output_name}.exe"):
             # Compile the C script
-            compile_command = f"gcc {c_script_path} -o {output_path}"
+            compile_command = " ".join((
+                f"gcc {c_script_path}{c_script_name}.c", 
+                f"-o {output_path}{output_name}.exe",
+                "-lm"))
             subprocess.run(compile_command, shell=True, check=True)
     else:
-        run_command = f"./{output_path}"
-        if not os.path.exists("SvgToPng"):
+        run_command = f"./{output_path}{output_name}"
+        if not os.path.exists(f"{output_name}"):
             # Compile the C script
-            compile_command = f"gcc {c_script_path} -o {output_path} -lm"
+            compile_command = "".join((
+                f"gcc {c_script_path}{c_script_name}.c",
+                f"-o {output_path}{output_name}",
+                "-lm"))
             subprocess.run(compile_command, shell=True, check=True)
     # Run the compiled C script
     run_process = subprocess.run(run_command, shell=True, check=False)
@@ -79,7 +94,7 @@ def get_results(molecule_id,input_type):
         with open("input.svg", "w", encoding="utf-8") as file:
             file.write(svg_string)
         # Run the C script to convert the SVG to PNG
-        run_c_script("SvgToPng.c", "SvgToPng")
+        compile_c_script("SvgToPng.c", "SvgToPng")
         # Write the molecule groups in the picture
         write_groups2picture(molecule.unifac.subgroups)
         error = None

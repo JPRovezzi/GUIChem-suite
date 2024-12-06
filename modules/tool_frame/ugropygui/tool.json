@@ -1,5 +1,14 @@
 {
     "FILENAME":{
-        "pict_out":"ouput.png"
+        "pict_out": "ouput.png",
+        "pict_in" : "input.svg",
+        "svg2png_script" : "SvgToPng",
+        "svg2png_exe" : "SvgToPng"
+    },
+    "PATH":{
+        "pict_out": "tmp/",
+        "pict_in" : "temp/",
+        "svg2png_script" : "scripts/",
+        "svg2png_exe" : "exe/"
     }
 }
