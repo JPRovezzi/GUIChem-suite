@@ -36,16 +36,10 @@ def load(
         ):
     ''' This function creates the result frame of the GUI. '''
     # Read the configuration file to get the constants
-    script_location = os.path.dirname(os.path.abspath(__file__))
-    print(f"The script is located at: {script_location}")
-    output_picture = "/".join((
-        read_json(section = "PATH",key = "temp"),
-        read_json(
-            path = script_location,
-            filename = "tool",
-            section = "FILENAME",
-            key = "pict_out"),
-        ))
+    module_location = os.path.dirname(os.path.abspath(__file__))
+    
+    
+    
     
     # Get the informations of the molecule
     mol_data = {
@@ -113,8 +107,10 @@ def load(
     xml_name_element.text = str(mol_data["name"][0])
 
     smiles_element = ET.SubElement(xml_root, "SMILES")
-    smiles_element.text = str(mol_data["smiles"][0])
-
+    
+    smiles_element.text = str(mol_data["smiles"])
+    print(smiles_element.text)
+    
     formula_element = ET.SubElement(xml_root, "MolecularFormula")
     formula_element.text = str(mol_data["formula"])
 

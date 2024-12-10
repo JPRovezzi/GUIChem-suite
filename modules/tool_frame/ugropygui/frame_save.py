@@ -4,6 +4,35 @@ import modules.main_frame.functions as functions
 import modules.main_frame.frame_root as frameRoot
 import modules.image_handler as imageHandler
 import modules.tool_frame.ugropygui.frame_result as frameResult
+# import shutil module to copy files
+import shutil
+# import filedialog from tkinter module to save files
+from tkinter import filedialog
+
+def save_image(file_format):
+    '''Implement the logic to save the image in the specified file_format'''
+    path = filedialog.asksaveasfilename(
+        defaultextension = f".{file_format}",
+        filetypes = [(f"{file_format.upper()} files", f"*.{file_format}")])
+    if not path:
+        return
+    if file_format == "svg":
+        shutil.copy("input.svg", path)
+    elif file_format == "png":
+        shutil.copy("output.png", path)
+
+def save_data(file_format):
+    '''Implement the logic to save the image in the specified file_format'''
+    filetypes = []
+    for extention in file_format:
+        filetypes.append((f"{extention.upper()} files", f"*.{extention}"))
+    path = filedialog.asksaveasfilename(
+        defaultextension = f".{file_format[0]}",
+        filetypes = filetypes)
+    if not path:
+        return
+    shutil.copy("ugropy.session", path)
+
 
 def load():
         save_window = tk.Toplevel(frameRoot.root)
@@ -58,15 +87,17 @@ def load():
         tk.Button(
             button_frame, 
             text="Save picture", 
-            command=lambda: functions.save_image(format_var.get())
+            command=lambda: save_image(format_var.get())
             ).pack(side=tk.LEFT, padx=5)
 
-        # Cancel button
+
         tk.Button(
             button_frame, 
             text="Save data", 
-            command=lambda: None
+            command=lambda: save_data(["txt", "xml", "session"])
             ).pack(side=tk.LEFT, padx=5)
+        
+        # Cancel button
         tk.Button(
             button_frame, 
             text="Close", 
