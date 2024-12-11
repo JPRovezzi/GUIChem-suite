@@ -31,6 +31,8 @@ def create_gui():
     window_height = read_json(section = "WINDOW", key = "height")
     is_resizable = read_json(section = "WINDOW", key = "resizable")
     window_title = read_json(section = "WINDOW", key = "title")
+    addons = read_json(filename = "user", section = "ADDONS", key = "enabled")
+
 
     # Create the main window
     root = ctk.CTk()
@@ -66,7 +68,7 @@ def create_gui():
     tools_menu = ctk.CTkOptionMenu(
         menuframe,
         corner_radius=0,
-        values=["UgropyGUI","Flash-Calc"]
+        values=addons
         )
     tools_menu.grid(
         row=0,

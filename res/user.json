@@ -1,2 +1,11 @@
-[LANG]
-language = en_EN
+{
+    "TEXT": 
+    {
+        "language": "en_EN"
+    },
+    "ADDONS": 
+    {
+        "installed": ["UgropyGUI", "FlashCalc"],
+        "enabled": ["UgropyGUI"]
+    }
+}
