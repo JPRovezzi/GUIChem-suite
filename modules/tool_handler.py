@@ -36,8 +36,10 @@ def start_tool_event(tool: str):
         print("Flash-Calc")
 
 def save(tool):
+    '''This function is used to save the data of the tool that the user is
+    using.'''
     match tool:
-        case "UgropyGUI": 
+        case "UgropyGUI":
             ugropygui_frame_save.load()
         case "Flash-Calc":
             None

@@ -5,7 +5,6 @@
 # Import the required libraries:
 import modules.main_frame.frame_root as frame_root
 import modules.tool_handler as tool_handler
-import modules.save_handler as save_handler
 #------------------------------------------------------------
 
 def file_menu_event(file_option:str):
@@ -18,7 +17,7 @@ def file_menu_event(file_option:str):
             print("Open file")
             frame_root.file_menu.set("File")
         case "Save":
-            save_handler.load(frame_root.tools_menu.get())
+            tool_handler.save(frame_root.tools_menu.get())
             print("Save file")
             frame_root.file_menu.set("File")
         case "Close":

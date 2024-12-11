@@ -7,7 +7,6 @@ import tkinter as tk
 import customtkinter as ctk
 import modules.main_frame.frame_root as frame_root
 import modules.tool_handler as tool_handler
-import modules.save_handler as save_handler
 
 #------------------------------------------------------------
 
@@ -125,7 +124,7 @@ class FileMenu(ctk.CTkOptionMenu):
             case "Open":
                 print("Open file")
             case "Save":
-                save_handler.load(frame_root.tools_menu.get())
+                tool_handler.save(frame_root.tools_menu.get())
                 print("Save file")
             case "Close":
                 tool_handler.destroy_all_frames()
