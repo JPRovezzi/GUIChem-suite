@@ -9,9 +9,9 @@ import modules.main_frame.frame_root as frame_root
 import modules.main_frame.frame_welcome as frame_welcome
 # ugroypygui is a module that provides functions to create and manage the
 # UGROpyGUI tool.
-import modules.tool_frame.ugropygui.frame_selection as frame_selection
+import addons.ugropygui.frame_selection as frame_selection
 
-import modules.tool_frame.ugropygui.frame_save as ugropygui_frame_save
+import addons.ugropygui.frame_save as ugropygui_frame_save
 #------------------------------------------------------------
 def destroy_all_frames():
     '''This function is used to destroy all the frames except the first two

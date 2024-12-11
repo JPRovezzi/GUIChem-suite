@@ -3,7 +3,7 @@ import os
 import modules.main_frame.functions as functions
 import modules.main_frame.frame_root as frameRoot
 import modules.image_handler as imageHandler
-import modules.tool_frame.ugropygui.frame_result as frameResult
+import addons.ugropygui.frame_result as frameResult
 # import shutil module to copy files
 import shutil
 # import filedialog from tkinter module to save files

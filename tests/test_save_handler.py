@@ -5,7 +5,7 @@ from modules.tool_handler import save
 def test_load_ugropygui(mocker):
     '''Test that the load function calls the load function from the frame_save
     module when the input is "UgropyGUI"'''
-    mock_load = mocker.patch('modules.tool_frame.ugropygui.frame_save.load')
+    mock_load = mocker.patch('addons.ugropygui.frame_save.load')
     save("UgropyGUI")
     mock_load.assert_called_once()
 
