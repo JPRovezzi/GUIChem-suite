@@ -4,9 +4,8 @@ This module provides functions to create and manage the result frame of the
 GUI.
 """
 # Import the required libraries:
+# xml.etree.ElementTree is a module that provides functions to create and parse XML documents.
 import xml.etree.ElementTree as ET
-
-import os
 # CustomTkinter is a custom GUI library for Python.
 import customtkinter as ctk
 # pubchempy is a module that provides functions to interact with the PubChem
@@ -17,12 +16,8 @@ import modules.image_handler as image_handler
 import modules.widget_classes as widget_classes
 # FrameRoot is a module that provides functions the root frame of the GUI.
 import modules.main_frame.frame_root as frame_root
+# tool_handler is a module that provides functions to handle the tools.
 import modules.tool_handler as tool_handler
-
-from modules.main_frame.functions import read_json
-
-
-
 #------------------------------------------------------------
 
 #------------------------------------------------------------
@@ -35,12 +30,7 @@ def load(
         picture = None
         ):
     ''' This function creates the result frame of the GUI. '''
-    # Read the configuration file to get the constants
-    module_location = os.path.dirname(os.path.abspath(__file__))
-    
-    
-    
-    
+
     # Get the informations of the molecule
     mol_data = {
         "name": [name],
@@ -105,19 +95,11 @@ def load(
 
     xml_name_element = ET.SubElement(xml_root, "Name")
     xml_name_element.text = str(mol_data["name"][0])
-
     smiles_element = ET.SubElement(xml_root, "SMILES")
-    
     smiles_element.text = str(mol_data["smiles"])
-    print(smiles_element.text)
-    
     formula_element = ET.SubElement(xml_root, "MolecularFormula")
     formula_element.text = str(mol_data["formula"])
-
     subgroups_element = ET.SubElement(xml_root, "UNIFACSubgroups")
     subgroups_element.text = str(mol_data["UNIFAC Subgroups"])
-
     tree = ET.ElementTree(xml_root)
     tree.write("ugropy.session")
-
-

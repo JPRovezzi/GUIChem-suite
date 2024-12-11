@@ -7,19 +7,19 @@
 # Import the required libraries:
 # CustomTkinter is a custom GUI library for Python.
 import customtkinter as ctk
-# svg_handler is a module that provides functions to handle SVG files.
-import addons.ugropygui.svg_handler as svg_handler
 
-# widget_classes is a module that provides classes for GUI widgets.
-import modules.widget_classes as widget_classes
-# FrameRoot is a module that provides functions the root frame of the GUI.
-import modules.main_frame.frame_root as frame_root
 # frameResult is a module that provides functions to create and manage the
 # result frame of the GUI.
 import addons.ugropygui.frame_result as frame_result
-
+# svg_handler is a module that provides functions to handle SVG files.
+import addons.ugropygui.svg_handler as svg_handler
+# FrameRoot is a module that provides functions the root frame of the GUI.
+import modules.main_frame.frame_root as frame_root
+# tool_handler is a module that provides functions to handle the tools of the
+# GUI.
 import modules.tool_handler as tool_handler
-
+# widget_classes is a module that provides classes for GUI widgets.
+import modules.widget_classes as widget_classes
 
 #------------------------------------------------------------
 # Read configuration file

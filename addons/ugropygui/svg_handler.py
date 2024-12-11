@@ -55,9 +55,9 @@ def compile_c_script(
 
 def write_groups2picture(groups_dict):
     '''Write the molecule groups in the picture.'''
-    
+
     module_location = os.path.dirname(os.path.abspath(__file__))
-    
+
     pict_out = "/".join((
         read_json(
             path = module_location,
@@ -88,8 +88,6 @@ def write_groups2picture(groups_dict):
     image.save(pict_out)
     return None
 
-
-
 def get_results(molecule_id,input_type):
     '''Get the molecule groups and save the SVG and PNG files.'''
     # Initialize the error and outcome variables
@@ -97,9 +95,7 @@ def get_results(molecule_id,input_type):
 
     # Get the basic configs
     module_location = os.path.dirname(os.path.abspath(__file__))
-    
-    
-    
+
     pict_in = "/".join((
         read_json(
             path = module_location,
@@ -107,7 +103,7 @@ def get_results(molecule_id,input_type):
             section = "FILENAME",
             key = "pict_in"),
         ))
-    
+
     svg2png_script = "/".join((
         read_json(
             path = module_location,
@@ -115,7 +111,7 @@ def get_results(molecule_id,input_type):
             section = "FILENAME",
             key = "svg2png_script"),
         ))
-    
+
     svg2png_exe = "/".join((
         read_json(
             path = module_location,
@@ -123,7 +119,7 @@ def get_results(molecule_id,input_type):
             section = "FILENAME",
             key = "svg2png_exe"),
         ))
-    
+
     path_script = "/".join((
         module_location,
         read_json(
@@ -131,9 +127,7 @@ def get_results(molecule_id,input_type):
             filename = "tool",
             section = "PATH",
             key = "svg2png_script"),
-            
         ))
-    
     path_exe = "/".join((
         module_location,
         read_json(
@@ -141,7 +135,7 @@ def get_results(molecule_id,input_type):
             filename = "tool",
             section = "PATH",
             key = "svg2png_exe"),
-        )) 
+        ))
 
     # Check if the molecule identifier is valid
     if molecule_id is not None and molecule_id != "":
@@ -165,10 +159,14 @@ def get_results(molecule_id,input_type):
         # Save the SVG
         with open(pict_in, "w", encoding="utf-8") as file:
             file.write(svg_string)
-        
+
         # Run the C script to convert the SVG to PNG
-        compile_c_script(c_script_path = path_script, c_script_name = svg2png_script, output_name = svg2png_exe, output_path = path_exe)
-        
+        compile_c_script(
+            c_script_path = path_script,
+            c_script_name = svg2png_script,
+            output_name = svg2png_exe,
+            output_path = path_exe)
+
         # Write the molecule groups in the picture
         write_groups2picture(molecule.unifac.subgroups)
         error = None
