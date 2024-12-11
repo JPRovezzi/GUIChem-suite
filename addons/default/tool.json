@@ -1,0 +1,21 @@
+{
+    "TOOL":{
+        "NAME": "",
+        "DESCRIPTION": "",
+        "VERSION": "",
+        "AUTHOR": "",
+        "WEBSITE": "",
+        "LICENSE": "",
+        "REQUIREMENTS": {
+            "OS": "",
+            "SOFTWARE": "",
+            "LIBRARIES": ""
+        },
+        "AKNOWLEDGEMENTS": ""
+    },
+
+    "FILENAME":{
+    },
+    "PATH":{
+    }
+}
