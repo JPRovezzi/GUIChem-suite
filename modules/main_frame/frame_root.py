@@ -68,5 +68,4 @@ class Root(ctk.CTk):
             if i >= 2:
                 widget.destroy()
             i += 1
-        
-        
+
