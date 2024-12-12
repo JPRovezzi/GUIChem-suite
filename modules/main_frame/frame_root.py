@@ -10,7 +10,6 @@ import customtkinter as ctk
 import modules.image_handler as image_handler
 # import the required functions to read the configuration files
 from modules.main_frame.functions import read_json
-
 from modules.widget_classes import FileMenu
 
 #------------------------------------------------------------

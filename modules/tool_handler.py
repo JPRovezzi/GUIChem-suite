@@ -9,9 +9,7 @@ import modules.main_frame.frame_root as frame_root
 import modules.main_frame.frame_welcome as frame_welcome
 # ugroypygui is a module that provides functions to create and manage the
 # UGROpyGUI tool.
-import addons.ugropygui.frame_selection as frame_selection
-
-import addons.ugropygui.frame_save as ugropygui_frame_save
+import addons.ugropygui as ugropygui
 #------------------------------------------------------------
 def destroy_all_frames():
     '''This function is used to destroy all the frames except the first two
@@ -31,7 +29,7 @@ def start_tool_event(tool: str):
     '''This function is used to start the tool that the user wants to use.'''
     if tool == "UgropyGUI":
         destroy_all_frames()
-        frame_selection.load()
+        ugropygui.frame_selection.load()
     elif tool == "Flash-Calc":
         print("Flash-Calc")
 
@@ -40,6 +38,6 @@ def save(tool):
     using.'''
     match tool:
         case "UgropyGUI":
-            ugropygui_frame_save.load()
+            ugropygui.frame_save.load()
         case "Flash-Calc":
             None
