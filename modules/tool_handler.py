@@ -11,6 +11,7 @@ import modules.main_frame.frame_welcome as frame_welcome
 # UGROpyGUI tool.
 import addons.ugropygui as ugropygui
 #------------------------------------------------------------
+# destroy_all_frames is deprecated and will be removed in a future version.
 def destroy_all_frames():
     '''This function is used to destroy all the frames except the first two
     which are the menubar and the background.'''

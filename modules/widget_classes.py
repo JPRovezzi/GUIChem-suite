@@ -7,7 +7,7 @@ import tkinter as tk
 import customtkinter as ctk
 import modules.main_frame.frame_root as frame_root
 import modules.tool_handler as tool_handler
-
+import modules.image_handler as image_handler
 #------------------------------------------------------------
 
 # Class definitions
@@ -102,6 +102,8 @@ class CopyTextBox(ctk.CTkTextbox):
 class FileMenu(ctk.CTkOptionMenu):
     ''' This class is a custom option menu widget that is used to display a list
     of options to the user.'''
+    menu = None
+    root = None
     def __init__(self, parent, **kwargs):
         super().__init__(
             parent,
@@ -109,31 +111,79 @@ class FileMenu(ctk.CTkOptionMenu):
             command = self.events,
             **kwargs
             )
+        self.menu = parent
+        self.root = self.menu.root
         self.set("File")
         self.grid(
             row=0,
             column=0,
             pady=10,
             padx=10)
+        
     def events(self, event):
         ''' This function is called when an option is selected from the menu.'''
         self.set("File")
         match event:
             case "New":
-                tool_handler.select_tool_event(frame_root.tools_menu.get())
+                tool_handler.select_tool_event(self.menu.tools_menu.get())
             case "Open":
                 print("Open file")
             case "Save":
-                tool_handler.save(frame_root.tools_menu.get())
+                tool_handler.save(self.menu.tools_menu.get())
                 print("Save file")
             case "Close":
-                tool_handler.destroy_all_frames()
+                self.root.destroy_all_frames()
             case "Exit":
-                frame_root.root.destroy()
+                self.root.destroy()
             case _:
                 print("Invalid option")
-
 
     def options(self):
         ''' This function returns the list of options in the menu.'''
         return ["New", "Open", "Save", "Close","","Exit"]
+    
+class MenuFrame(ctk.CTkFrame):
+    ''' This class is a custom frame widget that is used to create a frame for
+    the menu bar.'''
+    file_menu = None
+    appearance_menu = None
+    tools_menu = None
+    root = None
+
+    def __init__(self, parent, **kwargs):
+        
+        super().__init__(
+            parent,
+            **kwargs
+            )
+        self.root = parent
+        self.file_menu = FileMenu(
+            self,
+            corner_radius=0,
+            )
+        self.appearance_menu = ctk.CTkOptionMenu(
+            self,
+            corner_radius=0,
+            values=["Light", "Dark", "System"],
+            command = image_handler.change_appearance_mode_event
+            )
+
+        self.appearance_menu.set("Theme")
+        self.appearance_menu.grid(
+            row=0,
+            column=2,
+            pady=10,
+            padx=10)
+        self.tools_menu = ctk.CTkOptionMenu(
+            self,
+            corner_radius=0,
+            values=parent.addons
+            )
+        self.tools_menu.grid(
+            row=0,
+            column=1,
+            pady=10,
+            padx=10)
+        self.tools_menu.set("Tools")
+        self.pack(anchor="w",fill="both",padx=0, pady=0)
+        

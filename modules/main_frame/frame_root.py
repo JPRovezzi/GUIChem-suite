@@ -10,16 +10,19 @@ import customtkinter as ctk
 import modules.image_handler as image_handler
 # import the required functions to read the configuration files
 from modules.main_frame.functions import read_json
-from modules.widget_classes import FileMenu
+from modules.widget_classes import MenuFrame
 
 #------------------------------------------------------------
-# Function definitions
 
-
-def create_gui():
-    '''Create the main GUI window and frames.'''
-    global root, appearance_menu, file_menu, tools_menu
-
+class Root(ctk.CTk):
+    '''Class to create the main GUI window and frames.'''
+    
+    def __init__(self):
+        '''Initialize the class.'''
+        super().__init__()
+        #self.root, self.appearance_menu = self.create_gui()
+        print(self.background_path)
+    
     # Read the configuration file to get the constants
     background_path = read_json(section = "PATH", key = "backgrounds")
     icon_path = "/".join((
@@ -31,52 +34,39 @@ def create_gui():
     is_resizable = read_json(section = "WINDOW", key = "resizable")
     window_title = read_json(section = "WINDOW", key = "title")
     addons = read_json(filename = "user", section = "ADDONS", key = "enabled")
+    menuframe = None
 
+    def create_gui(self):
+        '''Create the main GUI window and frames.'''
 
-    # Create the main window
-    root = ctk.CTk()
-    root.title(window_title)
-    root.eval("tk::PlaceWindow . center")
-    root.geometry("x".join((window_width, window_height)))
-    if is_resizable == "false":
-        root.resizable(0, 0)  # Disable resizing
-    root.after(
-        201,
-        lambda :root.iconbitmap(icon_path))
-    image_handler.place_image(root, 0, 0, background_path)
-    #Frames
-    menuframe = ctk.CTkFrame(master=root)
-    file_menu = FileMenu(
-        menuframe,
-        corner_radius=0,
-        )
+        # Create the main window
+        self.title(self.window_title)
+        self.eval("tk::PlaceWindow . center")
+        self.geometry("x".join((self.window_width, self.window_height)))
+        if self.is_resizable == "false":
+            self.resizable(0, 0)  # Disable resizing
+        self.after(
+            201,
+            lambda :self.iconbitmap(self.icon_path))
+        image_handler.place_image(self, 0, 0, self.background_path)
+        #Frames
+        self.create_menu()
+        ctk.set_appearance_mode("system")
+        # Start the main loop
+        self.mainloop()
+        return
+    
+    def create_menu(self):
+        '''Create the menu bar.'''
+        self.menuframe = MenuFrame(self)
 
-    appearance_menu = ctk.CTkOptionMenu(
-        menuframe,
-        corner_radius=0,
-        values=["Light", "Dark", "System"],
-        command = image_handler.change_appearance_mode_event
-        )
-    appearance_menu.grid(
-        row=0,
-        column=2,
-        pady=10,
-        padx=10)
-    appearance_menu.set("Theme")
-
-    tools_menu = ctk.CTkOptionMenu(
-        menuframe,
-        corner_radius=0,
-        values=addons
-        )
-    tools_menu.grid(
-        row=0,
-        column=1,
-        pady=10,
-        padx=10)
-    tools_menu.set("Tools")
-    menuframe.pack(anchor="w",fill="both",padx=0, pady=0)
-    ctk.set_appearance_mode("system")
-    # Start the main loop
-    root.mainloop()
-    return root, appearance_menu
+    def destroy_all_frames(self):
+        '''This function is used to destroy all the frames except the first two
+        which are the menubar and the background.'''
+        i = 0
+        for widget in self.winfo_children():
+            if i >= 2:
+                widget.destroy()
+            i += 1
+        
+        
