@@ -7,7 +7,10 @@ import tkinter as tk
 import customtkinter as ctk
 import modules.main_frame.frame_root as frame_root
 import modules.tool_handler as tool_handler
+from PIL import Image
+import random
 import modules.image_handler as image_handler
+from modules.main_frame.functions import read_json
 #------------------------------------------------------------
 
 # Class definitions
@@ -125,7 +128,7 @@ class FileMenu(ctk.CTkOptionMenu):
         self.set("File")
         match event:
             case "New":
-                tool_handler.select_tool_event(self.menu.tools_menu.get())
+                self.select_tool_event(self.menu.tools_menu.get())
             case "Open":
                 print("Open file")
             case "Save":
@@ -141,6 +144,21 @@ class FileMenu(ctk.CTkOptionMenu):
     def options(self):
         ''' This function returns the list of options in the menu.'''
         return ["New", "Open", "Save", "Close","","Exit"]
+    
+    def select_tool_event(self, tool: str):
+        '''This function is used to select the tool that the user wants to use.'''
+        if tool != "Tools":
+            #self.root.destroy_all_frames()
+            self.root.load_module(tool,'WelcomeFrame')
+    def start_tool_event(self, tool: str):
+        '''This function is used to start the tool that the user wants to use.'''
+        self.root.destroy_all_frames()
+        self.root.load_module(tool)
+        #if tool == "UgropyGUI":
+            #self.root.destroy_all_frames()
+            #ugropygui.frame_selection.load()
+        #elif tool == "Flash-Calc":
+            #print("Flash-Calc")
     
 class MenuFrame(ctk.CTkFrame):
     ''' This class is a custom frame widget that is used to create a frame for
@@ -161,11 +179,9 @@ class MenuFrame(ctk.CTkFrame):
             self,
             corner_radius=0,
             )
-        self.appearance_menu = ctk.CTkOptionMenu(
+        #self.appearance_menu = ctk.CTkOptionMenu(
+        self.appearance_menu = AppearanceMenu(
             self,
-            corner_radius=0,
-            values=["Light", "Dark", "System"],
-            command = image_handler.change_appearance_mode_event
             )
 
         self.appearance_menu.set("Theme")
@@ -186,4 +202,51 @@ class MenuFrame(ctk.CTkFrame):
             padx=10)
         self.tools_menu.set("Tools")
         self.pack(anchor="w",fill="both",padx=0, pady=0)
+
+class AppearanceMenu(ctk.CTkOptionMenu):
+    ''' This class is a custom option menu widget that is used to display a list
+    of options to the user.'''
+    menu = None
+    root = None
+    def __init__(self, parent, **kwargs):
+        super().__init__(
+            parent,
+            corner_radius=0,
+            values = ["Light", "Dark", "System"],
+            command = self.change_appearance_mode_event,
+            **kwargs
+            )
+        self.set("Theme")
+        self.menu = parent
+        self.root = self.menu.root
+    def change_appearance_mode_event(self, new_appearance_mode: str):
+        '''Change the appearance mode of the GUI.'''
+        
+        backgrounds_path = read_json(section = "PATH",key = "backgrounds")
+        
+        # Reset the appearance menu label
+        self.set("Theme")
+        # Change the appearance mode
+        ctk.set_appearance_mode(new_appearance_mode)
+            # Change the default color theme
+        if new_appearance_mode == "Light":
+            ctk.set_default_color_theme("blue")
+        else:
+            ctk.set_default_color_theme("dark-blue")
+        # Change light and dark mode images
+        light_image=Image.open(
+            image_handler.random_image(f"{backgrounds_path}/light")
+                ).rotate(random.choice([0,90,180,270]))
+        dark_image=Image.open(
+            image_handler.random_image(f"{backgrounds_path}/dark")
+                ).rotate(random.choice([0,90,180,270]))
+        image = ctk.CTkImage(
+            light_image=light_image,
+            dark_image=dark_image,
+            size=(800,800))
+        # Change the image of the main frame
+        self.root.winfo_children()[0].configure(image=image)
+        return None
+
+
         

@@ -51,31 +51,3 @@ def place_image(where, posx, posy, image_path):
     dark_image.close()
     return None
 
-def change_appearance_mode_event(new_appearance_mode: str):
-    '''Change the appearance mode of the GUI.'''
-    
-    backgrounds_path = read_json(section = "PATH",key = "backgrounds")
-    
-    # Reset the appearance menu label
-    frame_root.appearance_menu.set("Theme")
-    # Change the appearance mode
-    ctk.set_appearance_mode(new_appearance_mode)
-        # Change the default color theme
-    if new_appearance_mode == "Light":
-        ctk.set_default_color_theme("blue")
-    else:
-        ctk.set_default_color_theme("dark-blue")
-    # Change light and dark mode images
-    light_image=Image.open(
-        random_image(f"{backgrounds_path}/light")
-            ).rotate(random.choice([0,90,180,270]))
-    dark_image=Image.open(
-        random_image(f"{backgrounds_path}/dark")
-            ).rotate(random.choice([0,90,180,270]))
-    image = ctk.CTkImage(
-        light_image=light_image,
-        dark_image=dark_image,
-        size=(800,800))
-    # Change the image of the main frame
-    frame_root.root.winfo_children()[0].configure(image=image)
-    return None

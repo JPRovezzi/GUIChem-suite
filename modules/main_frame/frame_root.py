@@ -6,11 +6,13 @@
 # Import the required libraries:
 # CustomTkinter is a custom GUI library for Python.
 import customtkinter as ctk
+import os
+import importlib
 # ImageHandler is a module that provides functions to handle images.
 import modules.image_handler as image_handler
 # import the required functions to read the configuration files
 from modules.main_frame.functions import read_json
-from modules.widget_classes import MenuFrame
+from modules.widget_classes import MenuFrame, TitleLabel
 
 #------------------------------------------------------------
 
@@ -35,6 +37,7 @@ class Root(ctk.CTk):
     window_title = read_json(section = "WINDOW", key = "title")
     addons = read_json(filename = "user", section = "ADDONS", key = "enabled")
     menuframe = None
+    module_frame = None
 
     def create_gui(self):
         '''Create the main GUI window and frames.'''
@@ -45,9 +48,13 @@ class Root(ctk.CTk):
         self.geometry("x".join((self.window_width, self.window_height)))
         if self.is_resizable == "false":
             self.resizable(0, 0)  # Disable resizing
-        self.after(
-            201,
-            lambda :self.iconbitmap(self.icon_path))
+        # Set the icon if the OS is Windows
+        # In linux the folowing lines will raise an error
+        if "nt" == os.name:
+            self.after(
+                201,
+                lambda :self.iconbitmap(self.icon_path))
+        # Set the background image
         image_handler.place_image(self, 0, 0, self.background_path)
         #Frames
         self.create_menu()
@@ -68,4 +75,53 @@ class Root(ctk.CTk):
             if i >= 2:
                 widget.destroy()
             i += 1
+    def load_welcome(self,tool):
+        '''This function loads the welcome frame with its widgets.'''
+        #global frame_welcome
+        BG_COLOR = "#000000"
+        frame_welcome = ctk.CTkFrame(
+            master = self,
+            corner_radius=50,
+            bg_color=BG_COLOR,
+            )
+        frame_welcome.tkraise()
+        frame_welcome.pack_propagate(False)
+        TitleLabel(
+            frame_welcome,
+            text=""
+            ).pack(pady=0)
+        TitleLabel(
+            frame_welcome,
+            text=f"Welcome to {tool}!"
+            ).pack(pady=0)
+        ctk.CTkButton(
+            frame_welcome,
+            text="START",
+            cursor="hand2",
+            command=lambda:self.menuframe.file_menu.start_tool_event(tool)
+            ).pack(pady=10)
 
+        ctk.CTkButton(
+        frame_welcome,
+        text="CLOSE",
+        cursor="hand2",
+        command=frame_welcome.destroy
+        ).pack(pady=10)
+        #if os.name == 'nt':  # Check if the OS is Windows
+            #pywinstyles.set_opacity(frame_welcome, color=BG_COLOR)
+        frame_welcome.pack(pady=100)
+        return None
+    def load_module(self,tool,frame): 
+        '''This function loads the module that the user wants to use.'''
+        self.module_frame = None
+        self.destroy_all_frames()
+        try: 
+            module = importlib.import_module("addons."+tool.lower()+".frame_classes")
+            frame_class = getattr(module, frame) 
+            # Assuming the frame class is named 'FrameClass'
+            self.module_frame = frame_class(self,tool)
+        except Exception as e: 
+            print(f"Error loading module!!!: {e}")
+            return 
+        
+        
