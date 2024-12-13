@@ -1,1 +1,1 @@
-<MoleculeData><Name>THC</Name><SMILES>CCCCCC1=CC(=C2C3C=C(CCC3C(OC2=C1)(C)C)C)O</SMILES><MolecularFormula>C21H30O2</MolecularFormula><UNIFACSubgroups>{}</UNIFACSubgroups></MoleculeData>
+<MoleculeData><Name>TNT</Name><SMILES>CC1=C(C=C(C=C1[N+](=O)[O-])[N+](=O)[O-])[N+](=O)[O-]</SMILES><MolecularFormula>C7H5N3O6</MolecularFormula><UNIFACSubgroups>{'ACH': 2, 'ACCH3': 1, 'ACNO2': 3}</UNIFACSubgroups></MoleculeData>

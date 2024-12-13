@@ -111,7 +111,7 @@ class Root(ctk.CTk):
             #pywinstyles.set_opacity(frame_welcome, color=BG_COLOR)
         frame_welcome.pack(pady=100)
         return None
-    def load_module(self,tool,frame): 
+    def load_module(self,tool,frame,**kargs): 
         '''This function loads the module that the user wants to use.'''
         self.module_frame = None
         self.destroy_all_frames()
@@ -119,9 +119,9 @@ class Root(ctk.CTk):
             module = importlib.import_module("addons."+tool.lower()+".frame_classes")
             frame_class = getattr(module, frame) 
             # Assuming the frame class is named 'FrameClass'
-            self.module_frame = frame_class(self,tool)
+            self.module_frame = frame_class(self,tool,**kargs)
         except Exception as e: 
-            print(f"Error loading module!!!: {e}")
+            print(f"Error loading module: {e}")
             return 
         
         

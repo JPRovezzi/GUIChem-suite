@@ -35,17 +35,17 @@ def compile_c_script(
             # Compile the C script
             compile_command = " ".join((
                 f"gcc {c_script_path}{c_script_name}.c", 
-                f"-o {output_path}{output_name}.exe",
-                "-lm"))
+                f" -o {output_path}{output_name}.exe",
+                " -lm"))
             subprocess.run(compile_command, shell=True, check=True)
     else:
-        run_command = f"./{output_path}{output_name}"
+        run_command = f"{output_path}{output_name}"
         if not os.path.exists(run_command):
             # Compile the C script
             compile_command = "".join((
                 f"gcc {c_script_path}{c_script_name}.c",
-                f"-o {output_path}{output_name}",
-                "-lm"))
+                f" -o {output_path}{output_name}",
+                " -lm"))
             subprocess.run(compile_command, shell=True, check=True)
     # Run the compiled C script
     run_process = subprocess.run(run_command, shell=True, check=False)

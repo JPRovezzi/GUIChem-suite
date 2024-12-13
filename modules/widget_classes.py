@@ -148,7 +148,7 @@ class FileMenu(ctk.CTkOptionMenu):
     def select_tool_event(self, tool: str):
         '''This function is used to select the tool that the user wants to use.'''
         if tool != "Tools":
-            #self.root.destroy_all_frames()
+            self.root.destroy_all_frames()
             self.root.load_module(tool,'WelcomeFrame')
     def start_tool_event(self, tool: str):
         '''This function is used to start the tool that the user wants to use.'''
