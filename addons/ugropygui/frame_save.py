@@ -5,8 +5,6 @@ import os
 import shutil
 # import filedialog from tkinter module to save files
 from tkinter import filedialog
-# import the main frame
-import modules.main_frame.frame_root as frameRoot
 # import the image handler module
 import modules.image_handler as imageHandler
 

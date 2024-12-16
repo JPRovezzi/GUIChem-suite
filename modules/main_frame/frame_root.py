@@ -38,7 +38,7 @@ class Root(ctk.CTk):
     addons = read_json(filename = "user", section = "ADDONS", key = "enabled")
     menuframe = None
     module_frame = None
-
+    
     def create_gui(self):
         '''Create the main GUI window and frames.'''
 

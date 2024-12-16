@@ -18,6 +18,14 @@ import addons.ugropygui.svg_handler as svg_handler
 if os.name == 'nt':
     import pywinstyles
 
+class UgropyFrame(ctk.CTkFrame):
+    '''Class to create the Ugropy frame.'''
+    def __init__(self, master, tool):
+        '''Initialize the class.'''
+        super().__init__(master=master, corner_radius=50, bg_color="#000000")
+        
+    
+
 class WelcomeFrame(ctk.CTkFrame):
     '''Class to create the welcome frame.'''
     master=None
