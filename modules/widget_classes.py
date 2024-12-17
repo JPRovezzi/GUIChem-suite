@@ -130,12 +130,13 @@ class FileMenu(ctk.CTkOptionMenu):
             case "New":
                 self.select_tool_event(self.menu.tools_menu.get())
             case "Open":
-                print("Open file")
+                if self.root.module_frame is not None:
+                    self.root.module_frame.open()
             case "Save":
-                tool_handler.save(self.menu.tools_menu.get())
-                print("Save file")
+                if self.root.module_frame is not None:
+                    self.root.module_frame.save()
             case "Close":
-                self.root.destroy_all_frames()
+                self.root.close_module()
             case "Exit":
                 self.root.destroy()
             case _:

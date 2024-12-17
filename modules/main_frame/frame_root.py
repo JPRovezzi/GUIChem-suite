@@ -123,5 +123,11 @@ class Root(ctk.CTk):
         except Exception as e: 
             print(f"Error loading module: {e}")
             return 
+    def close_module(self):
+        '''This function is used to close the module that the user is using.'''
+        self.module_frame.destroy()
+        self.module_frame = None
+        self.destroy_all_frames()
+        return
         
         

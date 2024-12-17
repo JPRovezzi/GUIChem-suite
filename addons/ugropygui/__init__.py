@@ -1,4 +1,2 @@
-from . import frame_result
-from . import frame_save
-from . import frame_selection
+from . import frame_classes
 from . import svg_handler
