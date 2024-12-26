@@ -29,7 +29,10 @@ class UgropyFrame(ctk.CTkFrame):
     tool = None
     def __init__(self, master, tool, **kwargs):
         '''Initialize the class.'''
-        super().__init__(master=master, corner_radius=50, bg_color="#000000")
+        if os.name == 'nt':
+            super().__init__(master=master, corner_radius=50, bg_color="#000000")
+        else:
+            super().__init__(master=master, corner_radius=0, bg_color="#000000")
         self.master = master
         self.tool = tool
         kwargs

@@ -130,8 +130,8 @@ class FileMenu(ctk.CTkOptionMenu):
             case "New":
                 self.select_tool_event(self.menu.tools_menu.get())
             case "Open":
-                if self.root.module_frame is not None:
-                    self.root.module_frame.open()
+                self.open_tool_event()
+                    
             case "Save":
                 if self.root.module_frame is not None:
                     self.root.module_frame.save()
@@ -151,10 +151,40 @@ class FileMenu(ctk.CTkOptionMenu):
         if tool != "Tools":
             self.root.destroy_all_frames()
             self.root.load_module(tool,'WelcomeFrame')
-    def start_tool_event(self, tool: str):
-        '''This function is used to start the tool that the user wants to use.'''
-        self.root.destroy_all_frames()
-        self.root.load_module(tool)
+
+    def open_tool_event(self):
+        '''This function is used to open a file of the tool that the user wants to use.'''
+        open_window = tk.Toplevel(self.master)
+        open_window.resizable(0, 0)  # Disable resizing
+        open_window.title("Open file")
+        open_window.transient(self.master)
+        open_window.grab_set()
+
+        # Selection box to select if it is a SVG image or a PNG image
+        tk.Label(open_window, text="Select tool:").pack(pady=5)
+
+        # Frame to hold the buttons
+        button_frame = tk.Frame(open_window)
+        button_frame.pack(pady=10)
+
+        # Save button
+        tk.Button(
+            button_frame,
+            text="Open",
+            command=lambda: None
+            ).pack(side=tk.LEFT, padx=5)
+
+        # Cancel button
+        tk.Button(
+            button_frame,
+            text="Close",
+            command=lambda: open_window.destroy()
+            ).pack(side=tk.LEFT, padx=5)
+        return
+    #def start_tool_event(self, tool: str):
+        #'''This function is used to start the tool that the user wants to use.#'''
+        #self.root.destroy_all_frames()
+        #self.root.load_module(tool)
         #if tool == "UgropyGUI":
             #self.root.destroy_all_frames()
             #ugropygui.frame_selection.load()
