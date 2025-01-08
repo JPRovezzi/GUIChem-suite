@@ -12,8 +12,6 @@ import tkinter as tk
 import customtkinter as ctk
 # The PIL library is used to work with images.
 from PIL import ImageTk, Image
-# frameRoot is the main frame of the GUIChem-suite application
-import modules.main_frame.frame_root as frame_root
 # import the required functions to read the configuration files
 from modules.main_frame.functions import read_json
 

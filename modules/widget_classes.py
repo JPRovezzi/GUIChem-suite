@@ -5,8 +5,6 @@
 import tkinter as tk
 # CustomTkinter is a custom GUI library for Python.
 import customtkinter as ctk
-import modules.main_frame.frame_root as frame_root
-import modules.tool_handler as tool_handler
 from PIL import Image
 import random
 import modules.image_handler as image_handler
@@ -181,15 +179,36 @@ class FileMenu(ctk.CTkOptionMenu):
             command=lambda: open_window.destroy()
             ).pack(side=tk.LEFT, padx=5)
         return
-    #def start_tool_event(self, tool: str):
-        #'''This function is used to start the tool that the user wants to use.#'''
-        #self.root.destroy_all_frames()
-        #self.root.load_module(tool)
-        #if tool == "UgropyGUI":
-            #self.root.destroy_all_frames()
-            #ugropygui.frame_selection.load()
-        #elif tool == "Flash-Calc":
-            #print("Flash-Calc")
+    
+    def onew_tool_event(self):
+        '''This function is used to open a file of the tool that the user wants to use.'''
+        open_window = tk.Toplevel(self.master)
+        open_window.resizable(0, 0)  # Disable resizing
+        open_window.title("New file")
+        open_window.transient(self.master)
+        open_window.grab_set()
+
+        # Selection box to select if it is a SVG image or a PNG image
+        tk.Label(open_window, text="Select tool:").pack(pady=5)
+
+        # Frame to hold the buttons
+        button_frame = tk.Frame(open_window)
+        button_frame.pack(pady=10)
+
+        # Save button
+        tk.Button(
+            button_frame,
+            text="Open",
+            command=lambda: None
+            ).pack(side=tk.LEFT, padx=5)
+
+        # Cancel button
+        tk.Button(
+            button_frame,
+            text="Close",
+            command=lambda: open_window.destroy()
+            ).pack(side=tk.LEFT, padx=5)
+        return
     
 class MenuFrame(ctk.CTkFrame):
     ''' This class is a custom frame widget that is used to create a frame for
