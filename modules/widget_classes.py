@@ -126,9 +126,9 @@ class FileMenu(ctk.CTkOptionMenu):
         self.set("File")
         match event:
             case "New":
-                self.select_tool_event(self.menu.tools_menu.get())
+                self.start_tool_event(action = "new")
             case "Open":
-                self.open_tool_event()
+                self.start_tool_event(action = "open")
                     
             case "Save":
                 if self.root.module_frame is not None:
@@ -144,11 +144,15 @@ class FileMenu(ctk.CTkOptionMenu):
         ''' This function returns the list of options in the menu.'''
         return ["New", "Open", "Save", "Close","","Exit"]
     
-    def select_tool_event(self, tool: str):
+    def select_tool_event(self, tool: str, action = "new"):
         '''This function is used to select the tool that the user wants to use.'''
-        if tool != "Tools":
-            self.root.destroy_all_frames()
-            self.root.load_module(tool,'WelcomeFrame')
+        if action == "new":
+            if tool != "Tools":
+                self.root.destroy_all_frames()
+                self.root.load_module(tool,'WelcomeFrame')
+        if action == "open":
+            if tool != "Tools":
+                self.root.load_module(tool,'WelcomeFrame')
 
     def open_tool_event(self):
         '''This function is used to open a file of the tool that the user wants to use.'''
@@ -180,33 +184,59 @@ class FileMenu(ctk.CTkOptionMenu):
             ).pack(side=tk.LEFT, padx=5)
         return
     
-    def onew_tool_event(self):
-        '''This function is used to open a file of the tool that the user wants to use.'''
-        open_window = tk.Toplevel(self.master)
-        open_window.resizable(0, 0)  # Disable resizing
-        open_window.title("New file")
-        open_window.transient(self.master)
-        open_window.grab_set()
+    def start_tool_event(self,action: str):
+        '''This function is used to create a new file of the tool that the user wants to use.'''
+        
+        match action:
+            case "new":
+                title = "New file"
+                button_text = "Create"
+            case "open":
+                title = "Open file"
+                button_text = "Open"
+            case _:
+                pass
+        select_window = ctk.CTkToplevel(self.master)
+        select_window.resizable(0, 0)  # Disable resizing
+        select_window.title(title)
+        select_window.transient(self.master)
+        select_window.grab_set()
 
         # Selection box to select if it is a SVG image or a PNG image
-        tk.Label(open_window, text="Select tool:").pack(pady=5)
+        ctk.CTkLabel(select_window, text="Select tool:").pack(pady=5)
+        # Create a scrollable listbox to display the values of parent.addons
+        listbox_frame = ctk.CTkFrame(select_window)
+        listbox_frame.pack(pady=10)
 
+        scrollbar = tk.Scrollbar(listbox_frame)
+        scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+
+        listbox = tk.Listbox(listbox_frame, yscrollcommand=scrollbar.set)
+        for addon in self.root.addons:
+            listbox.insert(tk.END, addon)
+        listbox.pack(side=tk.LEFT, fill=tk.BOTH)
+        if listbox.size() > 0:
+            listbox.select_set(0)  # Auto-select the first item
+
+        scrollbar.config(command=listbox.yview)
         # Frame to hold the buttons
-        button_frame = tk.Frame(open_window)
+        button_frame = ctk.CTkFrame(select_window)
         button_frame.pack(pady=10)
+        
 
-        # Save button
-        tk.Button(
+        # New button
+        ctk.CTkButton(
             button_frame,
-            text="Open",
-            command=lambda: None
+            text=button_text,
+            command=lambda: (self.select_tool_event(listbox.get(listbox.curselection()), action), select_window.destroy())
+            
             ).pack(side=tk.LEFT, padx=5)
 
         # Cancel button
-        tk.Button(
+        ctk.CTkButton(
             button_frame,
             text="Close",
-            command=lambda: open_window.destroy()
+            command=lambda: select_window.destroy()
             ).pack(side=tk.LEFT, padx=5)
         return
     
@@ -240,17 +270,17 @@ class MenuFrame(ctk.CTkFrame):
             column=2,
             pady=10,
             padx=10)
-        self.tools_menu = ctk.CTkOptionMenu(
-            self,
-            corner_radius=0,
-            values=parent.addons
-            )
-        self.tools_menu.grid(
-            row=0,
-            column=1,
-            pady=10,
-            padx=10)
-        self.tools_menu.set("Tools")
+        #self.tools_menu = ctk.CTkOptionMenu(
+            #self,
+            #corner_radius=0,
+            #values=parent.addons
+            #)
+        #self.tools_menu.grid(
+            #row=0,
+            #column=1,
+            #pady=10,
+            #padx=10)
+        #self.tools_menu.set("Tools")
         self.pack(anchor="w",fill="both",padx=0, pady=0)
 
 class AppearanceMenu(ctk.CTkOptionMenu):
