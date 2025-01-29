@@ -262,7 +262,6 @@ class MenuFrame(ctk.CTkFrame):
             self,
             corner_radius=0,
             )
-        #self.appearance_menu = ctk.CTkOptionMenu(
         self.appearance_menu = AppearanceMenu(
             self,
             )
@@ -273,17 +272,6 @@ class MenuFrame(ctk.CTkFrame):
             column=2,
             pady=10,
             padx=10)
-        #self.tools_menu = ctk.CTkOptionMenu(
-            #self,
-            #corner_radius=0,
-            #values=parent.addons
-            #)
-        #self.tools_menu.grid(
-            #row=0,
-            #column=1,
-            #pady=10,
-            #padx=10)
-        #self.tools_menu.set("Tools")
         self.pack(anchor="w",fill="both",padx=0, pady=0)
 
 class AppearanceMenu(ctk.CTkOptionMenu):
