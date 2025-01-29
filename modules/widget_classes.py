@@ -107,8 +107,10 @@ class CopyTextBox(ctk.CTkTextbox):
 class FileMenu(ctk.CTkOptionMenu):
     ''' This class is a custom option menu widget that is used to display a 
     list of options to the user.'''
+
     menu = None
     root = None
+
     def __init__(self, parent, **kwargs):
         super().__init__(
             parent,
