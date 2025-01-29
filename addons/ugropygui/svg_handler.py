@@ -51,13 +51,10 @@ def compile_c_script(
     run_process = subprocess.run(run_command, shell=True, check=False)
     return run_process.stdout
 
-
-
 def write_groups2picture(groups_dict):
     '''Write the molecule groups in the picture.'''
 
     module_location = os.path.dirname(os.path.abspath(__file__))
-
     pict_out = "/".join((
         read_json(
             path = module_location,
@@ -90,6 +87,7 @@ def write_groups2picture(groups_dict):
 
 def get_results(molecule_id,input_type):
     '''Get the molecule groups and save the SVG and PNG files.'''
+
     # Initialize the error and outcome variables
     outcome = (None,None)
 
@@ -176,4 +174,3 @@ def get_results(molecule_id,input_type):
         error = 2 # The identifier is empty
         outcome = (None,error)
         return outcome
-    

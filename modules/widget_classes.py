@@ -1,12 +1,16 @@
 ''' This module contains the class definitions for the custom widgets used in UGROpyGUI. '''
 #------------------------------------------------------------
-# Import the required libraries:
+# Import the required standard libraries:
 # Tkinter is a standard GUI library for Python.
 import tkinter as tk
+# random is a standard library for generating random numbers.
+import random
+# PIL is a standard library for image processing.
+from PIL import Image
+# Import the required 3rd party libraries:
 # CustomTkinter is a custom GUI library for Python.
 import customtkinter as ctk
-from PIL import Image
-import random
+
 import modules.image_handler as image_handler
 from modules.main_frame.functions import read_json
 #------------------------------------------------------------
@@ -101,8 +105,8 @@ class CopyTextBox(ctk.CTkTextbox):
         self.see('insert')
 
 class FileMenu(ctk.CTkOptionMenu):
-    ''' This class is a custom option menu widget that is used to display a list
-    of options to the user.'''
+    ''' This class is a custom option menu widget that is used to display a 
+    list of options to the user.'''
     menu = None
     root = None
     def __init__(self, parent, **kwargs):
@@ -120,7 +124,7 @@ class FileMenu(ctk.CTkOptionMenu):
             column=0,
             pady=10,
             padx=10)
-        
+
     def events(self, event):
         ''' This function is called when an option is selected from the menu.'''
         self.set("File")
@@ -129,7 +133,6 @@ class FileMenu(ctk.CTkOptionMenu):
                 self.start_tool_event(action = "new")
             case "Open":
                 self.start_tool_event(action = "open")
-                    
             case "Save":
                 if self.root.module_frame is not None:
                     self.root.module_frame.save()
@@ -143,7 +146,7 @@ class FileMenu(ctk.CTkOptionMenu):
     def options(self):
         ''' This function returns the list of options in the menu.'''
         return ["New", "Open", "Save", "Close","","Exit"]
-    
+
     def select_tool_event(self, tool: str, action = "new"):
         '''This function is used to select the tool that the user wants to use.'''
         if action == "new":
@@ -183,10 +186,10 @@ class FileMenu(ctk.CTkOptionMenu):
             command=lambda: open_window.destroy()
             ).pack(side=tk.LEFT, padx=5)
         return
-    
+
     def start_tool_event(self,action: str):
         '''This function is used to create a new file of the tool that the user wants to use.'''
-        
+
         match action:
             case "new":
                 title = "New file"
@@ -222,14 +225,14 @@ class FileMenu(ctk.CTkOptionMenu):
         # Frame to hold the buttons
         button_frame = ctk.CTkFrame(select_window)
         button_frame.pack(pady=10)
-        
 
         # New button
         ctk.CTkButton(
             button_frame,
             text=button_text,
-            command=lambda: (self.select_tool_event(listbox.get(listbox.curselection()), action), select_window.destroy())
-            
+            command=lambda: (self.select_tool_event(
+                listbox.get(
+                    listbox.curselection()), action), select_window.destroy())
             ).pack(side=tk.LEFT, padx=5)
 
         # Cancel button
@@ -239,7 +242,7 @@ class FileMenu(ctk.CTkOptionMenu):
             command=lambda: select_window.destroy()
             ).pack(side=tk.LEFT, padx=5)
         return
-    
+
 class MenuFrame(ctk.CTkFrame):
     ''' This class is a custom frame widget that is used to create a frame for
     the menu bar.'''
@@ -249,7 +252,7 @@ class MenuFrame(ctk.CTkFrame):
     root = None
 
     def __init__(self, parent, **kwargs):
-        
+        ''' This function initializes the menu frame.'''
         super().__init__(
             parent,
             **kwargs
@@ -301,9 +304,9 @@ class AppearanceMenu(ctk.CTkOptionMenu):
         self.root = self.menu.root
     def change_appearance_mode_event(self, new_appearance_mode: str):
         '''Change the appearance mode of the GUI.'''
-        
+
         backgrounds_path = read_json(section = "PATH",key = "backgrounds")
-        
+
         # Reset the appearance menu label
         self.set("Theme")
         # Change the appearance mode
@@ -327,6 +330,3 @@ class AppearanceMenu(ctk.CTkOptionMenu):
         # Change the image of the main frame
         self.root.winfo_children()[0].configure(image=image)
         return None
-
-
-        

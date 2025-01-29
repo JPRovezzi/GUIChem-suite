@@ -1,30 +1,34 @@
 '''This module contains the classes for the frames of the GUIChem-suite application.'''
-# Import the required libraries:
-
+# Import the required standard libraries:
 # OS module provides functions to interact with the operating system.
 import os
+# import shutil module to copy files
+import shutil
+# tkinter is a module that provides functions to create GUI applications.
 import tkinter as tk
-# CustomTkinter is a custom GUI library for Python.
-import customtkinter as ctk
 # xml.etree.ElementTree is a module that provides functions to create and parse XML documents.
 import xml.etree.ElementTree as ET
+
+# Import the required third-party libraries:
+# CustomTkinter is a custom GUI library for Python.
+import customtkinter as ctk
 # pubchempy is a module that provides functions to interact with the PubChem
 import pubchempy
 # widget_classes is a module that provides classes for GUI widgets.
 import modules.widget_classes as widget_classes
+# import the image handler module
 import modules.image_handler as image_handler
 # svg_handler is a module that provides functions to handle SVG files.
 import addons.ugropygui.svg_handler as svg_handler
 # pywinstyles is a library that provides functions to set the opacity of a window.
-# import the image handler module
-import modules.image_handler as imageHandler
-# import shutil module to copy files
-import shutil
+
 if os.name == 'nt':
     import pywinstyles
 
 class UgropyFrame(ctk.CTkFrame):
-    '''Class to create the Ugropy frame.'''
+    '''Class to create the Ugropy frame. It has the following methods: 
+    save, open.'''
+
     master = None
     tool = None
     def __init__(self, master, tool, **kwargs):
@@ -38,9 +42,13 @@ class UgropyFrame(ctk.CTkFrame):
         kwargs
 
     def save(self):
-        '''Save the data to a file by creating the save window and display the image to save'''
+        '''Save the data to a file by creating the save window and display
+        the image to save'''
+
         def save_image(file_format):
-            '''Implement the logic to save the image in the specified file_format'''
+            '''Implement the logic to save the image in the specified
+            file_format'''
+
             path = tk.filedialog.asksaveasfilename(
                 defaultextension = f".{file_format}",
                 filetypes = [(f"{file_format.upper()} files", f"*.{file_format}")])
@@ -50,8 +58,10 @@ class UgropyFrame(ctk.CTkFrame):
                 shutil.copy("input.svg", path)
             elif file_format == "png":
                 shutil.copy("output.png", path)
+
         def save_data(file_format):
             '''Implement the logic to save the image in the specified file_format'''
+
             filetypes = []
             for extention in file_format:
                 filetypes.append((f"{extention.upper()} files", f"*.{extention}"))
@@ -61,14 +71,17 @@ class UgropyFrame(ctk.CTkFrame):
             if not path:
                 return
             shutil.copy("ugropy.session", path)
+
+        # Create the save window
         save_window = tk.Toplevel(self.master)
         save_window.resizable(0, 0)  # Disable resizing
         save_window.title("Save (last session)")
         save_window.transient(self.master)
         save_window.grab_set()
+
         # Display the output PNG as a widget
         if os.path.exists("output.png"):
-            imageHandler.insert_image(save_window, "output.png")
+            image_handler.insert_image(save_window, "output.png")
         else:
             save_window.destroy()
             return
@@ -80,7 +93,6 @@ class UgropyFrame(ctk.CTkFrame):
         # Frame to hold the radio buttons
         radiobutton_frame = tk.Frame(save_window)
         radiobutton_frame.pack(pady=10)
-
         tk.Radiobutton(
                 radiobutton_frame,
                 text="PNG",
@@ -104,8 +116,6 @@ class UgropyFrame(ctk.CTkFrame):
             text="Save picture",
             command=lambda: save_image(format_var.get())
             ).pack(side=tk.LEFT, padx=5)
-
-
         tk.Button(
             button_frame,
             text="Save data",
@@ -121,20 +131,24 @@ class UgropyFrame(ctk.CTkFrame):
 
     def open(self):
         '''Load the data from a file.'''
-        pass
-    
+        return
 
 class WelcomeFrame(UgropyFrame):
-    '''Class to create the welcome frame.'''
+    '''Class to create the welcome frame. It has the following methods: 
+    load.'''
+
     master=None
     tool=None
+
     def __init__(self, master, tool):
         '''Initialize the class.'''
+
         super().__init__(master, tool)
         self.load(tool)
-    
+
     def load(self, tool):
         '''Load the welcome frame with its widgets.'''
+
         self.tkraise()
         self.pack_propagate(False)
         widget_classes.TitleLabel(self, text="").pack(pady=0)
@@ -158,21 +172,27 @@ class WelcomeFrame(UgropyFrame):
 
 class SelectionFrame(UgropyFrame):
     '''Class to create the selection frame.'''
+
     molecule_id_var = None
     error_message = None
+
     def __init__(self, master, tool, **kwargs):
         '''Initialize the class.'''
+
         super().__init__(master, tool, **kwargs)
         self.error_message=kwargs.get('error_message',None)
         self.load(self.error_message)
-        
-    
+
     def load(self, error_message = None):
-        ''' This function creates the frame_selection frame. This frame allows the 
-        user to enter the chemical identifier of the molecule and select the type 
-        of identifier (NAME or SMILES). The user can also go back to the UgropyGUI 
-        frame. '''
+        ''' This function creates the frame_selection frame. This frame allows 
+        the user to enter the chemical identifier of the molecule and select
+        the type of identifier (NAME or SMILES). The user can also go back to 
+        the UgropyGUI frame. '''
+
         def select_name(self):
+            '''This function is called when the user selects the NAME 
+            identifier'''
+
             input_type = 'name'
             molecule_id = self.molecule_id_var.get()
             outcome = svg_handler.get_results(molecule_id,input_type)
@@ -194,13 +214,17 @@ class SelectionFrame(UgropyFrame):
             return
 
         def select_smiles(self):
+            '''This function is called when the user selects the SMILES 
+            identifier '''
+
             input_type = 'smiles'
             molecule_id = self.molecule_id_var.get()
             outcome = svg_handler.get_results(molecule_id,input_type)
             molecule,error = outcome
             if error is None and molecule is not None:
                 self.destroy()
-                self.master.load_module(self.tool,"ResultFrame",molecule=molecule, smiles=molecule_id)
+                self.master.load_module(self.tool,"ResultFrame",
+                                        molecule=molecule, smiles=molecule_id)
                 error_message = ""
             elif error == 1:
                 error_message = "The SMILES identifier is not valid. Please try again."
@@ -214,7 +238,6 @@ class SelectionFrame(UgropyFrame):
             return
 
         self.tkraise()
-
         # frame_selection widgets
         ctk.CTkLabel(self,
                     text="",
@@ -223,47 +246,41 @@ class SelectionFrame(UgropyFrame):
             self,
             text = "Please enter the Chemical identifier of the molecule:"
             ).pack(pady=0)
-
         self.molecule_id_var = ctk.StringVar()
         widget_classes.TextEntry(
             self,
             textvariable = self.molecule_id_var
             ).pack(pady=20)
-
         ctk.CTkLabel(
             self,
             text = self.error_message,
             ).pack(pady=0)
-
         widget_classes.TitleLabel(
             self,
             text="Select the type of Chemical identifier",
             ).pack(pady=0)
-
         ctk.CTkButton(
             self,
             text="NAME",
             cursor="hand2",
             command=lambda:select_name(self)
             ).pack(pady=10)
-
         ctk.CTkButton(
             self,
             text="SMILES",
             cursor="hand2",
             command=lambda:select_smiles(self)
             ).pack(pady=10)
-
         widget_classes.GoBackButton(
             self,
             command=lambda:self.master.load_module(self.tool,"WelcomeFrame")
         ).pack(pady=50)
-
         self.pack()
         return None
 
 class   ResultFrame(UgropyFrame):
     '''Class to create the result frame.'''
+
     molecule = None
     name = None
     smiles = None
@@ -274,7 +291,6 @@ class   ResultFrame(UgropyFrame):
         self.name=kwargs.get('name',None)
         self.smiles=kwargs.get('smiles',None)
         self.load(self.molecule, self.name, self.smiles)
-        
 
     def load(self,
         molecule,
@@ -305,21 +321,15 @@ class   ResultFrame(UgropyFrame):
             smiles if smiles is not None else name,
             namespace =
             'smiles' if smiles is not None else "name")[0].molecular_formula
-
         if subgroups is None:
             mol_data["UNIFAC Subgroups"] = molecule.unifac.subgroups
 
-        #self.master.destroy_all_frames()
-        #frame_result = ctk.CTkFrame(master=frame_root.root)
         self.tkraise()
-
         ctk.CTkLabel(
             self,
             text="The molecule groups are displayed below.",
             ).pack()
-
         image_handler.insert_image(self, "output.png")
-
         result_table = ctk.CTkFrame(master=self)
         i = 0
         result_table_info = []
@@ -338,7 +348,6 @@ class   ResultFrame(UgropyFrame):
             result_table_info.append(result_table.winfo_children()[-1])
             i += 1
         result_table.pack(fill="both")
-
         widget_classes.GoBackButton(
             self,
             command=lambda:self.master.load_module(self.tool,"SelectionFrame")
@@ -347,7 +356,6 @@ class   ResultFrame(UgropyFrame):
 
     # Save data to a file
         xml_root = ET.Element("MoleculeData")
-
         xml_name_element = ET.SubElement(xml_root, "Name")
         xml_name_element.text = str(mol_data["name"][0])
         smiles_element = ET.SubElement(xml_root, "SMILES")
