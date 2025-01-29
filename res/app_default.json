@@ -1,2 +1,17 @@
-[PATH]
-icon_path = res/assets/icons/GUIChem.ico
+{
+    "FILENAME": {
+        "icon": "GUIChem.ico",
+        "output": ""
+    },
+    "PATH": {
+        "icons": "res/assets/icons",
+        "backgrounds": "res/assets/backgrounds",
+        "temp": "res/temp"
+    },
+    "WINDOW": {
+        "width": "800",
+        "height": "600",
+        "title": "GUIChem",
+        "resizable": "false"
+    }
+}
