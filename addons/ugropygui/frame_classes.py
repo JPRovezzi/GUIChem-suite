@@ -131,6 +131,39 @@ class UgropyFrame(ctk.CTkFrame):
 
     def open(self):
         '''Load the data from a file.'''
+        file_path = tk.filedialog.askopenfilename(
+            title="Open File",
+            filetypes=[("All Files", "*.*"), ("Ugropy savefile", "*.session")]
+        )
+        if not file_path:
+            return
+        with open(file_path, 'r') as file:
+            data = file.read()
+            print(data,"\n")
+            xmlroot = ET.fromstring(data)
+            name = xmlroot.find("Name").text
+            print(name,type(name))
+            smiles = xmlroot.find("SMILES").text
+            print(smiles,type(smiles))
+            formula = xmlroot.find("MolecularFormula").text
+            print(formula,type(formula))
+            subgroups = xmlroot.find("UNIFACSubgroups").text
+            print(subgroups,type(subgroups))
+        # Process the data as needed
+        if name is not None and name != "":
+            print("Reading name...")
+            print(name,type(name))
+            outcome = svg_handler.get_results(name,"name")
+        elif smiles is not None and smiles != "":
+            print("Reading smiles...")
+            outcome = svg_handler.get_results(smiles,"smiles")
+        else:
+            outcome = None
+        if outcome is not None:
+            molecule,error = outcome
+            if error is None and molecule is not None:
+                self.master.load_module(self.tool,"ResultFrame",
+                                            molecule=molecule,name=name, smiles=smiles)
         return
 
 class WelcomeFrame(UgropyFrame):
@@ -298,24 +331,25 @@ class   ResultFrame(UgropyFrame):
         smiles = None,
         formula = None,
         subgroups = None,
-        picture = None
         ):
         ''' This function creates the result frame of the GUI. '''
-
+        print("Molecule is being loaded")
         # Get the informations of the molecule
         mol_data = {
-            "name": [name],
-            "smiles": [smiles],
-            "formula": [formula],
+            "name": name,
+            "smiles": smiles,
+            "formula": formula,
             "UNIFAC Subgroups": subgroups}
         if name is None:
             mol_data["name"] = pubchempy.get_compounds(
                 mol_data["smiles"],
                 namespace='smiles')[0].iupac_name
+            print(mol_data["name"],type(mol_data["name"]))
         if smiles is None:
             mol_data["smiles"] = pubchempy.get_compounds(
                 name,
                 namespace='name')[0].canonical_smiles
+            print(mol_data["smiles"],type(mol_data["smiles"]))
         if formula is None:
             mol_data["formula"] = pubchempy.get_compounds(
             smiles if smiles is not None else name,
@@ -357,7 +391,7 @@ class   ResultFrame(UgropyFrame):
     # Save data to a file
         xml_root = ET.Element("MoleculeData")
         xml_name_element = ET.SubElement(xml_root, "Name")
-        xml_name_element.text = str(mol_data["name"][0])
+        xml_name_element.text = str(mol_data["name"])
         smiles_element = ET.SubElement(xml_root, "SMILES")
         smiles_element.text = str(mol_data["smiles"])
         formula_element = ET.SubElement(xml_root, "MolecularFormula")

@@ -151,13 +151,15 @@ class FileMenu(ctk.CTkOptionMenu):
 
     def select_tool_event(self, tool: str, action = "new"):
         '''This function is used to select the tool that the user wants to use.'''
-        if action == "new":
+        if action == "new": #This is the final action of the "New" button
             if tool != "Tools":
                 self.root.destroy_all_frames()
                 self.root.load_module(tool,'WelcomeFrame')
-        if action == "open":
+        if action == "open": #This is the final action of the "Open" button
             if tool != "Tools":
+                self.root.destroy_all_frames()
                 self.root.load_module(tool,'WelcomeFrame')
+                self.root.module_frame.open()
 
     def open_tool_event(self):
         '''This function is used to open a file of the tool that the user wants to use.'''
