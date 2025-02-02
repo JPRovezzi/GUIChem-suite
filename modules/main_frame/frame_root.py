@@ -18,7 +18,7 @@ from modules.main_frame.functions import read_json
 from modules.widget_classes import MenuFrame
 
 #------------------------------------------------------------
-
+VERBOSE = True
 class Root(ctk.CTk):
     '''Class to create the main GUI window and frames.'''
 
@@ -92,7 +92,11 @@ class Root(ctk.CTk):
         self.module_frame = None
         self.destroy_all_frames()
         try:
+            if VERBOSE: 
+                print(f"Trying to load addon {tool} with frame {frame}...")
             module = importlib.import_module("addons."+tool.lower()+".frame_classes")
+            if VERBOSE: 
+                print("Job done")
             frame_class = getattr(module, frame)
             # Assuming the frame class is named 'FrameClass'
             self.module_frame = frame_class(self,tool,**kargs)

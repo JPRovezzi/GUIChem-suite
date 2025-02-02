@@ -13,6 +13,8 @@ import customtkinter as ctk
 
 import modules.image_handler as image_handler
 from modules.main_frame.functions import read_json
+import os
+import json
 #------------------------------------------------------------
 
 # Class definitions
@@ -247,7 +249,7 @@ class FileMenu(ctk.CTkOptionMenu):
             ).pack(side=tk.LEFT, padx=5)
         return
 
-class MenuFrame(ctk.CTkFrame):
+class MenuFrameOld(ctk.CTkFrame):
     ''' This class is a custom frame widget that is used to create a frame for
     the menu bar.'''
     file_menu = None
@@ -322,3 +324,71 @@ class AppearanceMenu(ctk.CTkOptionMenu):
         # Change the image of the main frame
         self.root.winfo_children()[0].configure(image=image)
         return None
+
+class RefreshAddonsButton(ctk.CTkButton):
+    ''' This class is a custom button widget that is used to refresh the list of addons. '''
+    def __init__(self, parent, **kwargs):
+        super().__init__(
+            parent,
+            text="Refresh Addons",
+            command=self.refresh_addons,
+            **kwargs)
+        self.root = parent.root
+
+    def refresh_addons(self):
+        ''' This function refreshes the list of addons. '''
+
+        addons_path = "./addons"
+        installed_addons = [d for d in os.listdir(addons_path) if os.path.isdir(os.path.join(addons_path, d)) and d not in ["__pycache__", "default"]]
+
+        user_config_path = "res/user.json"
+        with open(user_config_path, "r") as f:
+            user_config = json.load(f)
+
+        user_config["ADDONS"]["installed"] = installed_addons
+        user_config["ADDONS"]["enabled"] = installed_addons
+
+        with open(user_config_path, "w") as f:
+            json.dump(user_config, f, indent=4)
+
+        self.root.addons = installed_addons
+        print("Addons refreshed:", installed_addons)
+
+class MenuFrame(ctk.CTkFrame):
+    ''' This class is a custom frame widget that is used to create a frame for
+    the menu bar.'''
+    file_menu = None
+    appearance_menu = None
+    tools_menu = None
+    root = None
+
+    def __init__(self, parent, **kwargs):
+        ''' This function initializes the menu frame.'''
+        super().__init__(
+            parent,
+            **kwargs
+            )
+        self.root = parent
+        self.file_menu = FileMenu(
+            self,
+            corner_radius=0,
+            )
+        self.appearance_menu = AppearanceMenu(
+            self,
+            )
+
+        self.appearance_menu.set("Theme")
+        self.appearance_menu.grid(
+            row=0,
+            column=2,
+            pady=10,
+            padx=10)
+
+        self.refresh_addons_button = RefreshAddonsButton(self)
+        self.refresh_addons_button.grid(
+            row=0,
+            column=3,
+            pady=10,
+            padx=10)
+
+        self.pack(anchor="w", fill="both", padx=0, pady=0)

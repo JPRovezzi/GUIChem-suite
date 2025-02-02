@@ -8,6 +8,7 @@ import shutil
 import tkinter as tk
 # xml.etree.ElementTree is a module that provides functions to create and parse XML documents.
 import xml.etree.ElementTree as ET
+import importlib
 
 # Import the required third-party libraries:
 # CustomTkinter is a custom GUI library for Python.
@@ -19,7 +20,8 @@ import modules.widget_classes as widget_classes
 # import the image handler module
 import modules.image_handler as image_handler
 # svg_handler is a module that provides functions to handle SVG files.
-import addons.ugropygui.svg_handler as svg_handler
+#import addons.ugropygui2.svg_handler as svg_handler
+svg_handler = importlib.import_module("addons."+os.path.basename(os.path.dirname(__file__))+".frame_classes")
 # pywinstyles is a library that provides functions to set the opacity of a window.
 
 if os.name == 'nt':

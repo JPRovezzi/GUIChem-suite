@@ -1,11 +1,15 @@
 {
-    "TEXT": 
-    {
+    "TEXT": {
         "language": "en_EN"
     },
-    "ADDONS": 
-    {
-        "installed": ["UgropyGUI", "FlashCalc"],
-        "enabled": ["UgropyGUI"]
+    "ADDONS": {
+        "installed": [
+            "ugropygui",
+            "flashcalc"
+        ],
+        "enabled": [
+            "ugropygui",
+            "flashcalc"
+        ]
     }
 }
