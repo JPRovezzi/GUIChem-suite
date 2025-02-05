@@ -8,6 +8,7 @@ import os
 import tkinter as tk
 # xml.etree.ElementTree is a module that provides functions to create and parse XML documents.
 import xml.etree.ElementTree as ET
+from PIL import Image
 
 # Import the required third-party libraries:
 # CustomTkinter is a custom GUI library for Python.
@@ -67,11 +68,17 @@ class WelcomeFrame(FlashCalcFrame):
         self.pack_propagate(False)
         widget_classes.TitleLabel(self, text="").pack(pady=0)
         widget_classes.TitleLabel(self, text=f"Welcome to {tool}!").pack(pady=0)
+        
+        script_dir = os.path.dirname(__file__)
+        image_path = script_dir+"/res/flashcalc.jpeg"
+        image = Image.open(image_path)
+        self.image = ctk.CTkImage(image, size=(80,80))
+        ctk.CTkLabel(self, image=self.image, text="").pack(pady=10)
         ctk.CTkButton(
             self,
             text="NEW",
             cursor="hand2",
-            command=lambda: self.master.load_module(tool,"SelectionFrame")
+            command=lambda: self.master.load_module(tool,"WorkSheetFrame")
             ).pack(pady=10)
         ctk.CTkButton(
             self,
@@ -85,7 +92,12 @@ class WelcomeFrame(FlashCalcFrame):
             cursor="hand2",
             command=self.master.close_module
             ).pack(pady=10)
+        
         if os.name == 'nt':
             pywinstyles.set_opacity(self, color="#000000")
-        self.pack(pady=100)
+        self.pack(pady=100, expand=True, fill="y")
         return None
+
+class WorkSheetFrame(FlashCalcFrame):
+    '''Class to create the worksheet frame. It has the following methods:
+    load, save, open, close.'''

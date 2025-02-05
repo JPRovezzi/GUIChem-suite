@@ -209,7 +209,7 @@ class WelcomeFrame(UgropyFrame):
             ).pack(pady=10)
         if os.name == 'nt':
             pywinstyles.set_opacity(self, color="#000000")
-        self.pack(pady=100)
+        self.pack(pady=100, expand=True, fill="y")
         return None
 
 class SelectionFrame(UgropyFrame):
