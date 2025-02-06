@@ -58,14 +58,15 @@ class Root(ctk.CTk):
                 201,
                 lambda :self.iconbitmap(self.icon_path))
 
+        # Set the appearance mode
+        appearance_theme = read_json(filename="user", section="APPEARANCE", key="theme")
+        ctk.set_appearance_mode(appearance_theme)
+
         # Set the background image
         image_handler.place_image(self, 0, 0, self.background_path)
 
         #Frames
         self.create_menu()
-
-        # Set the appearance mode
-        ctk.set_appearance_mode("system")
 
         # Start the main loop
         self.mainloop()

@@ -1,4 +1,7 @@
 {
+    "APPEARANCE": {
+        "theme":"dark"
+    },
     "TEXT": {
         "language": "en_EN"
     },
