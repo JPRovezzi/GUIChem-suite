@@ -101,3 +101,45 @@ class WelcomeFrame(FlashCalcFrame):
 class WorkSheetFrame(FlashCalcFrame):
     '''Class to create the worksheet frame. It has the following methods:
     load, save, open, close.'''
+    error_message = None
+
+    def __init__(self, master, tool, **kwargs):
+        '''Initialize the class.'''
+
+        super().__init__(master, tool, **kwargs)
+        self.error_message=kwargs.get('error_message',None)
+        self.load(self.error_message)
+
+    def load(self, error_message = None):
+        '''Load the worksheet frame with its widgets.'''
+
+        self.tkraise()
+        self.pack_propagate(False)
+        
+        script_dir = os.path.dirname(__file__)
+        image_path = script_dir+"/res/flashcalc.jpeg"
+        image = Image.open(image_path)
+        self.image = ctk.CTkImage(image, size=(80, 80))
+
+        title_frame = ctk.CTkFrame(self)
+        title= widget_classes.TitleLabel(title_frame, text="Flash-Calc")
+        flashcalc_picture=ctk.CTkLabel(title_frame, image=self.image, text="")
+
+        worksheet_frame = ctk.CTkFrame(self)
+        randomtext = ctk.CTkLabel(worksheet_frame, text="Worksheet")
+        
+        title.pack(side="left")
+        flashcalc_picture.pack()
+        title_frame.pack()
+        randomtext.pack()
+        worksheet_frame.pack()
+
+        # Add other widgets here as needed
+        
+        if os.name == 'nt':
+            pywinstyles.set_opacity(self, color="#000000")
+        self.pack(pady=0, expand=True, fill="both")
+        return None
+    
+
+    
