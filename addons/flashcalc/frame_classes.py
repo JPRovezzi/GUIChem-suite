@@ -149,7 +149,7 @@ class WorkSheetFrame(FlashCalcFrame):
 
         comment_frame = ctk.CTkFrame(self)
         comment_label = ctk.CTkLabel(comment_frame, text="Comments:")
-        comment_text = widget_classes.TextEntry(comment_frame, width=50, height=5)
+        comment_text = widget_classes.TextEntry(comment_frame, width=400, height=5)
 
         buttonrow2_frame = ctk.CTkFrame(self)
         save_button = ctk.CTkButton(
@@ -163,10 +163,6 @@ class WorkSheetFrame(FlashCalcFrame):
         reset_button = ctk.CTkButton(
             buttonrow2_frame, text="Reset", cursor="hand2", command=lambda: self.master.load_module(self.tool, "WorkSheetFrame"))
 
-        
-        worksheet_frame = ctk.CTkFrame(self)
-        
-        
         title.pack(side="left")
         flashcalc_picture.pack()
         title_frame.pack()
@@ -191,8 +187,8 @@ class WorkSheetFrame(FlashCalcFrame):
         buttonrow1_frame.pack()
 
         
-        comment_label.pack(padx=5)
-        comment_text.pack(padx=5)
+        comment_label.pack(padx=5, side = "left")
+        comment_text.pack(padx=5,side="left")
         comment_frame.pack()
 
         save_button.pack(side="left", padx=5)
