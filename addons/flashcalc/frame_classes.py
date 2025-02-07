@@ -125,14 +125,82 @@ class WorkSheetFrame(FlashCalcFrame):
         title= widget_classes.TitleLabel(title_frame, text="Flash-Calc")
         flashcalc_picture=ctk.CTkLabel(title_frame, image=self.image, text="")
 
+        cfg1_frame = ctk.CTkFrame(self)
+        problem_name_label = ctk.CTkLabel(cfg1_frame, text="Problem name:")
+        problem_name_entry = widget_classes.TextEntry(cfg1_frame)
+        model_label = ctk.CTkLabel(cfg1_frame, text="Model:")
+        model_option = ctk.CTkOptionMenu(cfg1_frame, values=["UNIFAC", "A-UNIFAC"])
+        parameter_table_label = ctk.CTkLabel(cfg1_frame, text="Parameter table:")
+        parameter_table_option = ctk.CTkOptionMenu(cfg1_frame, values=["Vapor-Liquid", "Liquid-Liquid", "Infinity Dil."])
+
+        cfg2_frame = ctk.CTkFrame(self)
+        nc_label = ctk.CTkLabel(
+            cfg2_frame, text="Number of components:")
+        nc_spinbox = tk.Spinbox(cfg2_frame, from_=1, to=10, width=5)
+        nf_label = ctk.CTkLabel(
+            cfg2_frame, text="Number of flash calculations:")
+        nf_spinbox = tk.Spinbox(cfg2_frame, from_=1, to=10, width=5)
+
+        buttonrow1_frame = ctk.CTkFrame(self)
+        showct_button = ctk.CTkButton(
+            buttonrow1_frame, text="Show the composition table", cursor="hand2")
+        showft_button = ctk.CTkButton(
+            buttonrow1_frame, text="Show the flash table", cursor="hand2")
+
+        comment_frame = ctk.CTkFrame(self)
+        comment_label = ctk.CTkLabel(comment_frame, text="Comments:")
+        comment_text = widget_classes.TextEntry(comment_frame, width=50, height=5)
+
+        buttonrow2_frame = ctk.CTkFrame(self)
+        save_button = ctk.CTkButton(
+            buttonrow2_frame, text="Save", cursor="hand2", command=self.save)
+        open_button = ctk.CTkButton(
+            buttonrow2_frame, text="Open", cursor="hand2", command=self.open)
+        close_button = ctk.CTkButton(
+            buttonrow2_frame, text="Close", cursor="hand2", command=self.master.close_module)
+        back_button = ctk.CTkButton(
+            buttonrow2_frame, text="Back", cursor="hand2", command=lambda: self.master.load_module(self.tool, "WelcomeFrame"))
+        reset_button = ctk.CTkButton(
+            buttonrow2_frame, text="Reset", cursor="hand2", command=lambda: self.master.load_module(self.tool, "WorkSheetFrame"))
+
+        
         worksheet_frame = ctk.CTkFrame(self)
-        randomtext = ctk.CTkLabel(worksheet_frame, text="Worksheet")
+        
         
         title.pack(side="left")
         flashcalc_picture.pack()
         title_frame.pack()
-        randomtext.pack()
-        worksheet_frame.pack()
+
+
+        problem_name_label.pack(side="left", padx=5)
+        problem_name_entry.pack(side="left", padx=5)
+        model_label.pack(side="left", padx=5)
+        model_option.pack(side="left", padx=5)
+        parameter_table_label.pack(side="left", padx=5)
+        parameter_table_option.pack(side="left", padx=5)
+        cfg1_frame.pack()
+
+        nc_label.pack(side="left", padx=5)
+        nc_spinbox.pack(side="left", padx=5)
+        nf_label.pack(side="left", padx=5)
+        nf_spinbox.pack(side="left", padx=5)
+        cfg2_frame.pack()
+        
+        showct_button.pack(side="left", padx=5)
+        showft_button.pack(side="left", padx=5)
+        buttonrow1_frame.pack()
+
+        
+        comment_label.pack(padx=5)
+        comment_text.pack(padx=5)
+        comment_frame.pack()
+
+        save_button.pack(side="left", padx=5)
+        open_button.pack(side="left", padx=5)
+        close_button.pack(side="left", padx=5)
+        back_button.pack(side="left", padx=5)
+        reset_button.pack(side="left", padx=5)
+        buttonrow2_frame.pack(pady=50, side="bottom")
 
         # Add other widgets here as needed
         
