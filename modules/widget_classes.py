@@ -263,38 +263,6 @@ class FileMenu(ctk.CTkOptionMenu):
             command=lambda: select_window.destroy()
             ).pack(side=tk.LEFT, padx=5)
         return
-
-class MenuFrameOld(ctk.CTkFrame):
-    ''' This class is a custom frame widget that is used to create a frame for
-    the menu bar.'''
-    file_menu = None
-    appearance_menu = None
-    tools_menu = None
-    root = None
-
-    def __init__(self, parent, **kwargs):
-        ''' This function initializes the menu frame.'''
-        super().__init__(
-            parent,
-            **kwargs
-            )
-        self.root = parent
-        self.file_menu = FileMenu(
-            self,
-            corner_radius=0,
-            )
-        self.appearance_menu = AppearanceMenu(
-            self,
-            )
-
-        self.appearance_menu.set("Theme")
-        self.appearance_menu.grid(
-            row=0,
-            column=2,
-            pady=10,
-            padx=10)
-        self.pack(anchor="w",fill="both",padx=0, pady=0)
-
 class AppearanceMenu(ctk.CTkOptionMenu):
     ''' This class is a custom option menu widget that is used to display a list
     of options to the user.'''
@@ -380,7 +348,7 @@ class MenuFrame(ctk.CTkFrame):
     def __init__(self, parent, **kwargs):
         ''' This function initializes the menu frame.'''
         super().__init__(
-            parent,
+            parent, border_width= 1,
             **kwargs
             )
         self.root = parent
