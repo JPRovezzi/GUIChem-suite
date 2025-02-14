@@ -504,16 +504,49 @@ class CompositionTableWindow(ctk.CTkToplevel):
     
     def add_row(self):
         '''Add a pair of rows to the table.'''
-        for i in range(2):
-            row = []
-            for col in range(11):  # Assuming 11 columns for the table
-                entry = widget_classes.TextEntry(self.table_frame)
-                entry.grid(row=len(self.table) + 1, column=col, padx=5, pady=5)
-                row.append(entry)
-            self.table.append(row)
+        row = []
+        component_label = ctk.CTkLabel(
+            self.table_frame, text=f"Component {int(len(self.table)/2)+1}:")
+        component_label.grid(
+            row=len(self.table) + 1, column=0, padx=0, pady=5)
+        row.append(component_label)
+
+        group_label = ctk.CTkLabel(
+            self.table_frame, text="Group:")
+        group_label.grid(
+            row=len(self.table) + 1, column=1, padx=0, pady=5)
+        row.append(group_label)
+
+        for col in range(2,12):  # Assuming 11 columns for the table
+            group_box = ctk.CTkOptionMenu(
+                self.table_frame, values=["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"])
+            group_box.grid(row=len(self.table) + 1, column=col, padx=5, pady=5)
+            row.append(group_box)
+        
+        self.table.append(row)
+        self.row_count_label.configure(
+            text=f"Components: {int(len(self.table))}")
+
+        component_entry = widget_classes.TextEntry(self.table_frame)
+        component_entry.grid(
+            row=len(self.table) + 1, column=0, padx=5, pady=5)
+        row.append(component_entry)
+
+        number_label = ctk.CTkLabel(
+            self.table_frame, text="Number:")
+        number_label.grid(
+            row=len(self.table) + 1, column=1, padx=0, pady=5)
+        row.append(number_label)
+
+        for col in range(2,12):  # Assuming 11 columns for the table
+            #number_box = ctk.CTkLabel(self.table_frame, text="0")
+            number_box = tk.Spinbox(self.table_frame, from_=0, to=10, width=5)
+            number_box.grid(row=len(self.table) + 1, column=col, padx=5, pady=5)
+            row.append(number_box)
+        
+        self.table.append(row)
         self.row_count_label.configure(
             text=f"Components: {int(len(self.table)/2)}")
-
     
     def subtract_row(self):
         '''Subtract a pair of rows from the table.'''
