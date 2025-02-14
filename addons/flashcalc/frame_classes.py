@@ -146,16 +146,16 @@ class WorkSheetFrame1(FlashCalcFrame):
         cfg1_frame = ctk.CTkFrame(self)
         problem_name_label = ctk.CTkLabel(cfg1_frame, text="Problem name:")
         problem_name_entry = widget_classes.TextEntry(cfg1_frame)
-        #if self.problem_name is not None:
-            #problem_name_entry.insert(0, self.problem_name)
+        if self.problem_name is not None:
+            problem_name_entry.insert(0, self.problem_name)
         model_label = ctk.CTkLabel(cfg1_frame, text="Model:")
         model_option = ctk.CTkOptionMenu(cfg1_frame, values=["UNIFAC", "A-UNIFAC"])
-        #if self.model is not None:
-            #model_option.set(self.model)
+        if self.model is not None:
+            model_option.set(self.model)
         parameter_table_label = ctk.CTkLabel(cfg1_frame, text="Parameter table:")
-        parameter_table_option = ctk.CTkOptionMenu(cfg1_frame, values=["Vapor-Liquid", "Liquid-Liquid", "Infinity Dil."], variable=self.parameter_table)
-        #if self.parameter_table is not None:
-            #parameter_table_option.set(self.parameter_table)
+        parameter_table_option = ctk.CTkOptionMenu(cfg1_frame, values=["Vapor-Liquid", "Liquid-Liquid", "Infinity Dil."])
+        if self.parameter_table is not None:
+            parameter_table_option.set(self.parameter_table)
 
         # Last row of buttons: Back, Next
         buttonrow3_frame = ctk.CTkFrame(self)
@@ -167,7 +167,7 @@ class WorkSheetFrame1(FlashCalcFrame):
                     self.tool,
                     "WorkSheetFrame2",
                     error_message="",
-                    problem_name = problem_name_entry.get()[:18],
+                    problem_name = problem_name_entry.get()[:16],
                     model = model_option.get(),
                     parameter_table = parameter_table_option.get())]
             )
@@ -289,7 +289,7 @@ class WorkSheetFrame2(FlashCalcFrame):
         # Comment frame
         comment_frame = ctk.CTkFrame(self)
         comment_label = ctk.CTkLabel(comment_frame, text="Comments:")
-        comment_text = widget_classes.TextEntry(comment_frame, width=400, height=5) 
+        comment_text = widget_classes.TextEntry(comment_frame, width=400, height=5)
 
         # Last row of buttons: Save, Run, Back, Close
         buttonrow3_frame = ctk.CTkFrame(self)
