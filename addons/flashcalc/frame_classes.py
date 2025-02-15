@@ -108,6 +108,14 @@ class WorkSheetFrame1(FlashCalcFrame):
     model = None
     parameter_table = None
 
+    # Dictionary with models as keys and parameter tables as values
+    model_parameter_table = {
+        "UNIFAC": ["Vapor-Liquid", "Liquid-Liquid", "Infinity Dil."],
+        "A-UNIFAC": ["(A) Vapor-Liquid", "(A) Liquid-Liquid", "(A) Infinity Dil."]
+    }
+
+    parameter_table_option = None
+
     def __init__(self, master, tool, **kwargs):
         '''Initialize the class.'''
 
@@ -123,6 +131,15 @@ class WorkSheetFrame1(FlashCalcFrame):
 
         self.tkraise()
         self.pack_propagate(False)
+
+        def set_parameter_table(*args):
+            '''Set the parameter table options.'''
+            #try:
+            self.parameter_table_option.set(self.model_parameter_table[model_option.get()][0])
+            self.parameter_table_option.configure(values=self.model_parameter_table[model_option.get()])
+            #except:
+                #print("Error setting parameter table.")
+                #pass
         
         # Get the path of the image for the title
         script_dir = os.path.dirname(__file__)
@@ -138,8 +155,6 @@ class WorkSheetFrame1(FlashCalcFrame):
 
         # First row of buttons: Open, Reset
         buttonrow1_frame = ctk.CTkFrame(self)
-        open_button = ctk.CTkButton(
-            buttonrow1_frame, text="Open", cursor="hand2", command=self.open)
         reset_button = ctk.CTkButton(
             buttonrow1_frame, text="Reset", cursor="hand2", command=lambda: self.master.load_module(self.tool, "WorkSheetFrame1"))
 
@@ -150,15 +165,39 @@ class WorkSheetFrame1(FlashCalcFrame):
         problem_name_entry = widget_classes.TextEntry(cfg1_frame)
         if self.problem_name is not None:
             problem_name_entry.insert(0, self.problem_name)
+        
+        print("Building model list...")
         model_label = ctk.CTkLabel(cfg1_frame, text="Model:")
-        model_option = ctk.CTkOptionMenu(cfg1_frame, values=["UNIFAC", "A-UNIFAC"])
+        model_option = ctk.CTkOptionMenu(
+            cfg1_frame,
+            values=list(self.model_parameter_table.keys()),
+            command=lambda value:set_parameter_table(value))
+            
+        
         if self.model is not None:
             model_option.set(self.model)
+            print(f"Using preloaded model: {self.model}")
+        else:
+            model_option.set(list(self.model_parameter_table.keys())[0])
+            print("Using default model: ",
+                  list(self.model_parameter_table.keys())[0])
+        
+        print("Building parameter list...")
         parameter_table_label = ctk.CTkLabel(cfg1_frame, text="Parameter table:")
-        parameter_table_option = ctk.CTkOptionMenu(cfg1_frame, values=["Vapor-Liquid", "Liquid-Liquid", "Infinity Dil."])
-        if self.parameter_table is not None:
-            parameter_table_option.set(self.parameter_table)
+        self.parameter_table_option = ctk.CTkOptionMenu(
+            cfg1_frame,
+            values=self.model_parameter_table[model_option.get()])
 
+        if self.parameter_table is not None:
+            self.parameter_table_option.set(self.parameter_table)
+            print(f"Using preloaded parameter: {self.parameter_table}")
+        else:
+            self.parameter_table_option.set(self.model_parameter_table[model_option.get()][0])
+            print(f"Using default parameter: {self.model_parameter_table[model_option.get()][0]}")
+
+        
+
+        
         # Last row of buttons: Back, Next
         buttonrow3_frame = ctk.CTkFrame(self)
         next_button = ctk.CTkButton(
@@ -171,7 +210,7 @@ class WorkSheetFrame1(FlashCalcFrame):
                     error_message="",
                     problem_name = problem_name_entry.get()[:16],
                     model = model_option.get(),
-                    parameter_table = parameter_table_option.get())]
+                    parameter_table = self.parameter_table_option.get())]
             )
         back_button = ctk.CTkButton(
             buttonrow3_frame, text = "Back", cursor = "hand2",
@@ -196,7 +235,7 @@ class WorkSheetFrame1(FlashCalcFrame):
         model_label.grid(row=0, column=2, padx=5)
         model_option.grid(row=0, column=3, padx=5)
         parameter_table_label.grid(row=0, column=4, padx=5)
-        parameter_table_option.grid(row=0, column=5, padx=5)
+        self.parameter_table_option.grid(row=0, column=5, padx=5)
         cfg1_frame.pack(pady=10)
 
         # Last row of buttons: Back, Next
@@ -477,7 +516,8 @@ class WorkSheetFrame3(FlashCalcFrame):
 
 class CompositionTableWindow(ctk.CTkToplevel):
     '''Class to create the composition table window.'''
-    
+    table = []
+   
     def __init__(self, master, **kwargs):
         '''Initialize the class.'''
         super().__init__(master, **kwargs)
@@ -487,73 +527,123 @@ class CompositionTableWindow(ctk.CTkToplevel):
         self.table = []
         self.table_frame = CTkXYFrame(self)
         self.table_frame.pack(fill="both", expand=True, padx=10, pady=10)
-        
+
+        # Firt row of the table: Number of components, add and subtract buttons, save button and close button
+        self.row_count_label = ctk.CTkLabel(
+            self.table_frame,
+            text=self.number_of_components())
+        self.row_count_label.grid(row=0, column=0, padx=5, pady=5)
         self.add_row_button = ctk.CTkButton(
-            self.table_frame, text="Add Component", cursor="hand2", command=self.add_row)
-        self.add_row_button.grid(row=0, column=0, padx=5, pady=5)
+            self.table_frame, text="Add \n Component", cursor="hand2", command=self.add_row)
+        self.add_row_button.grid(row=0, column=1, padx=5, pady=5)
         
         self.subtract_row_button = ctk.CTkButton(
-            self.table_frame, text="Subtract Component", cursor="hand2", command=self.subtract_row)
-        self.subtract_row_button.grid(row=0, column=1, padx=5, pady=5)
+            self.table_frame, text="Subtract \n Component", cursor="hand2", command=self.subtract_row)
+        self.subtract_row_button.grid(row=0, column=2, padx=5, pady=5)
 
-        self.row_count_label = ctk.CTkLabel(
-            self.table_frame, text=f"Components: {int(len(self.table)/2)}")
-        self.row_count_label.grid(row=0, column=2, padx=5, pady=5)
+        self.save_button = ctk.CTkButton(
+            self.table_frame, text="Save", cursor="hand2")
+        self.save_button.grid(row=0, column=3, padx=5, pady=5)
+
+        self.close_button = ctk.CTkButton(
+            self.table_frame, text="Close", cursor="hand2", command=self.destroy)
+        self.close_button.grid(row=0, column=4, padx=5, pady=5)
+
+        line_row = []
+        for col in range(13):  # Assuming 13 columns for the table
+            separator = ctk.CTkLabel(self.table_frame, text="_"*25)
+            separator.grid(
+                row=len(self.table) + 1, column=col, padx=0, pady=0,
+                ipadx=0, ipady=0,sticky="n")
+            line_row.append(separator)
         
+        self.table.append(line_row)
+
+        # Add the first pair of rows: 
+        # Import, Component, Group, 10 groups
+        # Export, Name,Number, 10 numbers
         self.add_row()
+    def number_of_components(self):
+        '''Return the number of components in the table.'''
+        return f"Number of components:\n {int(len(self.table)/3)}"
     
+
     def add_row(self):
         '''Add a pair of rows to the table.'''
-        row = []
+        row1 = []
+        
+        import_button = ctk.CTkButton(
+            self.table_frame, text="Import from file", cursor="hand2")
+        import_button.grid(row=len(self.table) + 1, column=0, padx=5, pady=5)
+        row1.append(import_button)
+
         component_label = ctk.CTkLabel(
-            self.table_frame, text=f"Component {int(len(self.table)/2)+1}:")
+            self.table_frame, text=f"Component {int(len(self.table)/3)+1}:")
         component_label.grid(
-            row=len(self.table) + 1, column=0, padx=0, pady=5)
-        row.append(component_label)
+            row=len(self.table) + 1, column=1, padx=0, pady=5)
+        row1.append(component_label)
 
         group_label = ctk.CTkLabel(
             self.table_frame, text="Group:")
         group_label.grid(
-            row=len(self.table) + 1, column=1, padx=0, pady=5)
-        row.append(group_label)
+            row=len(self.table) + 1, column=2, padx=0, pady=5)
+        row1.append(group_label)
 
-        for col in range(2,12):  # Assuming 11 columns for the table
+        for col in range(3,13):  # Assuming 11 columns for the table
             group_box = ctk.CTkOptionMenu(
                 self.table_frame, values=["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"])
             group_box.grid(row=len(self.table) + 1, column=col, padx=5, pady=5)
-            row.append(group_box)
+            row1.append(group_box)
         
-        self.table.append(row)
-        self.row_count_label.configure(
-            text=f"Components: {int(len(self.table))}")
+        self.table.append(row1)
+        #self.row_count_label.configure(
+            #text=f"Components: {int(len(self.table))}")
+
+        row2 = []
+        export_button = ctk.CTkButton(
+            self.table_frame, text="Export to file", cursor="hand2")
+        export_button.grid(row=len(self.table) + 1, column=0, padx=5, pady=5)
+        row2.append(export_button)
 
         component_entry = widget_classes.TextEntry(self.table_frame)
         component_entry.grid(
-            row=len(self.table) + 1, column=0, padx=5, pady=5)
-        row.append(component_entry)
+            row=len(self.table) + 1, column=1, padx=5, pady=5)
+        row2.append(component_entry)
 
         number_label = ctk.CTkLabel(
             self.table_frame, text="Number:")
         number_label.grid(
-            row=len(self.table) + 1, column=1, padx=0, pady=5)
-        row.append(number_label)
+            row=len(self.table) + 1, column=2, padx=0, pady=5)
+        row2.append(number_label)
 
-        for col in range(2,12):  # Assuming 11 columns for the table
+        for col in range(3,13):  # Assuming 11 columns for the table
             #number_box = ctk.CTkLabel(self.table_frame, text="0")
             number_box = tk.Spinbox(self.table_frame, from_=0, to=10, width=5)
             number_box.grid(row=len(self.table) + 1, column=col, padx=5, pady=5)
-            row.append(number_box)
+            row2.append(number_box)
         
-        self.table.append(row)
+        self.table.append(row2)
         self.row_count_label.configure(
-            text=f"Components: {int(len(self.table)/2)}")
+            text=self.number_of_components())
+        
+        # Add a separator row
+        separator_row = []
+        for col in range(13):  # Assuming 13 columns for the table
+            separator = ctk.CTkLabel(self.table_frame, text="·"*37)
+            separator.grid(
+                row=len(self.table) + 1, column=col, padx=0, pady=0,
+                ipadx=0, ipady=0,)
+            separator_row.append(separator)
+        
+        self.table.append(separator_row)
     
     def subtract_row(self):
         '''Subtract a pair of rows from the table.'''
         if self.table:
-            for i in range(2):
-                row = self.table.pop()
-                for entry in row:
-                    entry.destroy()
+            for i in range(3):
+                if len(self.table) > 1:
+                    row = self.table.pop()
+                    for entry in row:
+                        entry.destroy()
         self.row_count_label.configure(
-            text=f"Components: {int(len(self.table)/2)}")
+            text=self.number_of_components())
