@@ -95,7 +95,7 @@ class Root(ctk.CTk):
         try:
             if VERBOSE: 
                 print(f"Trying to load addon {tool} with frame {frame}...")
-            module = importlib.import_module("addons."+tool.lower()+".frame_classes")
+            module = importlib.import_module("addons.apps."+tool.lower()+".frame_classes")
             if VERBOSE: 
                 print("Job done")
             frame_class = getattr(module, frame)

@@ -20,9 +20,8 @@ import modules.widget_classes as widget_classes
 # import the image handler module
 import modules.image_handler as image_handler
 # svg_handler is a module that provides functions to handle SVG files.
-#import addons.ugropygui2.svg_handler as svg_handler
 svg_handler = importlib.import_module(
-    "addons."+os.path.basename(os.path.dirname(__file__))+".svg_handler")
+    "addons.apps."+os.path.basename(os.path.dirname(__file__))+".svg_handler")
 # pywinstyles is a library that provides functions to set the opacity of a window.
 
 if os.name == 'nt':

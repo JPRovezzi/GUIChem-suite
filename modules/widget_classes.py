@@ -321,7 +321,7 @@ class RefreshAddonsButton(ctk.CTkButton):
     def refresh_addons(self):
         ''' This function refreshes the list of addons. '''
 
-        addons_path = "./addons"
+        addons_path = "./addons/apps"
         installed_addons = [d for d in os.listdir(addons_path) if os.path.isdir(os.path.join(addons_path, d)) and d not in ["__pycache__", "default"]]
 
         user_config_path = "res/user.json"
