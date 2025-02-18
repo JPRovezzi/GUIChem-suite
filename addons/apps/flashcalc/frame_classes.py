@@ -17,6 +17,8 @@ import customtkinter as ctk
 from modules.ctk_xyframe import CTkXYFrame
 # widget_classes is a module that provides classes for GUI widgets.
 import modules.widget_classes as widget_classes
+from modules.ctk_scrollable_dropdown import CTkScrollableDropdown
+import json
 
 if os.name == 'nt':
     import pywinstyles
@@ -255,7 +257,8 @@ class WorkSheetFrame1(FlashCalcFrame):
 
         self.pack(pady=0, expand=True, fill="both")
         return None
-    
+
+#------------------------------------------------------------------------------
 
 class WorkSheetFrame2(FlashCalcFrame):
     '''Class to create the worksheet frame. It has the following methods:
@@ -280,7 +283,7 @@ class WorkSheetFrame2(FlashCalcFrame):
 
         self.tkraise()
         self.pack_propagate(False)
-        
+
         # Get the path of the image for the title
         script_dir = os.path.dirname(__file__)
         image_path = script_dir+"/res/flashcalc.jpeg"
@@ -375,7 +378,8 @@ class WorkSheetFrame2(FlashCalcFrame):
 
         self.pack(pady=0, expand=True, fill="both")
         return None
-    
+
+#------------------------------------------------------------------------------
 class WorkSheetFrame3(FlashCalcFrame):
     '''Class to create the worksheet frame. It has the following methods:
     load, save, open, close.'''
@@ -517,13 +521,19 @@ class WorkSheetFrame3(FlashCalcFrame):
 class CompositionTableWindow(ctk.CTkToplevel):
     '''Class to create the composition table window.'''
     table = []
-   
+    parameter_table = "Liquid-Liquid"
+    groups = []
+     
     def __init__(self, master, **kwargs):
         '''Initialize the class.'''
         super().__init__(master, **kwargs)
         self.title("Composition Table")
         self.geometry("600x400")
         
+        #self.parameter_table = kwargs.get('partable', None)
+        
+        self.groups = self.load_groups(self.parameter_table)
+                
         self.table = []
         self.table_frame = CTkXYFrame(self)
         self.table_frame.pack(fill="both", expand=True, padx=10, pady=10)
@@ -563,6 +573,19 @@ class CompositionTableWindow(ctk.CTkToplevel):
         # Import, Component, Group, 10 groups
         # Export, Name,Number, 10 numbers
         self.add_row()
+
+    def load_groups(self, parameter_table):
+        '''Load the group list from the JSON file.'''
+        script_dir = os.path.dirname(__file__)
+        print(script_dir)
+        for i in range (2):
+                script_dir = os.path.dirname(script_dir)
+        json_path = script_dir+"/models/FlashCalcUNIFAC/gruposram.json"
+        print(json_path)
+        with open(json_path, 'r') as file:
+            data = json.load(file)
+        return data.get(parameter_table, [])
+
     def number_of_components(self):
         '''Return the number of components in the table.'''
         return f"Number of components:\n {int(len(self.table)/3)}"
@@ -590,14 +613,11 @@ class CompositionTableWindow(ctk.CTkToplevel):
         row1.append(group_label)
 
         for col in range(3,13):  # Assuming 11 columns for the table
-            group_box = ctk.CTkOptionMenu(
-                self.table_frame, values=["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"])
+            group_box = tk.Spinbox(self.table_frame, values=[f"{i}: {group}" for i, group in enumerate(self.groups)], width=10)
             group_box.grid(row=len(self.table) + 1, column=col, padx=5, pady=5)
             row1.append(group_box)
         
         self.table.append(row1)
-        #self.row_count_label.configure(
-            #text=f"Components: {int(len(self.table))}")
 
         row2 = []
         export_button = ctk.CTkButton(
