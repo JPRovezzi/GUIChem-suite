@@ -87,20 +87,21 @@ class Root(ctk.CTk):
                 widget.destroy()
             i += 1
 
-    def load_module(self,tool,frame,**kargs): #It should be named load_addon
+    def load_module(self,tool,frame,**kwargs): #It should be named load_addon
         '''This function loads the module that the user wants to use.'''
 
         self.module_frame = None
         self.destroy_all_frames()
+        location = kwargs.get('location',"frame_classes")
         try:
             if VERBOSE: 
                 print(f"Trying to load addon {tool} with frame {frame}...")
-            module = importlib.import_module("addons.apps."+tool.lower()+".frame_classes")
+            module = importlib.import_module("addons.apps."+tool.lower()+f".{location}")
             if VERBOSE: 
                 print("Job done")
             frame_class = getattr(module, frame)
             # Assuming the frame class is named 'FrameClass'
-            self.module_frame = frame_class(self,tool,**kargs)
+            self.module_frame = frame_class(self,tool,**kwargs)
         except Exception as e:
             print(f"Error loading module: {e}")
             return
