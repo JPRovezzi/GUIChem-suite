@@ -17,13 +17,14 @@ import modules.widget_classes as widget_classes
 from . import frame_classes
 from . import composition_table
 
-class WorkSheetFrame2(frame_classes.FlashCalcFrame):
+class WorkSheetFrame4(frame_classes.FlashCalcFrame):
     '''Class to create the worksheet frame. It has the following methods:
     load, save, open, close.'''
     error_message = None
     problem_name = None
     model = None
     parameter_table = None
+    comment = None
 
     def __init__(self, master, tool, **kwargs):
         '''Initialize the class.'''
@@ -33,6 +34,7 @@ class WorkSheetFrame2(frame_classes.FlashCalcFrame):
         self.problem_name=kwargs.get('problem_name',None)
         self.model=kwargs.get('model',None)
         self.parameter_table=kwargs.get('parameter_table',None)
+        self.comment=kwargs.get('comment',"")
         self.load(self.error_message)
 
     def load(self, error_message = None):
@@ -71,13 +73,27 @@ class WorkSheetFrame2(frame_classes.FlashCalcFrame):
         # Second row of buttons: Show Composition Table, Show Flash Table
         buttonrow2_frame = ctk.CTkFrame(self)
         showct_button = ctk.CTkButton(
-            buttonrow2_frame, text="Edit the composition table", cursor="hand2",
-            command=lambda : composition_table.CompositionTableWindow(self.master, partable=self.parameter_table))
+            buttonrow2_frame, text="Show the composition table", cursor="hand2",
+            command=lambda : print("WiP: Show the composition table"))
+        showft_button = ctk.CTkButton(
+            buttonrow2_frame, text="Show the flash config table", cursor="hand2",
+            command=lambda : print("WiP: Show the flash table"))
 
         # Last row of buttons: Save, Run, Back, Close
         buttonrow3_frame = ctk.CTkFrame(self)
         next_button = ctk.CTkButton(
             buttonrow3_frame, text="Next", cursor="hand2", command=lambda: 
+            self.master.load_module(
+                self.tool,
+                "WorkSheetFrame5",
+                location="worksheet_5",
+                error_message="",
+                problem_name = self.problem_name,
+                model = self.model,
+                parameter_table = self.parameter_table,
+                comment = comment_text.get()))
+        back_button = ctk.CTkButton(
+            buttonrow3_frame, text="Back", cursor="hand2", command=lambda: 
             self.master.load_module(
                 self.tool,
                 "WorkSheetFrame3",
@@ -86,25 +102,20 @@ class WorkSheetFrame2(frame_classes.FlashCalcFrame):
                 problem_name = self.problem_name,
                 model = self.model,
                 parameter_table = self.parameter_table))
-        back_button = ctk.CTkButton(
-            buttonrow3_frame, text="Back", cursor="hand2", command=lambda: 
-            self.master.load_module(
-                self.tool,
-                "WorkSheetFrame1",
-                location="worksheet_1",
-                error_message="",
-                problem_name = self.problem_name,
-                model = self.model,
-                parameter_table = self.parameter_table))
         
+        # Comment frame
+        comment_frame = ctk.CTkFrame(self)
+        comment_label = ctk.CTkLabel(comment_frame, text="Comments:")
+        comment_text = widget_classes.TextEntry(comment_frame, width=400, height=5)
+        comment_text.insert(0, self.comment)
+
         # Add the widgets to the frame with the pack method
         # Title and picture
         title.pack(side="left", padx = 5)
         flashcalc_picture.pack(side="left", padx = 5)
         title_frame.pack(pady=20)
 
-        # First row of buttons: Open, Reset
-        #open_button.pack(side="left", padx=5)
+        # First row of buttons: Reset
         reset_button.pack(side="left", padx=5)
         buttonrow1_frame.pack(pady=10)
 
@@ -117,8 +128,7 @@ class WorkSheetFrame2(frame_classes.FlashCalcFrame):
 
         # Second row of buttons: Show Composition Table, Show Flash Table
         showct_button.grid(row=0, column=0, padx=5)
-        ctk.CTkButton(
-            buttonrow2_frame,text="",hover=False).grid(row=0, column=1, padx=5)
+        showft_button.grid(row=0, column=1, padx=5)
         buttonrow2_frame.pack(pady=10)
 
         # Last row of buttons: Back, Next
@@ -131,6 +141,11 @@ class WorkSheetFrame2(frame_classes.FlashCalcFrame):
         ctk.CTkLabel(buttonrow3_frame, text="  |  ").grid(row=0, column=4, padx=5)
         next_button.grid(row=0, column=5, padx=5)
         buttonrow3_frame.pack(pady=50, side="bottom")
+
+        # Comment frame
+        comment_label.pack(padx=5, side = "left")
+        comment_text.pack(padx=5,side="left")
+        comment_frame.pack(pady=10)
 
         # Pack the worksheet frame
         if os.name == 'nt':

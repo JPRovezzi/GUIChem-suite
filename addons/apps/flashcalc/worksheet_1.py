@@ -51,13 +51,9 @@ class WorkSheetFrame1(frame_classes.FlashCalcFrame):
 
         def set_parameter_table(*args):
             '''Set the parameter table options.'''
-            #try:
             self.parameter_table_option.set(self.model_parameter_table[model_option.get()][0])
             self.parameter_table_option.configure(values=self.model_parameter_table[model_option.get()])
-            #except:
-                #print("Error setting parameter table.")
-                #pass
-        
+
         # Get the path of the image for the title
         script_dir = os.path.dirname(__file__)
         image_path = script_dir+"/res/flashcalc.jpeg"
@@ -83,15 +79,14 @@ class WorkSheetFrame1(frame_classes.FlashCalcFrame):
         problem_name_entry = widget_classes.TextEntry(cfg1_frame)
         if self.problem_name is not None:
             problem_name_entry.insert(0, self.problem_name)
-        
+
         print("Building model list...")
         model_label = ctk.CTkLabel(cfg1_frame, text="Model:")
         model_option = ctk.CTkOptionMenu(
             cfg1_frame,
             values=list(self.model_parameter_table.keys()),
             command=lambda value:set_parameter_table(value))
-            
-        
+
         if self.model is not None:
             model_option.set(self.model)
             print(f"Using preloaded model: {self.model}")
@@ -99,7 +94,7 @@ class WorkSheetFrame1(frame_classes.FlashCalcFrame):
             model_option.set(list(self.model_parameter_table.keys())[0])
             print("Using default model: ",
                   list(self.model_parameter_table.keys())[0])
-        
+
         print("Building parameter list...")
         parameter_table_label = ctk.CTkLabel(cfg1_frame, text="Parameter table:")
         self.parameter_table_option = ctk.CTkOptionMenu(
@@ -113,9 +108,6 @@ class WorkSheetFrame1(frame_classes.FlashCalcFrame):
             self.parameter_table_option.set(self.model_parameter_table[model_option.get()][0])
             print(f"Using default parameter: {self.model_parameter_table[model_option.get()][0]}")
 
-        
-
-        
         # Last row of buttons: Back, Next
         buttonrow3_frame = ctk.CTkFrame(self)
         next_button = ctk.CTkButton(
@@ -135,13 +127,13 @@ class WorkSheetFrame1(frame_classes.FlashCalcFrame):
             buttonrow3_frame, text = "Back", cursor = "hand2",
             command = lambda: self.master.load_module(
                 self.tool,"WelcomeFrame",location="frame_classes", error_message=""))
-        
+
         # Add the widgets to the frame with the pack method
         # Title and picture
         title.pack(side="left", padx = 5)
         flashcalc_picture.pack(side="left", padx = 5)
         title_frame.pack(pady=20)
-        
+
         # First row of buttons: Open, Reset
         #open_button.pack(side="left", padx=5)
         reset_button.pack(side="left", padx=5)

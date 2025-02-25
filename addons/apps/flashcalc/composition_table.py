@@ -20,16 +20,16 @@ from . import frame_classes
 class CompositionTableWindow(ctk.CTkToplevel):
     '''Class to create the composition table window.'''
     table = []
-    parameter_table = "Liquid-Liquid"
+    parameter_table = None
     groups = []
      
-    def __init__(self, master, **kwargs):
+    def __init__(self, master,partable=None, **kwargs):
         '''Initialize the class.'''
         super().__init__(master, **kwargs)
         self.title("Composition Table")
         self.geometry("600x400")
+        self.parameter_table = partable
         
-        #self.parameter_table = kwargs.get('partable', None)
         
         self.groups = self.load_groups(self.parameter_table)
                 
