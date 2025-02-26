@@ -15,8 +15,7 @@ from modules.ctk_xyframe import CTkXYFrame
 # widget_classes is a module that provides classes for GUI widgets.
 import modules.widget_classes as widget_classes
 from . import frame_classes
-from . import composition_table
-
+from . import flash_table
 class WorkSheetFrame3(frame_classes.FlashCalcFrame):
     '''Class to create the worksheet frame. It has the following methods:
     load, save, open, close.'''
@@ -75,7 +74,7 @@ class WorkSheetFrame3(frame_classes.FlashCalcFrame):
             command=lambda : print("WiP: Show the composition table"))
         showft_button = ctk.CTkButton(
             buttonrow2_frame, text="Edit the flash config table", cursor="hand2",
-            command=lambda : print("WiP: Edit the flash config table"))
+            command=lambda : flash_table.FlashTableWindow(self.master))
 
         # Last row of buttons: Save, Run, Back, Close
         buttonrow3_frame = ctk.CTkFrame(self)

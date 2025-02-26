@@ -82,10 +82,11 @@ class WorkSheetFrame5(frame_classes.FlashCalcFrame):
         # Last row of buttons: Save, Run, Back, Close
         buttonrow3_frame = ctk.CTkFrame(self)
         close_button = ctk.CTkButton(
-            buttonrow3_frame, 
+            buttonrow3_frame,
             text="Close",
-            cursor="hand2", 
-            command=lambda: self.master.close_module)
+            cursor="hand2",
+            command=lambda: self.master.load_module(
+                self.tool,"WelcomeFrame",location="frame_classes", error_message=""))
 
         back_button = ctk.CTkButton(
             buttonrow3_frame, text="Back", cursor="hand2", command=lambda: 
