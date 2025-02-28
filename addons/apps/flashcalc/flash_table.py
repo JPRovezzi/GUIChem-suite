@@ -37,11 +37,29 @@ class FlashTableWindow(ctk.CTkToplevel):
     z_increment = 0.05
     
     fixed_rows = 2 # Minimum number of rows in the table
+    max_columns = 13 # Maximum number of columns in the table
      
+    #Text for the table
+    title_text = "Flash Config Table"
+    number_of_flashes_text = "Number of flashes:"
+    auto_fill_text = "Auto Fill"
+    add_flash_text = "Add\nFlash"
+    subtract_flash_text = "Subtract\nFlash"
+    save_text = "Save"
+    close_text = "Close"
+    flash_text = "Flash"
+    temperature_text = "Temperature (K):"
+    pressure_text = "Pressure (bar):"
+    setting_text = "Settings"
+    increment_text = "Increment"
+    starting_value_text = "Starting Value"
+    final_value_text = "Final Value"
+
+
     def __init__(self, master,partable=None, **kwargs):
         '''Initialize the class.'''
         super().__init__(master, **kwargs)
-        self.title("Flash Config Table")
+        self.title(self.title_text)
         self.geometry("600x400")
         self.parameter_table = partable
 
@@ -49,7 +67,7 @@ class FlashTableWindow(ctk.CTkToplevel):
         self.table_frame = CTkXYFrame(self)
         self.table_frame.pack(fill="both", expand=True, padx=10, pady=10)
 
-        # Firt row of the table: Number of flashes, add and subtract buttons, save button and close button
+        # First row of the table: Number of flashes, add and subtract buttons, save button and close button
         buttons_row = []
 
         self.row_count_label = ctk.CTkLabel(
@@ -58,38 +76,50 @@ class FlashTableWindow(ctk.CTkToplevel):
         self.row_count_label.grid(row=0, column=0, padx=5, pady=5)
         buttons_row.append(self.row_count_label)
 
-        self.auto_fill_button = ctk.CTkButton(
+        self.auto_fill_checkbox = ctk.CTkCheckBox(
             self.table_frame,
-            text="Auto Fill",
-            cursor="hand2",
-            command=lambda: self.auto_fill())
-        self.auto_fill_button.grid(row=0, column=1, padx=5, pady=5)
-        buttons_row.append(self.auto_fill_button)
+            text=self.auto_fill_text,
+            variable=tk.BooleanVar(),
+            command=lambda: self.auto_fill() if self.auto_fill_checkbox.get()  else self.clear_table()
+            )
+        self.auto_fill_checkbox.grid(row=0, column=1, padx=5, pady=5)
+        buttons_row.append(self.auto_fill_checkbox)
 
         self.add_row_button = ctk.CTkButton(
-            self.table_frame, text="Add \n Flash", cursor="hand2", command=self.add_row)
+            self.table_frame,
+            text=self.add_flash_text,
+            cursor="hand2",
+            command=self.add_row)
         self.add_row_button.grid(row=0, column=2, padx=5, pady=5)
         buttons_row.append(self.add_row_button)
         
         self.subtract_row_button = ctk.CTkButton(
-            self.table_frame, text="Subtract \n Flash", cursor="hand2", command=self.subtract_row)
+            self.table_frame,
+            text=self.subtract_flash_text,
+            cursor="hand2",
+            command=self.subtract_row)
         self.subtract_row_button.grid(row=0, column=3, padx=5, pady=5)
         buttons_row.append(self.subtract_row_button)
 
         self.save_button = ctk.CTkButton(
-            self.table_frame, text="Save", cursor="hand2")
+            self.table_frame,
+            text=self.save_text,
+            cursor="hand2")
         self.save_button.grid(row=0, column=4, padx=5, pady=5)
         buttons_row.append(self.save_button)
 
         self.close_button = ctk.CTkButton(
-            self.table_frame, text="Close", cursor="hand2", command=self.destroy)
+            self.table_frame,
+            text=self.close_text,
+            cursor="hand2",
+            command=self.destroy)
         self.close_button.grid(row=0, column=5, padx=5, pady=5)
         buttons_row.append(self.close_button)
 
         self.table.append(buttons_row)
 
         line_row = []
-        for col in range(13):  # Assuming 13 columns for the table
+        for col in range(self.max_columns):
             separator = ctk.CTkLabel(self.table_frame, text="_"*25)
             separator.grid(
                 row=len(self.table) + 1, column=col, padx=0, pady=0,
@@ -98,8 +128,14 @@ class FlashTableWindow(ctk.CTkToplevel):
         
         self.table.append(line_row)
 
-
-        #self.add_row()
+    def clear_table(self):
+        '''Clear the table.'''
+        while len(self.table) > self.fixed_rows:
+            row = self.table.pop()
+            for entry in row:
+                entry.destroy()
+        self.row_count_label.configure(
+        text = self.number_of_flashes())
 
     def load_from_json(self, json_file):
         '''Load a table from a json file.'''
@@ -119,7 +155,7 @@ class FlashTableWindow(ctk.CTkToplevel):
 
     def number_of_flashes(self):
         '''Return the number of flashes in the table.'''
-        return f"Number of flashes:\n {int(len(self.table)/3)}"
+        return f"{self.number_of_flashes_text}\n {int(len(self.table)/3)}"
     
 
     def add_row(self):
@@ -133,14 +169,14 @@ class FlashTableWindow(ctk.CTkToplevel):
         row1.append(flash_label)
 
         temp_label = ctk.CTkLabel(
-            self.table_frame, text="Temperature (K):")
+            self.table_frame, text=self.temperature_text)
         temp_label.grid(
             row=len(self.table) + 1, column=1, padx=0, pady=5)
         row1.append(temp_label)
 
 
         pressure_label = ctk.CTkLabel(
-            self.table_frame, text="Pressure (bar):")
+            self.table_frame, text=self.pressure_text)
         pressure_label.grid(
             row=len(self.table) + 1, column=2, padx=0, pady=5)
         row1.append(pressure_label)
@@ -208,7 +244,7 @@ class FlashTableWindow(ctk.CTkToplevel):
         
         # Add a separator row
         separator_row = []
-        for col in range(13):  # Assuming 13 columns for the table
+        for col in range(self.max_columns):
             separator = ctk.CTkLabel(self.table_frame, text="·"*37)
             separator.grid(
                 row=len(self.table) + 1, column=col, padx=0, pady=0,
@@ -232,16 +268,85 @@ class FlashTableWindow(ctk.CTkToplevel):
     
     def auto_fill(self):
         '''Fill the table with values.'''
-        # Remove all rows below the fixed ones
-        while len(self.table) > self.fixed_rows:
-            row = self.table.pop()
-            for entry in row:
-                entry.destroy()
+        def auto_fill_values():
+            '''Fill the table with values.'''
+            # Clear the table below the separator row
+            while len(self.table) > self.fixed_rows + 5:
+                row = self.table.pop()
+                for entry in row:
+                    entry.destroy()
+            auto_list = []
+            print(auto_list)
+            # Add the auto-filled values into rows
+            for index,label in enumerate(labels):
+                print(f"index={index}, label={label}")
+                if index == 0:
+                    continue
+                auto_list.append([])
+                auto_values=label
 
+                if int(float(increment_value_row[index].get())*100) != 0:
+                    for value in range(
+                        int(
+                            float(
+                                starting_value_row[index].get())*100),
+                        int(
+                            (float(final_value_row[index].get()))*100)+1,
+                        int(
+                            float(
+                                increment_value_row[index].get())*100)):
+
+                        auto_list[index-1].append(float(value)/100)
+
+                else:
+                    auto_list[index-1] = [float(starting_value_row[index].get())]
+
+                print(auto_list)
+                for value in list(auto_list[index-1]):
+                    auto_values += f" {value};"
+
+                row = []
+                label = ctk.CTkLabel(self.table_frame, text=auto_values)
+                label.grid(
+                    row=len(self.table) + 1,
+                    column=0,
+                    padx=5,
+                    pady=5,
+                    columnspan=self.max_columns,
+                    sticky="w")
+                row.append(label)
+                self.table.append(row)
+
+
+        # Remove all rows below the fixed ones
+        self.clear_table()
+
+        from_values = [self.temp_min, self.pressure_min]
+        for i in range(self.number_of_components):
+            from_values.append(self.z_min)
+
+        to_values = [self.temp_max, self.pressure_max]
+        for i in range(self.number_of_components):
+            to_values.append(self.z_max)
+
+        increment_values = [self.temp_increment, self.pressure_increment]
+        for i in range(self.number_of_components):
+            increment_values.append(self.z_increment)
+
+        # Add a row with a button to auto-fill the table
+        auto_fill_row = []
+        auto_fill_button = ctk.CTkButton(   
+            self.table_frame,
+            text=self.save_text,
+            cursor="hand2",
+            command=auto_fill_values)
+        auto_fill_button.grid(row=len(self.table) + 1, column=0, padx=5, pady=5)
+        auto_fill_row.append(auto_fill_button)
+        self.table.append(auto_fill_row)
         # Add the label row:
         label_row = []
 
-        labels = ["Settings", "Temperature", "Pressure"]
+        labels = ["Settings", self.temperature_text, self.pressure_text]
         for i in range(self.number_of_components):
             labels.append(f"z{i+1}")
         for label in labels:
@@ -254,21 +359,9 @@ class FlashTableWindow(ctk.CTkToplevel):
         # Add the row with starting values
         starting_value_row = []
 
-        starting_label = ctk.CTkLabel(self.table_frame, text="Starting Value:")
+        starting_label = ctk.CTkLabel(self.table_frame, text=self.starting_value_text)
         starting_label.grid(row=len(self.table) + 1, column=0, padx=5, pady=5)
         starting_value_row.append(starting_label)
-
-        from_values = [self.temp_min, self.pressure_min]
-        for i in range(self.number_of_components): 
-            from_values.append(self.z_min)
-
-        to_values = [self.temp_max, self.pressure_max]
-        for i in range(self.number_of_components):
-            to_values.append(self.z_max)
-
-        increment_values = [self.temp_increment, self.pressure_increment]
-        for i in range(self.number_of_components):
-            increment_values.append(self.z_increment)
         
         for i, from_value in enumerate(from_values):
             initial_box = tk.Spinbox(
@@ -289,55 +382,64 @@ class FlashTableWindow(ctk.CTkToplevel):
         # Add the row with final values
         final_value_row = []
         
-        final_label = ctk.CTkLabel(self.table_frame, text="Final Value:")
+        final_label = ctk.CTkLabel(self.table_frame, text=self.final_value_text)
         final_label.grid(row=len(self.table) + 1, column=0, padx=5, pady=5)
         final_value_row.append(final_label)
-        temp_final_box = tk.Spinbox(self.table_frame, from_=self.temp_min, to=self.temp_max, increment=self.temp_increment, width=5)
-        temp_final_box.grid(row=len(self.table) + 1, column=1, padx=5, pady=5)
-        final_value_row.append(temp_final_box)
+        
+        for i, to_value in enumerate(to_values):
+            final_box = tk.Spinbox(
+                self.table_frame,
+                from_=from_values[i],
+                to=to_value,
+                increment=increment_values[i],
+                width=5)
+            final_box.grid(
+                row=len(self.table) + 1,
+                column= i + 1,
+                padx=5,
+                pady=5)
+            final_value_row.append(final_box)
+
 
         self.table.append(final_value_row)
 
         # Add the row with increment values
         increment_value_row = []
-        increment_label = ctk.CTkLabel(self.table_frame, text="Increment:")
+        increment_label = ctk.CTkLabel(self.table_frame, text=self.increment_text)
         increment_label.grid(row=len(self.table) + 1, column=0, padx=5, pady=5)
         increment_value_row.append(increment_label)
-        temp_increment_box = tk.Spinbox(self.table_frame, from_=self.temp_increment, to=self.temp_max, increment=self.temp_increment, width=5)
-        temp_increment_box.grid(row=len(self.table) + 1, column=1, padx=5, pady=5)
-        increment_value_row.append(temp_increment_box)
 
+        for i, increment_value in enumerate(increment_values):
+            increment_box = tk.Spinbox(
+                self.table_frame,
+                from_=0,
+                to=to_values[i],
+                increment=increment_value,
+                width=5)
+            increment_box.grid(
+                row=len(self.table) + 1,
+                column= i + 1,
+                padx=5,
+                pady=5)
+            increment_value_row.append(increment_box)
         
         self.table.append(increment_value_row)
 
-        
+        # Add a separator row
+        separator_row = []
+        for col in range(self.max_columns):
+            separator = ctk.CTkLabel(self.table_frame, text="·"*37)
+            separator.grid(
+                row=len(self.table) + 1, column=col, padx=0, pady=0,
+                ipadx=0, ipady=0,)
+            separator_row.append(separator)
+
+        self.table.append(separator_row)
+
+        auto_fill_values()
 
         
 
-        '''
-        pressure_initial_box = tk.Spinbox(self.table_frame, from_=self.pressure_min, to=self.pressure_max, increment=self.pressure_increment, width=5)
-        pressure_initial_box.grid(row=len(self.table) + 1, column=4, padx=5, pady=5)
-        settings_row.append(pressure_initial_box)
-
-        pressure_final_box = tk.Spinbox(self.table_frame, from_=self.pressure_min, to=self.pressure_max, increment=self.pressure_increment, width=5)
-        pressure_final_box.grid(row=len(self.table) + 1, column=5, padx=5, pady=5)
-        settings_row.append(pressure_final_box)
-
-        pressure_increment_box = tk.Spinbox(self.table_frame, from_=self.pressure_increment, to=self.pressure_max, increment=self.pressure_increment, width=5)
-        pressure_increment_box.grid(row=len(self.table) + 1, column=6, padx=5, pady=5)
-        settings_row.append(pressure_increment_box)
-
-        for col in range(self.number_of_components):
-            z_initial_box = tk.Spinbox(self.table_frame, from_=self.z_min, to=self.z_max, increment=self.z_increment, width=5)
-            z_initial_box.grid(row=len(self.table) + 1, column=7 + col * 3, padx=5, pady=5)
-            settings_row.append(z_initial_box)
-
-            z_final_box = tk.Spinbox(self.table_frame, from_=self.z_min, to=self.z_max, increment=self.z_increment, width=5)
-            z_final_box.grid(row=len(self.table) + 1, column=8 + col * 3, padx=5, pady=5)
-            settings_row.append(z_final_box)
-
-            z_increment_box = tk.Spinbox(self.table_frame, from_=self.z_increment, to=self.z_max, increment=self.z_increment, width=5)
-            z_increment_box.grid(row=len(self.table) + 1, column=9 + col * 3, padx=5, pady=5)
-            settings_row.append(z_increment_box)
-
-        self.table.append(settings_row)'''
+        
+        
+        
