@@ -372,6 +372,11 @@ class FlashTableWindow(ctk.CTkToplevel):
                     increment_value_row[index].delete(0, tk.END)
                     increment_value_row[index].insert(
                         0, intx100_to_float(0))
+                  
+                if float_to_intx100(increment_value_row[index].get()) < increment_values[index-1]:
+                    print(f"{increment_value_row[index].get()} is less than {intx100_to_float(increment_values[index-1])}!")
+                    increment_value_row[index].delete(0, tk.END)
+                    increment_value_row[index].insert(0, intx100_to_float(increment_values[index-1]))
 
                 # Check if the final value is greater than the starting value:
                 if float_to_intx100(final_value_row[index].get()) < float_to_intx100(starting_value_row[index].get()):
