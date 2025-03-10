@@ -90,7 +90,7 @@ class FlashTableWindow(ctk.CTkToplevel):
             self.table_frame,
             text=self.add_flash_text,
             cursor="hand2",
-            command=self.add_row)
+            command=lambda: None if self.auto_fill_checkbox.get() else self.add_row())
         self.add_row_button.grid(row=0, column=2, padx=5, pady=5)
         buttons_row.append(self.add_row_button)
         
@@ -98,7 +98,7 @@ class FlashTableWindow(ctk.CTkToplevel):
             self.table_frame,
             text=self.subtract_flash_text,
             cursor="hand2",
-            command=self.subtract_row)
+            command=lambda: None if self.auto_fill_checkbox.get() else self.subtract_row())
         self.subtract_row_button.grid(row=0, column=3, padx=5, pady=5)
         buttons_row.append(self.subtract_row_button)
 
@@ -113,7 +113,7 @@ class FlashTableWindow(ctk.CTkToplevel):
             self.table_frame,
             text=self.close_text,
             cursor="hand2",
-            command=self.destroy)
+            command=lambda: self.destroy())
         self.close_button.grid(row=0, column=5, padx=5, pady=5)
         buttons_row.append(self.close_button)
 
