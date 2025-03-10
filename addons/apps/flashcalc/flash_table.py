@@ -26,15 +26,16 @@ class FlashTableWindow(ctk.CTkToplevel):
     number_of_components = 3
 
     #Constants for the table
-    temp_min = 273
-    temp_max = 473
-    temp_increment = 1
-    pressure_min = 1
-    pressure_max = 10
-    pressure_increment = 0.1
-    z_min = 0
-    z_max = 1
-    z_increment = 0.05
+    # The values are intergers
+    temp_min = 27300 # 273 K
+    temp_max = 47300 # 473 K
+    temp_increment = 100 # 1 K
+    pressure_min = 100 # 1 bar
+    pressure_max = 1000 # 1000 bar
+    pressure_increment = 10 # 0.1 bar
+    z_min = 0 # 0 
+    z_max = 100 # 1
+    z_increment = 5 # 0.05
     
     fixed_rows = 2 # Minimum number of rows in the table
     max_columns = 13 # Maximum number of columns in the table
@@ -268,8 +269,16 @@ class FlashTableWindow(ctk.CTkToplevel):
     
     def auto_fill(self):
         '''Fill the table with values.'''
+        def float_to_intx100(value):
+            '''Convert a value to an integer multiplied by 100.'''
+            return int(float(value)*100)
+        def intx100_to_float(value):
+            '''Convert an integer multiplied by 100 to a float.'''
+            return float(value)/100
         def auto_fill_values():
             '''Fill the table with values.'''
+            # Check if input values are correct:
+            check_values()
             # Clear the table below the separator row
             while len(self.table) > self.fixed_rows + 5:
                 row = self.table.pop()
@@ -285,17 +294,13 @@ class FlashTableWindow(ctk.CTkToplevel):
                 auto_list.append([])
                 auto_values=label
 
+                # If the increment value is not zero, 
+                # fill the list with the values
                 if int(float(increment_value_row[index].get())*100) != 0:
                     for value in range(
-                        int(
-                            float(
-                                starting_value_row[index].get())*100),
-                        int(
-                            (float(final_value_row[index].get()))*100)+1,
-                        int(
-                            float(
-                                increment_value_row[index].get())*100)):
-
+                        float_to_intx100(starting_value_row[index].get()),
+                        float_to_intx100(final_value_row[index].get())+1,
+                        float_to_intx100(increment_value_row[index].get())):
                         auto_list[index-1].append(float(value)/100)
 
                 else:
@@ -316,6 +321,73 @@ class FlashTableWindow(ctk.CTkToplevel):
                     sticky="w")
                 row.append(label)
                 self.table.append(row)
+            return  None
+        def check_values():
+            '''Check the values in the table.'''
+            for index,label in enumerate(labels):
+                print(f"index={index}, label={label}")
+                if index == 0:
+                    continue
+                # Check if the values are numbers:
+                try:
+                    float(starting_value_row[index].get())
+                except ValueError:
+                    print(f"{starting_value_row[index].get()} is not a number!")
+                    starting_value_row[index].delete(0, tk.END)
+                    starting_value_row[index].insert(
+                        0, intx100_to_float(from_values[index-1]))
+                try:
+                    float(final_value_row[index].get())
+                except ValueError:
+                    print(f"{final_value_row[index].get()} is not a number!")
+                    final_value_row[index].delete(0, tk.END)
+                    final_value_row[index].insert(
+                        0, intx100_to_float(from_values[index-1]))
+                try:
+                    float(increment_value_row[index].get())
+                except ValueError:
+                    print(f"{increment_value_row[index].get()} is not a number!")
+                    increment_value_row[index].delete(0, tk.END)
+                    increment_value_row[index].insert(
+                        0, intx100_to_float(0))
+
+                # Check if the values are within the limits:
+                if float_to_intx100(starting_value_row[index].get()) < from_values[index-1] or float_to_intx100(starting_value_row[index].get()) > to_values[index-1]:
+                    print(f"{starting_value_row[index].get()} is out of range!")
+                    starting_value_row[index].delete(0, tk.END)
+                    starting_value_row[index].insert(
+                        0, intx100_to_float(from_values[index-1]))
+                if float_to_intx100(final_value_row[index].get()) > to_values[index-1] or float_to_intx100(final_value_row[index].get()) < from_values[index-1]:
+                    print(f"{final_value_row[index].get()} is out of range!")
+                    final_value_row[index].delete(0, tk.END)
+                    final_value_row[index].insert(
+                        0, intx100_to_float(to_values[index-1]))
+                
+                #if float(increment_value_row[index].get()) > to_values[index-1]:
+                    #increment_value_row[index].delete(0, tk.END)
+                    #increment_value_row[index].insert(0, increment_values[index-1])
+
+                if float_to_intx100(increment_value_row[index].get()) < 0:
+                    print(f"{increment_value_row[index].get()} is negative!")
+                    increment_value_row[index].delete(0, tk.END)
+                    increment_value_row[index].insert(
+                        0, intx100_to_float(0))
+
+                # Check if the final value is greater than the starting value:
+                if float_to_intx100(final_value_row[index].get()) < float_to_intx100(starting_value_row[index].get()):
+                    print(f"{final_value_row[index].get()} is less than {starting_value_row[index].get()}!")
+                    final_value_row[index].delete(0, tk.END)
+                    final_value_row[index].insert(
+                        0, starting_value_row[index].get())
+                # Check if the increment value is greater than the difference between the final and starting values:
+                if float_to_intx100(increment_value_row[index].get()) > (float_to_intx100(final_value_row[index].get()) - float_to_intx100(starting_value_row[index].get())):
+                    print(f"{increment_value_row[index].get()} is greater than {final_value_row[index].get()} - {starting_value_row[index].get()}!")
+                    increment_value_row[index].delete(0, tk.END)
+                    increment_value_row[index].insert(0, intx100_to_float(float_to_intx100(final_value_row[index].get()) - float_to_intx100(starting_value_row[index].get())))
+
+            return None
+        
+
 
 
         # Remove all rows below the fixed ones
@@ -339,10 +411,11 @@ class FlashTableWindow(ctk.CTkToplevel):
             self.table_frame,
             text=self.save_text,
             cursor="hand2",
-            command=auto_fill_values)
+            command= lambda: auto_fill_values())
         auto_fill_button.grid(row=len(self.table) + 1, column=0, padx=5, pady=5)
         auto_fill_row.append(auto_fill_button)
         self.table.append(auto_fill_row)
+
         # Add the label row:
         label_row = []
 
@@ -366,10 +439,11 @@ class FlashTableWindow(ctk.CTkToplevel):
         for i, from_value in enumerate(from_values):
             initial_box = tk.Spinbox(
                 self.table_frame,
-                from_=from_value,
-                to=to_values[i],
-                increment=increment_values[i],
+                from_=intx100_to_float(from_value),
+                to=intx100_to_float(to_values[i]),
+                increment=intx100_to_float(increment_values[i]),
                 width=5)
+
             initial_box.grid(
                 row=len(self.table) + 1,
                 column= i + 1,
@@ -389,10 +463,11 @@ class FlashTableWindow(ctk.CTkToplevel):
         for i, to_value in enumerate(to_values):
             final_box = tk.Spinbox(
                 self.table_frame,
-                from_=from_values[i],
-                to=to_value,
-                increment=increment_values[i],
+                from_=intx100_to_float(from_values[i]),
+                to=intx100_to_float(to_value),
+                increment=intx100_to_float(increment_values[i]),
                 width=5)
+ 
             final_box.grid(
                 row=len(self.table) + 1,
                 column= i + 1,
@@ -413,8 +488,8 @@ class FlashTableWindow(ctk.CTkToplevel):
             increment_box = tk.Spinbox(
                 self.table_frame,
                 from_=0,
-                to=to_values[i],
-                increment=increment_value,
+                to=intx100_to_float(to_values[i]),
+                increment=intx100_to_float(increment_value),
                 width=5)
             increment_box.grid(
                 row=len(self.table) + 1,
@@ -436,6 +511,7 @@ class FlashTableWindow(ctk.CTkToplevel):
 
         self.table.append(separator_row)
 
+        # Fill the table with values
         auto_fill_values()
 
         
