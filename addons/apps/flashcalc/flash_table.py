@@ -25,7 +25,9 @@ class FlashTableWindow(ctk.CTkToplevel):
     groups = []
     nc = 5 # Number of components
     nf = 0 # Number of flashes
-    flash_list = []
+    flash_list = [] # List with T, P and z values for each flash
+    show_auto_fill = False
+
 
 
     #Constants for the table
@@ -325,7 +327,7 @@ class FlashTableWindow(ctk.CTkToplevel):
 
             return values
         
-        def auto_fill_values():
+        def update_table():
             '''Fill the table with values.'''
             # Check if input values are correct:
             check_values()
@@ -362,13 +364,14 @@ class FlashTableWindow(ctk.CTkToplevel):
 
                 row = []
                 label = ctk.CTkLabel(self.table_frame, text=auto_values)
-                label.grid(
-                    row=len(self.table) + 1,
-                    column=0,
-                    padx=5,
-                    pady=5,
-                    columnspan=self.max_columns,
-                    sticky="w")
+                if self.show_auto_fill:
+                    label.grid(
+                        row=len(self.table) + 1,
+                        column=0,
+                        padx=5,
+                        pady=5,
+                        columnspan=self.max_columns,
+                        sticky="w")
                 row.append(label)
                 self.table.append(row)
             
@@ -387,13 +390,14 @@ class FlashTableWindow(ctk.CTkToplevel):
                 for value in z_value:
                     z_values_text += f"{value:.2f}; "
                 label = ctk.CTkLabel(self.table_frame, text=z_values_text)
-                label.grid(
-                    row=len(self.table) + 1,
-                    column=0,
-                    padx=5,
-                    pady=5,
-                    columnspan=self.max_columns,
-                    sticky="w")
+                if self.show_auto_fill:
+                    label.grid(
+                        row=len(self.table) + 1,
+                        column=0,
+                        padx=5,
+                        pady=5,
+                        columnspan=self.max_columns,
+                        sticky="w")
                 row.append(label)
                 self.table.append(row)
             
@@ -495,7 +499,7 @@ class FlashTableWindow(ctk.CTkToplevel):
             self.table_frame,
             text=self.save_text,
             cursor="hand2",
-            command= lambda: auto_fill_values())
+            command= lambda: update_table())
         auto_fill_button.grid(row=len(self.table) + 1, column=0, padx=5, pady=5)
         auto_fill_row.append(auto_fill_button)
         self.table.append(auto_fill_row)
@@ -596,7 +600,7 @@ class FlashTableWindow(ctk.CTkToplevel):
         self.table.append(separator_row)
 
         # Fill the table with values
-        auto_fill_values()
+        update_table()
 
         
 
