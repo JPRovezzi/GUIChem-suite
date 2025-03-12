@@ -1,7 +1,7 @@
 '''This module contains the FlashTableWindow class for the FlashCalc app.
 This class creates a window with a table to input the temperature,pressure and
 z values for each flash. It can be filled manually by adding or subtracting
-rows, or automatically by setting the starting, final and increment values for
+rows, or automatically by setting the starting, final and step values for
 the temperature, pressure and z values.'''
 
 # Import the required libraries:
@@ -38,15 +38,15 @@ class FlashTableWindow(ctk.CTkToplevel):
 
     #Constants for the table
     # The values are intergers
-    temp_min = 27300 # 273 K
-    temp_max = 47300 # 473 K
-    temp_increment = 100 # 1 K
-    pressure_min = 100 # 1 bar
-    pressure_max = 1000 # 1000 bar
-    pressure_increment = 10 # 0.1 bar
+    t_min = 27300 # 273 K
+    t_max = 47300 # 473 K
+    t_step = 100 # 1 K
+    p_min = 100 # 1 bar
+    p_max = 1000 # 1000 bar
+    p_step = 10 # 0.1 bar
     z_min = 0 # 0
     z_max = 100 # 1
-    z_increment = 5 # 0.05
+    z_step = 5 # 0.05
 
     fixed_rows = 2 # Minimum number of rows in the table
     max_columns = 13 # Maximum number of columns in the table
@@ -63,7 +63,7 @@ class FlashTableWindow(ctk.CTkToplevel):
     temperature_text = "Temperature (K):"
     pressure_text = "Pressure (bar):"
     setting_text = "Settings"
-    increment_text = "Increment"
+    step_text = "step"
     starting_value_text = "Starting Value"
     final_value_text = "Final Value"
 
@@ -197,7 +197,8 @@ class FlashTableWindow(ctk.CTkToplevel):
 
         # Flash label
         flash_label = ctk.CTkLabel(
-            self.table_frame, text=f"Flash {int(len(self.table)/3)+1}:")
+            self.table_frame, text=f"Flash {self.nf+1}:")
+        
         flash_label.grid(
             row=len(self.table) + 1, column=0, padx=0, pady=5)
         row1.append(flash_label)
@@ -232,9 +233,10 @@ class FlashTableWindow(ctk.CTkToplevel):
 
         # temperature spinbox
         t_spinbox = tk.Spinbox(self.table_frame,
-                              from_= self.temp_min,
-                              to = self.temp_max,
-                              increment = self.temp_increment,
+                              from_= self.intx100_to_float(self.t_min),
+                              to = self.intx100_to_float(self.t_max),
+                              step = self.intx100_to_float(
+                                  self.t_step),
                               width = 5)
 
         # If the table has more than 3 rows,
@@ -252,9 +254,10 @@ class FlashTableWindow(ctk.CTkToplevel):
 
         # pressure spinbox
         pressure_box = tk.Spinbox(self.table_frame,
-                              from_= self.pressure_min,
-                              to = self.pressure_max,
-                              increment = self.pressure_increment,
+                              from_= self.intx100_to_float(self.p_min),
+                              to = self.intx100_to_float(self.p_max),
+                              step = self.intx100_to_float(
+                                  self.p_step),
                               width = 5)
         # If the table has more than 3 rows,
         # copy the value from the previous row
@@ -272,9 +275,9 @@ class FlashTableWindow(ctk.CTkToplevel):
         # z spinboxes
         for col in range(z_colmin,z_colmax):
             z_box = tk.Spinbox(self.table_frame,
-                                    from_=self.z_min,
-                                    to=self.z_max,
-                                    increment=self.z_increment,
+                                    from_=self.intx100_to_float(self.z_min),
+                                    to=self.intx100_to_float(self.z_max),
+                                    step=self.intx100_to_float(self.z_step),
                                     width=5)
             # If the table has more than 3 rows,
             # copy the value from the previous row
@@ -315,16 +318,18 @@ class FlashTableWindow(ctk.CTkToplevel):
         self.nf_label.configure(
             text = self.set_nf())
 
+    def float_to_intx100(self, value : float) -> int:
+        '''Convert a value to an integer multiplied by 100.'''
+        return int(float(value)*100)
+
+    def intx100_to_float(self, value: int) -> float:
+        '''Convert an integer multiplied by 100 to a float.'''
+        return float(value)/100
+
     def auto_fill(self):
         '''Fill the table with values.'''
         # Define the functions used in the method:
-        def float_to_intx100(value : float) -> int:
-            '''Convert a value to an integer multiplied by 100.'''
-            return int(float(value)*100)
 
-        def intx100_to_float(value: int) -> float:
-            '''Convert an integer multiplied by 100 to a float.'''
-            return float(value)/100
 
         def generate_combinations(
                 input_list, n, condition, current_level=0,current_combination=None, values=None):
@@ -389,13 +394,16 @@ class FlashTableWindow(ctk.CTkToplevel):
                 auto_list.append([])
                 auto_values=label
 
-                # If the increment value is not zero,
+                # If the step value is not zero,
                 # fill the list with the values
-                if int(float(increment_value_row[index].get())*100) != 0:
+                if int(float(step_value_row[index].get())*100) != 0:
                     for value in range(
-                        float_to_intx100(starting_value_row[index].get()),
-                        float_to_intx100(final_value_row[index].get())+1,
-                        float_to_intx100(increment_value_row[index].get())):
+                        self.float_to_intx100(
+                            starting_value_row[index].get()),
+                        self.float_to_intx100(
+                            final_value_row[index].get())+1,
+                        self.float_to_intx100(
+                            step_value_row[index].get())):
                         auto_list[index-1].append(float(value)/100)
 
                 else:
@@ -463,95 +471,96 @@ class FlashTableWindow(ctk.CTkToplevel):
                     print(f"{starting_value_row[index].get()} is not a number!")
                     starting_value_row[index].delete(0, tk.END)
                     starting_value_row[index].insert(
-                        0, intx100_to_float(from_values[index-1]))
+                        0, self.intx100_to_float(from_values[index-1]))
                 try:
                     float(final_value_row[index].get())
                 except ValueError:
                     print(f"{final_value_row[index].get()} is not a number!")
                     final_value_row[index].delete(0, tk.END)
                     final_value_row[index].insert(
-                        0, intx100_to_float(from_values[index-1]))
+                        0, self.intx100_to_float(from_values[index-1]))
                 try:
-                    float(increment_value_row[index].get())
+                    float(step_value_row[index].get())
                 except ValueError:
-                    print(f"{increment_value_row[index].get()} is not a number!")
-                    increment_value_row[index].delete(0, tk.END)
-                    increment_value_row[index].insert(
-                        0, intx100_to_float(0))
+                    print(f"{step_value_row[index].get()} is not a number!")
+                    step_value_row[index].delete(0, tk.END)
+                    step_value_row[index].insert(
+                        0, self.intx100_to_float(0))
 
                 # Check if the values are within the limits:
-                if ((float_to_intx100(starting_value_row[index].get()) <
-                    from_values[index-1])
-                    or (float_to_intx100(starting_value_row[index].get()) >
+                if ((self.float_to_intx100(starting_value_row[index].get()) <
+                    from_values[index-1]) or
+                    (self.float_to_intx100(starting_value_row[index].get()) >
                     to_values[index-1])):
                     print(f"{starting_value_row[index].get()} is out of range!")
                     starting_value_row[index].delete(0, tk.END)
                     starting_value_row[index].insert(
-                        0, intx100_to_float(from_values[index-1]))
+                        0, self.intx100_to_float(from_values[index-1]))
 
-                if ((float_to_intx100(
+                if ((self.float_to_intx100(
                     final_value_row[index].get()) > to_values[index-1]) or
-                    (float_to_intx100(final_value_row[index].get()) <
+                    (self.float_to_intx100(final_value_row[index].get()) <
                     from_values[index-1])):
                     print(f"{final_value_row[index].get()} is out of range!")
                     final_value_row[index].delete(0, tk.END)
                     final_value_row[index].insert(
-                        0, intx100_to_float(to_values[index-1]))
+                        0, self.intx100_to_float(to_values[index-1]))
 
-                if float_to_intx100(increment_value_row[index].get()) < 0:
-                    print(f"{increment_value_row[index].get()} is negative!")
-                    increment_value_row[index].delete(0, tk.END)
-                    increment_value_row[index].insert(
-                        0, intx100_to_float(0))
+                if self.float_to_intx100(step_value_row[index].get()) < 0:
+                    print(f"{step_value_row[index].get()} is negative!")
+                    step_value_row[index].delete(0, tk.END)
+                    step_value_row[index].insert(
+                        0, self.intx100_to_float(0))
 
-                if float_to_intx100(increment_value_row[index].get()) < increment_values[index-1]:
-                    print(f'''{increment_value_row[index].get()} is less than
-                     {intx100_to_float(increment_values[index-1])}!''')
-                    increment_value_row[index].delete(
+                if self.float_to_intx100(step_value_row[index].get()) < step_values[index-1]:
+                    print(f'''{step_value_row[index].get()} is less than
+                     {self.intx100_to_float(step_values[index-1])}!''')
+                    step_value_row[index].delete(
                         0, tk.END)
-                    increment_value_row[index].insert(
-                        0, intx100_to_float(increment_values[index-1]))
+                    step_value_row[index].insert(
+                        0, self.intx100_to_float(step_values[index-1]))
 
                 # Check if the final value is greater than the starting value:
-                if (float_to_intx100(final_value_row[index].get()) <
-                    float_to_intx100(starting_value_row[index].get())):
+                if (self.float_to_intx100(final_value_row[index].get()) <
+                    self.float_to_intx100(starting_value_row[index].get())):
                     print(f'''{final_value_row[index].get()} is less than
                      {starting_value_row[index].get()}!''')
                     final_value_row[index].delete(0, tk.END)
                     final_value_row[index].insert(
                         0, starting_value_row[index].get())
-                # Check if the increment value is greater than the difference
+                # Check if the step value is greater than the difference
                 # between the final and starting values:
-                if (float_to_intx100(increment_value_row[index].get()) >
-                    (float_to_intx100(final_value_row[index].get()) -
-                    float_to_intx100(starting_value_row[index].get()))):
-                    print(f'''{increment_value_row[index].get()} is greater
+                if (self.float_to_intx100(step_value_row[index].get()) >
+                    (self.float_to_intx100(final_value_row[index].get()) -
+                    self.float_to_intx100(starting_value_row[index].get()))):
+                    print(f'''{step_value_row[index].get()} is greater
                           than {final_value_row[index].get()} - 
                           {starting_value_row[index].get()}!''')
-                    increment_value_row[index].delete(
+                    step_value_row[index].delete(
                         0, tk.END)
-                    increment_value_row[index].insert(
-                        0, (intx100_to_float(
-                            float_to_intx100(final_value_row[index].get()) -
-                            float_to_intx100(starting_value_row[index].get
-                                             ()))))
+                    step_value_row[index].insert(
+                        0, (self.intx100_to_float(
+                            self.float_to_intx100(
+                                final_value_row[index].get()) -
+                            self.float_to_intx100(
+                                starting_value_row[index].get()))))
             return None
         # ---------------------------------------------------------------------
 
         # Remove all rows below the fixed ones
         self.clear_table()
 
-        from_values = [self.temp_min, self.pressure_min]
+        from_values = [self.t_min, self.p_min]
         for i in range(self.nc):
             from_values.append(self.z_min)
 
-        to_values = [self.temp_max, self.pressure_max]
+        to_values = [self.t_max, self.p_max]
         for i in range(self.nc):
             to_values.append(self.z_max)
 
-        increment_values = [self.temp_increment, self.pressure_increment]
+        step_values = [self.t_step, self.p_step]
         for i in range(self.nc):
-            increment_values.append(self.z_increment)
+            step_values.append(self.z_step)
 
         # Add a row with a button to auto-fill the table
         auto_fill_row = []
@@ -587,9 +596,9 @@ class FlashTableWindow(ctk.CTkToplevel):
         for i, from_value in enumerate(from_values):
             initial_box = tk.Spinbox(
                 self.table_frame,
-                from_=intx100_to_float(from_value),
-                to=intx100_to_float(to_values[i]),
-                increment=intx100_to_float(increment_values[i]),
+                from_ = self.intx100_to_float(from_value),
+                to = self.intx100_to_float(to_values[i]),
+                step = self.intx100_to_float(step_values[i]),
                 width=5)
 
             initial_box.grid(
@@ -611,9 +620,9 @@ class FlashTableWindow(ctk.CTkToplevel):
         for i, to_value in enumerate(to_values):
             final_box = tk.Spinbox(
                 self.table_frame,
-                from_=intx100_to_float(from_values[i]),
-                to=intx100_to_float(to_value),
-                increment=intx100_to_float(increment_values[i]),
+                from_ = self.intx100_to_float(from_values[i]),
+                to = self.intx100_to_float(to_value),
+                step = self.intx100_to_float(step_values[i]),
                 width=5)
 
             final_box.grid(
@@ -626,27 +635,27 @@ class FlashTableWindow(ctk.CTkToplevel):
 
         self.table.append(final_value_row)
 
-        # Add the row with increment values
-        increment_value_row = []
-        increment_label = ctk.CTkLabel(self.table_frame, text=self.increment_text)
-        increment_label.grid(row=len(self.table) + 1, column=0, padx=5, pady=5)
-        increment_value_row.append(increment_label)
+        # Add the row with step values
+        step_value_row = []
+        step_label = ctk.CTkLabel(self.table_frame, text=self.step_text)
+        step_label.grid(row=len(self.table) + 1, column=0, padx=5, pady=5)
+        step_value_row.append(step_label)
 
-        for i, increment_value in enumerate(increment_values):
-            increment_box = tk.Spinbox(
+        for i, step_value in enumerate(step_values):
+            step_box = tk.Spinbox(
                 self.table_frame,
-                from_=0,
-                to=intx100_to_float(to_values[i]),
-                increment=intx100_to_float(increment_value),
+                from_= 0,
+                to = self.intx100_to_float(to_values[i]),
+                step = self.intx100_to_float(step_value),
                 width=5)
-            increment_box.grid(
+            step_box.grid(
                 row=len(self.table) + 1,
                 column= i + 1,
                 padx=5,
                 pady=5)
-            increment_value_row.append(increment_box)
+            step_value_row.append(step_box)
 
-        self.table.append(increment_value_row)
+        self.table.append(step_value_row)
 
         # Add a separator row
         separator_row = []
