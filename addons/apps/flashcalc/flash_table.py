@@ -480,8 +480,8 @@ class FlashTableWindow(ctk.CTkToplevel):
                         0, intx100_to_float(0))
 
                 # Check if the values are within the limits:
-                if float_to_intx100(
-                    ((starting_value_row[index].get()) < from_values[index-1])
+                if ((float_to_intx100(starting_value_row[index].get()) <
+                    from_values[index-1])
                     or (float_to_intx100(starting_value_row[index].get()) >
                     to_values[index-1])):
                     print(f"{starting_value_row[index].get()} is out of range!")
@@ -489,8 +489,8 @@ class FlashTableWindow(ctk.CTkToplevel):
                     starting_value_row[index].insert(
                         0, intx100_to_float(from_values[index-1]))
 
-                if float_to_intx100(
-                    (final_value_row[index].get() > to_values[index-1]) or
+                if ((float_to_intx100(
+                    final_value_row[index].get()) > to_values[index-1]) or
                     (float_to_intx100(final_value_row[index].get()) <
                     from_values[index-1])):
                     print(f"{final_value_row[index].get()} is out of range!")
