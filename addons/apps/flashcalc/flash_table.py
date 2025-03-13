@@ -30,7 +30,7 @@ class FlashTableWindow(ctk.CTkToplevel):
     table = []
     parameter_table = None
     groups = []
-    nc = 5 # Number of components
+    nc = 3 # Number of components
     nf = 0 # Number of flashes
     flash_list = [] # List with T, P and z values for each flash
     show_TPZ = True # Show the temperature, pressure and z values in the table
@@ -49,23 +49,24 @@ class FlashTableWindow(ctk.CTkToplevel):
     z_step = 5 # 0.05
 
     fixed_rows = 2 # Minimum number of rows in the table
-    max_columns = 13 # Maximum number of columns in the table
+    max_columns = nc+3 if ((nc+3)>8) else 8 # Max. n of columns in table
 
     #Text for the table
-    title_text = "Flash Config Table"
-    number_of_flashes_text = "Number of flashes:"
-    auto_fill_text = "Auto Fill"
     add_flash_text = "Add\nFlash"
-    subtract_flash_text = "Subtract\nFlash"
-    save_text = "Save"
+    auto_fill_text = "Auto Fill"
     close_text = "Close"
-    flash_text = "Flash"
-    temperature_text = "Temperature (K):"
-    pressure_text = "Pressure (bar):"
-    setting_text = "Settings"
-    step_text = "step"
-    starting_value_text = "Starting Value"
     final_value_text = "Final Value"
+    flash_text = "Flash"
+    number_of_flashes_text = "Number of flashes:"
+    pressure_text = "Pressure (bar):"
+    save_text = "Save"
+    setting_text = "Settings"
+    starting_value_text = "Starting Value"
+    step_text = "Step"
+    subtract_flash_text = "Subtract\nFlash"
+    temperature_text = "Temperature (K):"
+    title_text = "Flash Config Table"
+    update_text = "Update"
 
 
     def __init__(self, master,partable=None, **kwargs):
@@ -80,115 +81,6 @@ class FlashTableWindow(ctk.CTkToplevel):
         self.table_frame.pack(fill="both", expand=True, padx=10, pady=10)
 
         self.load()
-
-    def load(self):
-        '''Load the table.'''
-        # First row of the table:
-        # Number of flashes,
-        # autofill, add and subtract buttons, save button and close button
-        buttons_row = []
-
-        # Number of flashes label:
-        self.nf_label = ctk.CTkLabel(
-            self.table_frame,
-            text=self.set_nf())
-        self.nf_label.grid(row=0, column=0, padx=5, pady=5)
-        buttons_row.append(self.nf_label)
-
-        # Autofill checkbox:
-        self.auto_fill_checkbox = ctk.CTkCheckBox(
-            self.table_frame,
-            text=self.auto_fill_text,
-            variable=tk.BooleanVar(),
-            command=lambda: (
-                self.toggle_buttons(),
-                self.auto_fill() if self.auto_fill_checkbox.get()
-                else self.clear_table())
-            )
-        self.auto_fill_checkbox.grid(row=0, column=1, padx=5, pady=5)
-        buttons_row.append(self.auto_fill_checkbox)
-
-        # Add and subtract buttons:
-        self.add_row_button = ctk.CTkButton(
-            self.table_frame,
-            text=self.add_flash_text,
-            cursor="hand2",
-            command=lambda: self.add_row())
-        self.add_row_button.grid(row=0, column=2, padx=5, pady=5)
-        buttons_row.append(self.add_row_button)
-
-        self.subtract_row_button = ctk.CTkButton(
-            self.table_frame,
-            text=self.subtract_flash_text,
-            cursor="hand2",
-            command=lambda: self.subtract_row())
-        self.subtract_row_button.grid(row=0, column=3, padx=5, pady=5)
-        buttons_row.append(self.subtract_row_button)
-
-        # Save and close buttons:
-        self.save_button = ctk.CTkButton(
-            self.table_frame,
-            text=self.save_text,
-            cursor="hand2")
-        self.save_button.grid(row=0, column=4, padx=5, pady=5)
-        buttons_row.append(self.save_button)
-
-        self.close_button = ctk.CTkButton(
-            self.table_frame,
-            text=self.close_text,
-            cursor="hand2",
-            command=lambda: self.destroy())
-        self.close_button.grid(row=0, column=5, padx=5, pady=5)
-        buttons_row.append(self.close_button)
-
-        self.table.append(buttons_row)
-
-        # Second row of the table:
-        line_row = []
-
-        # Separation line
-        for col in range(self.max_columns):
-            separator = ctk.CTkLabel(self.table_frame, text="_"*25)
-            separator.grid(
-                row=len(self.table) + 1, column=col, padx=0, pady=0,
-                ipadx=0, ipady=0,sticky="n")
-            line_row.append(separator)
-        self.table.append(line_row)
-
-    def toggle_buttons(self):
-        '''Toggle the add and subtract buttons.'''
-        if self.auto_fill_checkbox.get():
-            self.add_row_button.configure(state="disabled")
-            self.subtract_row_button.configure(state="disabled")
-        else:
-            self.add_row_button.configure(state="normal")
-            self.subtract_row_button.configure(state="normal")
-
-    def clear_table(self):
-        '''Clear the table.'''
-        while len(self.table) > self.fixed_rows:
-            row = self.table.pop()
-            for entry in row:
-                entry.destroy()
-        self.nf_label.configure(
-        text = self.set_nf())
-
-    def load_table(self,table):
-        '''Load a table from a file.'''
-        self.table = table
-        for row in table:
-            for entry in row:
-                entry.grid()
-        self.nf_label.configure(
-            text=self.set_nf())
-
-    def set_nf(self, flash_number=None):
-        '''Return the number of flashes in the table.'''
-        if flash_number is None:
-            self.nf = int(len(self.table)/3)
-        else:
-            self.nf = flash_number
-        return f"{self.number_of_flashes_text}\n {self.nf}"
 
     def add_row(self):
         '''Add a pair of rows to the table if autofill is disabled.'''
@@ -235,7 +127,7 @@ class FlashTableWindow(ctk.CTkToplevel):
         t_spinbox = tk.Spinbox(self.table_frame,
                               from_= self.intx100_to_float(self.t_min),
                               to = self.intx100_to_float(self.t_max),
-                              step = self.intx100_to_float(
+                              increment = self.intx100_to_float(
                                   self.t_step),
                               width = 5)
 
@@ -256,7 +148,7 @@ class FlashTableWindow(ctk.CTkToplevel):
         pressure_box = tk.Spinbox(self.table_frame,
                               from_= self.intx100_to_float(self.p_min),
                               to = self.intx100_to_float(self.p_max),
-                              step = self.intx100_to_float(
+                              increment = self.intx100_to_float(
                                   self.p_step),
                               width = 5)
         # If the table has more than 3 rows,
@@ -277,7 +169,8 @@ class FlashTableWindow(ctk.CTkToplevel):
             z_box = tk.Spinbox(self.table_frame,
                                     from_=self.intx100_to_float(self.z_min),
                                     to=self.intx100_to_float(self.z_max),
-                                    step=self.intx100_to_float(self.z_step),
+                                    increment=self.intx100_to_float(
+                                        self.z_step),
                                     width=5)
             # If the table has more than 3 rows,
             # copy the value from the previous row
@@ -295,168 +188,19 @@ class FlashTableWindow(ctk.CTkToplevel):
             text=self.set_nf())
 
         # Add a separator row
-        separator_row = []
+        separator_row1 = []
         for col in range(self.max_columns):
             separator = ctk.CTkLabel(self.table_frame, text="·"*37)
             separator.grid(
                 row=len(self.table) + 1, column=col, padx=0, pady=0,
                 ipadx=0, ipady=0,)
-            separator_row.append(separator)
+            separator_row1.append(separator)
 
-        self.table.append(separator_row)
-
-    def subtract_row(self):
-        '''Subtract rows from the table.'''
-        rows_to_substract = 3 # Number of rows to subtract
-
-        if self.table:
-            for _ in range(rows_to_substract):
-                if len(self.table) > self.fixed_rows:
-                    row = self.table.pop()
-                    for entry in row:
-                        entry.destroy()
-        self.nf_label.configure(
-            text = self.set_nf())
-
-    def float_to_intx100(self, value : float) -> int:
-        '''Convert a value to an integer multiplied by 100.'''
-        return int(float(value)*100)
-
-    def intx100_to_float(self, value: int) -> float:
-        '''Convert an integer multiplied by 100 to a float.'''
-        return float(value)/100
+        self.table.append(separator_row1)
 
     def auto_fill(self):
         '''Fill the table with values.'''
         # Define the functions used in the method:
-
-
-        def generate_combinations(
-                input_list, n, condition, current_level=0,current_combination=None, values=None):
-            '''Generate all possible combinations of values from a list
-            following a certain condition.'''
-            if current_combination is None:
-                current_combination = []
-            if values is None:
-                values = []
-            # Base case: If we've reached the desired level of nesting
-            if current_level == n:
-                match condition[0]:
-                    case ">":
-                        if sum(current_combination) > int(condition[1]):
-                            values.append(current_combination[:])
-                    case "<":
-                        if sum(current_combination) < int(condition[1]):
-                            values.append(current_combination[:])
-                    case ">=":
-                        if sum(current_combination) >= int(condition[1]):
-                            values.append(current_combination[:])
-                    case "<=":
-                        if sum(current_combination) <= int(condition[1]):
-                            values.append(current_combination[:])
-                    case "==":
-                        if sum(current_combination) == int(condition[1]):
-                            values.append(current_combination[:])
-                    case "!=":
-                        if sum(current_combination) != int(condition[1]):
-                            values.append(current_combination[:])
-                    case _:
-                        values.append(current_combination[:])
-
-                return values
-
-            # Iterate over the elements of input_list at the current level
-            for item in input_list[current_level]:
-                current_combination.append(item)
-                generate_combinations(
-                    input_list, n, condition, current_level + 1,
-                    current_combination, values)
-                current_combination.pop()  # Backtrack to explore other combinations
-
-            return values
-
-        def update_table():
-            '''Fill the table with values.'''
-            # Check if input values are correct:
-            check_values()
-            # Clear the table below the separator row
-            while len(self.table) > self.fixed_rows + 5:
-                row = self.table.pop()
-                for entry in row:
-                    entry.destroy()
-            auto_list = []
-            print(auto_list)
-            # Add the auto-filled values into rows
-            for index,label in enumerate(labels):
-                print(f"index={index}, label={label}")
-                if index == 0:
-                    continue
-                auto_list.append([])
-                auto_values=label
-
-                # If the step value is not zero,
-                # fill the list with the values
-                if int(float(step_value_row[index].get())*100) != 0:
-                    for value in range(
-                        self.float_to_intx100(
-                            starting_value_row[index].get()),
-                        self.float_to_intx100(
-                            final_value_row[index].get())+1,
-                        self.float_to_intx100(
-                            step_value_row[index].get())):
-                        auto_list[index-1].append(float(value)/100)
-
-                else:
-                    auto_list[index-1] = [float(starting_value_row[index].get())]
-
-                print(auto_list)
-                for value in list(auto_list[index-1]):
-                    auto_values += f" {value};"
-
-                row = []
-                label = ctk.CTkLabel(self.table_frame, text=auto_values)
-                if self.show_TPZ:
-                    label.grid(
-                        row=len(self.table) + 1,
-                        column=0,
-                        padx=5,
-                        pady=5,
-                        columnspan=self.max_columns,
-                        sticky="w")
-                row.append(label)
-                self.table.append(row)
-
-            # Add a matrix with the z values that sum to 1
-            z_values = generate_combinations(
-                input_list = auto_list[2:],
-                n = self.nc,
-                condition = ("==",1))
-
-            print(z_values)
-            # Add the z values to the table
-            for index,z_value in enumerate(z_values):
-                row = []
-                z_values_text = ""
-                for value in z_value:
-                    z_values_text += f"{value:.2f}; "
-                label = ctk.CTkLabel(self.table_frame, text=z_values_text)
-                if self.show_ZMatrix:
-                    label.grid(
-                        row=len(self.table) + 1,
-                        column=0,
-                        padx=5,
-                        pady=5,
-                        columnspan=self.max_columns,
-                        sticky="w")
-                row.append(label)
-                self.table.append(row)
-
-            self.nf = len(z_values)*len(auto_list[0])*len(auto_list[1])
-            # Set the number of flashes text
-            self.nf_label.configure(
-            text = self.set_nf(self.nf))
-
-            return  None
 
         def check_values():
             '''Check the values in the table.'''
@@ -545,6 +289,137 @@ class FlashTableWindow(ctk.CTkToplevel):
                             self.float_to_intx100(
                                 starting_value_row[index].get()))))
             return None
+
+        def generate_combinations(
+                input_list, n, condition, current_level=0,current_combination=None, values=None):
+            '''Generate all possible combinations of values from a list
+            following a certain condition.'''
+            if current_combination is None:
+                current_combination = []
+            if values is None:
+                values = []
+            # Base case: If we've reached the desired level of nesting
+            if current_level == n:
+                match condition[0]:
+                    case ">":
+                        if sum(current_combination) > int(condition[1]):
+                            values.append(current_combination[:])
+                    case "<":
+                        if sum(current_combination) < int(condition[1]):
+                            values.append(current_combination[:])
+                    case ">=":
+                        if sum(current_combination) >= int(condition[1]):
+                            values.append(current_combination[:])
+                    case "<=":
+                        if sum(current_combination) <= int(condition[1]):
+                            values.append(current_combination[:])
+                    case "==":
+                        if sum(current_combination) == int(condition[1]):
+                            values.append(current_combination[:])
+                    case "!=":
+                        if sum(current_combination) != int(condition[1]):
+                            values.append(current_combination[:])
+                    case _:
+                        values.append(current_combination[:])
+
+                return values
+
+            # Iterate over the elements of input_list at the current level
+            for item in input_list[current_level]:
+                current_combination.append(item)
+                generate_combinations(
+                    input_list, n, condition, current_level + 1,
+                    current_combination, values)
+                current_combination.pop()  # Backtrack to explore other combinations
+
+            return values
+
+        def update_table():
+            '''Fill the table with values.'''
+            # Check if input values are correct:
+            check_values()
+            # Clear the table below the separator row
+            while len(self.table) > self.fixed_rows + 6:
+                row = self.table.pop()
+                for entry in row:
+                    entry.destroy()
+            auto_list = []
+            print(auto_list)
+            # Add the auto-filled values into rows
+            for index,label in enumerate(labels):
+                print(f"index={index}, label={label}")
+                if index == 0:
+                    continue
+                auto_list.append([])
+                auto_values=label
+
+                # If the step value is not zero,
+                # fill the list with the values
+                if int(float(step_value_row[index].get())*100) != 0:
+                    for value in range(
+                        self.float_to_intx100(
+                            starting_value_row[index].get()),
+                        self.float_to_intx100(
+                            final_value_row[index].get())+1,
+                        self.float_to_intx100(
+                            step_value_row[index].get())):
+                        auto_list[index-1].append(float(value)/100)
+
+                else:
+                    auto_list[index-1] = [float(starting_value_row[index].get())]
+
+                if self.show_TPZ:
+                    print(auto_list)
+                    print_flag = False
+                    print(len(auto_list[index-1])-3)
+                    for i,value in enumerate(list(auto_list[index-1])):
+                        if (i < 3) or ((i - len(auto_list[index-1])+4) > 0):
+                            print_flag = True
+                            auto_values += f" {value};"
+                        elif print_flag:
+                            print_flag = False
+                            auto_values += f" ...;"
+                        
+                    row = []
+                    label = ctk.CTkLabel(self.table_frame, text=auto_values)
+                    label.grid(
+                        row=len(self.table) + 1,
+                        column=0,
+                        padx=5,
+                        pady=5,
+                        columnspan=self.max_columns,
+                        sticky="w")
+                    row.append(label)
+                    self.table.append(row)
+
+            # Add a matrix with the z values that sum to 1
+            z_values = generate_combinations(
+                input_list = auto_list[2:],
+                n = self.nc,
+                condition = ("==",1))
+
+            print(z_values)
+            if self.show_ZMatrix:
+                # Add the z values to the table
+                for index,z_value in enumerate(z_values):
+                    row = []
+                    z_values_text = ""
+                    for value in z_value:
+                        z_values_text += f"{value:.2f}; "
+                    label = ctk.CTkLabel(self.table_frame, text=z_values_text)
+                    label.grid(
+                    row=len(self.table) + 1, column=0, padx=5, pady=5,
+                    columnspan=self.max_columns, sticky="w")
+                    row.append(label)
+                    self.table.append(row)
+
+            self.nf = len(z_values)*len(auto_list[0])*len(auto_list[1])
+            # Set the number of flashes text
+            self.nf_label.configure(
+            text = self.set_nf(self.nf))
+
+            return  None
+
         # ---------------------------------------------------------------------
 
         # Remove all rows below the fixed ones
@@ -562,23 +437,12 @@ class FlashTableWindow(ctk.CTkToplevel):
         for i in range(self.nc):
             step_values.append(self.z_step)
 
-        # Add a row with a button to auto-fill the table
-        auto_fill_row = []
-        auto_fill_button = ctk.CTkButton(
-            self.table_frame,
-            text=self.save_text,
-            cursor="hand2",
-            command= lambda: update_table())
-        auto_fill_button.grid(row=len(self.table) + 1, column=0, padx=5, pady=5)
-        auto_fill_row.append(auto_fill_button)
-        self.table.append(auto_fill_row)
-
         # Add the label row:
         label_row = []
 
         labels = ["Settings", self.temperature_text, self.pressure_text]
         for i in range(self.nc):
-            labels.append(f"z{i+1}")
+            labels.append(f"z{i+1}:")
         for label in labels:
             label_label = ctk.CTkLabel(self.table_frame, text=label)
             label_label.grid(row=len(self.table) + 1, column=labels.index(label), padx=5, pady=5)
@@ -598,7 +462,7 @@ class FlashTableWindow(ctk.CTkToplevel):
                 self.table_frame,
                 from_ = self.intx100_to_float(from_value),
                 to = self.intx100_to_float(to_values[i]),
-                step = self.intx100_to_float(step_values[i]),
+                increment = self.intx100_to_float(step_values[i]),
                 width=5)
 
             initial_box.grid(
@@ -622,7 +486,7 @@ class FlashTableWindow(ctk.CTkToplevel):
                 self.table_frame,
                 from_ = self.intx100_to_float(from_values[i]),
                 to = self.intx100_to_float(to_value),
-                step = self.intx100_to_float(step_values[i]),
+                increment = self.intx100_to_float(step_values[i]),
                 width=5)
 
             final_box.grid(
@@ -631,7 +495,6 @@ class FlashTableWindow(ctk.CTkToplevel):
                 padx=5,
                 pady=5)
             final_value_row.append(final_box)
-
 
         self.table.append(final_value_row)
 
@@ -646,7 +509,7 @@ class FlashTableWindow(ctk.CTkToplevel):
                 self.table_frame,
                 from_= 0,
                 to = self.intx100_to_float(to_values[i]),
-                step = self.intx100_to_float(step_value),
+                increment = self.intx100_to_float(step_value),
                 width=5)
             step_box.grid(
                 row=len(self.table) + 1,
@@ -657,16 +520,164 @@ class FlashTableWindow(ctk.CTkToplevel):
 
         self.table.append(step_value_row)
 
+        # Add a row with a button to auto-fill the table
+        auto_fill_row = []
+        auto_fill_button = ctk.CTkButton(
+            self.table_frame,
+            text=self.update_text,
+            cursor="hand2",
+            command= lambda: update_table())
+        auto_fill_button.grid(row=len(self.table) + 1, column=0, padx=5, pady=5)
+        auto_fill_row.append(auto_fill_button)
+        self.table.append(auto_fill_row)
+
         # Add a separator row
-        separator_row = []
+        separator_row2 = []
         for col in range(self.max_columns):
             separator = ctk.CTkLabel(self.table_frame, text="·"*37)
             separator.grid(
                 row=len(self.table) + 1, column=col, padx=0, pady=0,
-                ipadx=0, ipady=0,)
-            separator_row.append(separator)
+                ipadx=0, ipady=0)
+            separator_row2.append(separator)
 
-        self.table.append(separator_row)
+        self.table.append(separator_row2)
 
         # Fill the table with values
         update_table()
+        return None
+
+    def clear_table(self):
+        '''Clear the table.'''
+        while len(self.table) > self.fixed_rows:
+            row = self.table.pop()
+            for entry in row:
+                entry.destroy()
+        self.nf_label.configure(
+        text = self.set_nf())
+
+    def float_to_intx100(self, value : float) -> int:
+        '''Convert a value to an integer multiplied by 100.'''
+        return int(float(value)*100)
+
+    def intx100_to_float(self, value: int) -> float:
+        '''Convert an integer multiplied by 100 to a float.'''
+        return float(value)/100
+
+    def load(self):
+        '''Load the table.'''
+        # First row of the table:
+        # Number of flashes,
+        # autofill, add and subtract buttons, save button and close button
+        buttons_row = []
+
+        # Number of flashes label:
+        self.nf_label = ctk.CTkLabel(
+            self.table_frame,
+            text=self.set_nf())
+        self.nf_label.grid(row=0, column=0, padx=5, pady=5)
+        buttons_row.append(self.nf_label)
+
+        # Autofill checkbox:
+        self.auto_fill_checkbox = ctk.CTkCheckBox(
+            self.table_frame,
+            text=self.auto_fill_text,
+            variable=tk.BooleanVar(),
+            command=lambda: (
+                self.toggle_buttons(),
+                self.auto_fill() if self.auto_fill_checkbox.get()
+                else self.clear_table())
+            )
+        self.auto_fill_checkbox.grid(row=0, column=1, padx=5, pady=5)
+        buttons_row.append(self.auto_fill_checkbox)
+
+        # Add and subtract buttons:
+        self.add_row_button = ctk.CTkButton(
+            self.table_frame,
+            text=self.add_flash_text,
+            cursor="hand2",
+            command=lambda: self.add_row())
+        self.add_row_button.grid(row=0, column=2, padx=5, pady=5)
+        buttons_row.append(self.add_row_button)
+
+        self.subtract_row_button = ctk.CTkButton(
+            self.table_frame,
+            text=self.subtract_flash_text,
+            cursor="hand2",
+            command=lambda: self.subtract_row())
+        self.subtract_row_button.grid(row=0, column=3, padx=5, pady=5)
+        buttons_row.append(self.subtract_row_button)
+
+        # Save and close buttons:
+        self.save_button = ctk.CTkButton(
+            self.table_frame,
+            text=self.save_text,
+            cursor="hand2",
+            command=lambda: self.save_table())
+        self.save_button.grid(row=0, column=4, padx=5, pady=5)
+        buttons_row.append(self.save_button)
+
+        self.close_button = ctk.CTkButton(
+            self.table_frame,
+            text=self.close_text,
+            cursor="hand2",
+            command=lambda: self.destroy())
+        self.close_button.grid(row=0, column=5, padx=5, pady=5)
+        buttons_row.append(self.close_button)
+
+        self.table.append(buttons_row)
+
+        # Second row of the table:
+        line_row = []
+
+        # Separation line
+        for col in range(self.max_columns):
+            separator = ctk.CTkLabel(self.table_frame, text="_"*25)
+            separator.grid(
+                row=len(self.table) + 1, column=col, padx=0, pady=0,
+                ipadx=0, ipady=0,sticky="n")
+            line_row.append(separator)
+        self.table.append(line_row)
+
+    def load_table(self,table):
+        '''Load a table from a file.'''
+        self.table = table
+        for row in table:
+            for entry in row:
+                entry.grid()
+        self.nf_label.configure(
+            text=self.set_nf())
+
+    def save_table(self):
+        '''Save the table to a file.'''
+        print(self.table)
+        return 
+    
+    def set_nf(self, flash_number=None):
+        '''Return the number of flashes in the table.'''
+        if flash_number is None:
+            self.nf = int(len(self.table)/3)
+        else:
+            self.nf = flash_number
+        return f"{self.number_of_flashes_text}\n {self.nf}"
+
+    def subtract_row(self):
+        '''Subtract rows from the table.'''
+        rows_to_substract = 3 # Number of rows to subtract
+
+        if self.table:
+            for _ in range(rows_to_substract):
+                if len(self.table) > self.fixed_rows:
+                    row = self.table.pop()
+                    for entry in row:
+                        entry.destroy()
+        self.nf_label.configure(
+            text = self.set_nf())
+
+    def toggle_buttons(self):
+        '''Toggle the add and subtract buttons.'''
+        if self.auto_fill_checkbox.get():
+            self.add_row_button.configure(state="disabled")
+            self.subtract_row_button.configure(state="disabled")
+        else:
+            self.add_row_button.configure(state="normal")
+            self.subtract_row_button.configure(state="normal")
