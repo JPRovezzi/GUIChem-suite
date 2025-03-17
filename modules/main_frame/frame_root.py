@@ -112,3 +112,7 @@ class Root(ctk.CTk):
         self.module_frame = None
         self.destroy_all_frames()
         return
+    
+    def raise_messagebox(self,title,message):
+        '''This function is used to raise a messagebox.'''
+        None
