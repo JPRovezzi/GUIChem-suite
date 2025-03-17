@@ -32,7 +32,9 @@ class FlashTableWindow(ctk.CTkToplevel):
     groups = []
     nc = 3 # Number of components
     nf = 0 # Number of flashes
-    flash_list = [] # List with T, P and z values for each flash
+    flash_list = [] # List of flashes with T,P, and z values
+    auto_list = [] # List of autofilled values
+    z_values = [] # List of z values that sum to 1
     show_TPZ = True # Show the temperature, pressure and z values in the table
     show_ZMatrix = False # Show the z matrix in the table
 
@@ -338,19 +340,15 @@ class FlashTableWindow(ctk.CTkToplevel):
             '''Fill the table with values.'''
             # Check if input values are correct:
             check_values()
-            # Clear the table below the separator row
-            while len(self.table) > self.fixed_rows + 6:
-                row = self.table.pop()
-                for entry in row:
-                    entry.destroy()
-            auto_list = []
-            print(auto_list)
+            self.clear_table(leave_rows=6)
+            self.auto_list = []
+            print(self.auto_list)
             # Add the auto-filled values into rows
             for index,label in enumerate(labels):
                 print(f"index={index}, label={label}")
                 if index == 0:
                     continue
-                auto_list.append([])
+                self.auto_list.append([])
                 auto_values=label
 
                 # If the step value is not zero,
@@ -363,17 +361,19 @@ class FlashTableWindow(ctk.CTkToplevel):
                             final_value_row[index].get())+1,
                         self.float_to_intx100(
                             step_value_row[index].get())):
-                        auto_list[index-1].append(float(value)/100)
+                        self.auto_list[index-1].append(float(value)/100)
 
                 else:
-                    auto_list[index-1] = [float(starting_value_row[index].get())]
+                    self.auto_list[index-1] = [float(starting_value_row[index].get())]
 
                 if self.show_TPZ:
-                    print(auto_list)
+                    print(self.auto_list)
                     print_flag = False
-                    print(len(auto_list[index-1])-3)
-                    for i,value in enumerate(list(auto_list[index-1])):
-                        if (i < 3) or ((i - len(auto_list[index-1])+4) > 0):
+                    print(len(self.auto_list[index-1])-3)
+                    for i,value in enumerate(list(self.auto_list[index-1])):
+                        #show only the first 3 and last 3 values
+                        if (i < 3) or (
+                            (i - len(self.auto_list[index-1])+4) > 0):
                             print_flag = True
                             auto_values += f" {value};"
                         elif print_flag:
@@ -393,15 +393,15 @@ class FlashTableWindow(ctk.CTkToplevel):
                     self.table.append(row)
 
             # Add a matrix with the z values that sum to 1
-            z_values = generate_combinations(
-                input_list = auto_list[2:],
+            self.z_values = generate_combinations(
+                input_list = self.auto_list[2:],
                 n = self.nc,
                 condition = ("==",1))
 
-            print(z_values)
+            #print(z_values)
             if self.show_ZMatrix:
                 # Add the z values to the table
-                for index,z_value in enumerate(z_values):
+                for index,z_value in enumerate(self.z_values):
                     row = []
                     z_values_text = ""
                     for value in z_value:
@@ -413,12 +413,13 @@ class FlashTableWindow(ctk.CTkToplevel):
                     row.append(label)
                     self.table.append(row)
 
-            self.nf = len(z_values)*len(auto_list[0])*len(auto_list[1])
+            self.nf = (len(self.z_values)*
+                       len(self.auto_list[0])*
+                       len(self.auto_list[1]))
             # Set the number of flashes text
             self.nf_label.configure(
             text = self.set_nf(self.nf))
-
-            return  None
+            return None
 
         # ---------------------------------------------------------------------
 
@@ -522,13 +523,13 @@ class FlashTableWindow(ctk.CTkToplevel):
 
         # Add a row with a button to auto-fill the table
         auto_fill_row = []
-        auto_fill_button = ctk.CTkButton(
+        update_button = ctk.CTkButton(
             self.table_frame,
             text=self.update_text,
             cursor="hand2",
             command= lambda: update_table())
-        auto_fill_button.grid(row=len(self.table) + 1, column=0, padx=5, pady=5)
-        auto_fill_row.append(auto_fill_button)
+        update_button.grid(row=len(self.table) + 1, column=0, padx=5, pady=5)
+        auto_fill_row.append(update_button)
         self.table.append(auto_fill_row)
 
         # Add a separator row
@@ -546,14 +547,20 @@ class FlashTableWindow(ctk.CTkToplevel):
         update_table()
         return None
 
-    def clear_table(self):
+    def clear_table(self,leave_rows=0):
         '''Clear the table.'''
-        while len(self.table) > self.fixed_rows:
-            row = self.table.pop()
-            for entry in row:
-                entry.destroy()
-        self.nf_label.configure(
-        text = self.set_nf())
+        if self.auto_fill_checkbox.get():
+            while len(self.table) > self.fixed_rows + leave_rows:
+                row = self.table.pop()
+                for entry in row:
+                    entry.destroy()
+            self.nf_label.configure(text = self.set_nf())   
+        else:
+            while len(self.table) > self.fixed_rows + 0:
+                row = self.table.pop()
+                for entry in row:
+                    entry.destroy()
+            self.nf_label.configure(text = self.set_nf())
 
     def float_to_intx100(self, value : float) -> int:
         '''Convert a value to an integer multiplied by 100.'''
@@ -583,10 +590,12 @@ class FlashTableWindow(ctk.CTkToplevel):
             text=self.auto_fill_text,
             variable=tk.BooleanVar(),
             command=lambda: (
+                print("Autofill: ",self.auto_fill_checkbox.get()),
                 self.toggle_buttons(),
+                self.clear_table(),
                 self.auto_fill() if self.auto_fill_checkbox.get()
-                else self.clear_table())
-            )
+                else None
+            ))
         self.auto_fill_checkbox.grid(row=0, column=1, padx=5, pady=5)
         buttons_row.append(self.auto_fill_checkbox)
 
@@ -648,9 +657,9 @@ class FlashTableWindow(ctk.CTkToplevel):
             text=self.set_nf())
 
     def save_table(self):
-        '''Save the table to a file.'''
-        print(self.table)
-        return 
+        '''Save the table to be used in the FlashCalc app.'''
+        self.update_flash_list()
+        return
     
     def set_nf(self, flash_number=None):
         '''Return the number of flashes in the table.'''
@@ -681,3 +690,28 @@ class FlashTableWindow(ctk.CTkToplevel):
         else:
             self.add_row_button.configure(state="normal")
             self.subtract_row_button.configure(state="normal")
+        return None
+    
+    def update_flash_list(self):
+        '''Update the list of flashes.'''
+        self.flash_list = []
+        if self.auto_fill_checkbox.get():
+                tp_values = self.auto_list[:2]
+                flash_queue = 0
+                for t in tp_values[0]:
+                    for p in tp_values[1]:
+                        for z in self.z_values:
+                            self.flash_list.append([t,p]+z)
+                print("Flash list:")
+        else:
+            flash_queue = 0
+            for index,row in enumerate(self.table):
+                if (index) == (flash_queue + 1) * 3:
+                    self.flash_list.append([])
+                    for entry in row:
+                        self.flash_list[flash_queue].append(float(entry.get()))
+                    flash_queue += 1
+        for i,flash in enumerate(self.flash_list):
+                    print(i+1,": ",flash)
+        return None
+        
