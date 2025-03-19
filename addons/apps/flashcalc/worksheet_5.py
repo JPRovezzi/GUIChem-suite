@@ -25,6 +25,9 @@ class WorkSheetFrame5(frame_classes.FlashCalcFrame):
     model = None
     parameter_table = None
     comment = None
+    composition_dict = {}
+
+    flash_list = []
 
     def __init__(self, master, tool, **kwargs):
         '''Initialize the class.'''
@@ -35,7 +38,13 @@ class WorkSheetFrame5(frame_classes.FlashCalcFrame):
         self.model=kwargs.get('model',None)
         self.parameter_table=kwargs.get('parameter_table',None)
         self.comment=kwargs.get('comment',"")
+        
+        self.flash_list = kwargs.get('flash_list',None)
+        self.composition_dict = kwargs.get('composition_dict',None)
+        
         self.load(self.error_message)
+
+
 
     def load(self, error_message = None):
         '''Load the worksheet frame with its widgets.'''
@@ -98,7 +107,10 @@ class WorkSheetFrame5(frame_classes.FlashCalcFrame):
                 problem_name = self.problem_name,
                 model = self.model,
                 parameter_table = self.parameter_table,
-                comment = self.comment))
+                flash_list = self.flash_list,
+                comment = self.comment,
+                composition_dict = self.composition_dict
+                ))
         
         # Comment frame
         comment_frame = ctk.CTkFrame(self)
@@ -129,10 +141,12 @@ class WorkSheetFrame5(frame_classes.FlashCalcFrame):
         # Last row of buttons: Back, Next
         back_button.grid(row=0, column=0, padx=5)
         ctk.CTkLabel(buttonrow3_frame, text="  |  ").grid(row=0, column=1, padx=5)
-        ctk.CTkButton(
-            buttonrow3_frame,text="",hover=False).grid(row=0, column=2, padx=5)
-        ctk.CTkButton(
-            buttonrow3_frame,text="",hover=False).grid(row=0, column=3, padx=5)
+        save_button = ctk.CTkButton(
+            buttonrow3_frame, text="Save", cursor="hand2")
+        save_button.grid(row=0, column=2, padx=5)
+        run_button = ctk.CTkButton(
+            buttonrow3_frame, text="Run", cursor="hand2")
+        run_button.grid(row=0, column=3, padx=5)
         ctk.CTkLabel(buttonrow3_frame, text="  |  ").grid(row=0, column=4, padx=5)
         close_button.grid(row=0, column=5, padx=5)
         buttonrow3_frame.pack(pady=50, side="bottom")

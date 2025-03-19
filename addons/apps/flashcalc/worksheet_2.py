@@ -24,6 +24,7 @@ class WorkSheetFrame2(frame_classes.FlashCalcFrame):
     problem_name = None
     model = None
     parameter_table = None
+    composition_dict = None
 
     def __init__(self, master, tool, **kwargs):
         '''Initialize the class.'''
@@ -33,6 +34,7 @@ class WorkSheetFrame2(frame_classes.FlashCalcFrame):
         self.problem_name=kwargs.get('problem_name',None)
         self.model=kwargs.get('model',None)
         self.parameter_table=kwargs.get('parameter_table',None)
+        self.composition_dict = kwargs.get('composition_dict',None)
         self.load(self.error_message)
 
     def load(self, error_message = None):
@@ -72,7 +74,7 @@ class WorkSheetFrame2(frame_classes.FlashCalcFrame):
         buttonrow2_frame = ctk.CTkFrame(self)
         showct_button = ctk.CTkButton(
             buttonrow2_frame, text="Edit the composition table", cursor="hand2",
-            command=lambda : composition_table.CompositionTableWindow(self.master, partable=self.parameter_table))
+            command=lambda : composition_table.CompositionTableWindow(self, partable=self.parameter_table))
 
         # Last row of buttons: Save, Run, Back, Close
         buttonrow3_frame = ctk.CTkFrame(self)
@@ -85,7 +87,10 @@ class WorkSheetFrame2(frame_classes.FlashCalcFrame):
                 error_message="",
                 problem_name = self.problem_name,
                 model = self.model,
-                parameter_table = self.parameter_table))
+                parameter_table = self.parameter_table,
+
+                composition_dict = self.composition_dict
+                ))
         back_button = ctk.CTkButton(
             buttonrow3_frame, text="Back", cursor="hand2", command=lambda: 
             self.master.load_module(

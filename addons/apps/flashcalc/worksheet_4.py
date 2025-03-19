@@ -26,6 +26,9 @@ class WorkSheetFrame4(frame_classes.FlashCalcFrame):
     parameter_table = None
     comment = None
 
+    flash_list = []
+    composition_dict = {}
+
     def __init__(self, master, tool, **kwargs):
         '''Initialize the class.'''
 
@@ -35,6 +38,10 @@ class WorkSheetFrame4(frame_classes.FlashCalcFrame):
         self.model=kwargs.get('model',None)
         self.parameter_table=kwargs.get('parameter_table',None)
         self.comment=kwargs.get('comment',"")
+
+        self.flash_list = kwargs.get('flash_list',None)
+        self.composition_dict = kwargs.get('composition_dict',None)
+
         self.load(self.error_message)
 
     def load(self, error_message = None):
@@ -91,7 +98,11 @@ class WorkSheetFrame4(frame_classes.FlashCalcFrame):
                 problem_name = self.problem_name,
                 model = self.model,
                 parameter_table = self.parameter_table,
-                comment = comment_text.get()))
+                comment = comment_text.get(),
+                
+                flash_list = self.flash_list,
+                composition_dict = self.composition_dict
+                ))
         back_button = ctk.CTkButton(
             buttonrow3_frame, text="Back", cursor="hand2", command=lambda: 
             self.master.load_module(
@@ -101,7 +112,10 @@ class WorkSheetFrame4(frame_classes.FlashCalcFrame):
                 error_message="",
                 problem_name = self.problem_name,
                 model = self.model,
-                parameter_table = self.parameter_table))
+                parameter_table = self.parameter_table,
+                flash_list = self.flash_list,
+                composition_dict = self.composition_dict
+                ))
         
         # Comment frame
         comment_frame = ctk.CTkFrame(self)

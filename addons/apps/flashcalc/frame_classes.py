@@ -9,6 +9,7 @@ import tkinter as tk
 
 from PIL import Image
 import json
+import xml.etree.ElementTree as ET
 
 # Import the required third-party libraries:
 # CustomTkinter is a custom GUI library for Python.
@@ -26,6 +27,16 @@ class FlashCalcFrame(ctk.CTkFrame):
     save, open.'''
     master = None
     tool = None
+
+    error_message = None
+    problem_name = None
+    model = None
+    parameter_table = None
+    comment = None
+
+    flash_list = []
+    composition_dict = {}
+
     def __init__(self, master, tool, **kwargs):
         '''This method initializes an instance of the FlashCalcFrame class.'''
         if os.name == 'nt':
@@ -35,9 +46,32 @@ class FlashCalcFrame(ctk.CTkFrame):
         self.master = master
         self.tool = tool
         kwargs
+    
     def save(self):
-        '''Not implemented: Save the data'''
-        pass
+        '''Save the data'''
+        data_to_save = {
+            "FlashCalcData": {
+                "ProblemName": self.problem_name,
+                "Model": self.model,
+                "ParameterTable": self.parameter_table,
+                "Composition": self.composition_dict,
+                "TPZ": [str(item) for item in self.flash_list],
+                "Comment": self.comment,
+            }
+        }
+
+        file_path = tk.filedialog.asksaveasfilename(
+            title="Save File",
+            defaultextension=".json",
+            filetypes=[("JSON Files", "*.json"), ("All Files", "*.*")]
+        )
+        if not file_path:
+            return
+
+        with open(file_path, "w") as file:
+            json.dump(data_to_save, file, indent=4)
+        print(self.flash_list)
+        
     def open(self):
         '''Load the data from a file.'''
         file_path = tk.filedialog.askopenfilename(

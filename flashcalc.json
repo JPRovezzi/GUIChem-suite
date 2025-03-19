@@ -1,0 +1,51 @@
+{
+    "FlashCalcData": {
+        "ProblemName": "",
+        "Model": "UNIFAC",
+        "ParameterTable": "Vapor-Liquid",
+        "Composition": {
+            "1": {
+                "name": "A",
+                "groups": {
+                    "1: (CH3)": "2"
+                }
+            },
+            "2": {
+                "name": "B",
+                "groups": {
+                    "1: (CH3)": "2",
+                    "2: (CH2)": "1"
+                }
+            },
+            "3": {
+                "name": "C",
+                "groups": {
+                    "1: (CH3)": "2",
+                    "2: (CH2)": "2"
+                }
+            },
+            "4": {
+                "name": "D",
+                "groups": {
+                    "1: (CH3)": "2",
+                    "2: (CH2)": "3"
+                }
+            },
+            "5": {
+                "name": "E",
+                "groups": {
+                    "1: (CH3)": "3",
+                    "3: (CH)": "1"
+                }
+            },
+            "6": {
+                "name": "F",
+                "groups": {
+                    "17: (H2O)": "1"
+                }
+            }
+        },
+        "TPZ": [],
+        "Comment": null
+    }
+}

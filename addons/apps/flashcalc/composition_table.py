@@ -22,6 +22,8 @@ class CompositionTableWindow(ctk.CTkToplevel):
     table = []
     parameter_table = None
     groups = []
+
+    composition_dict = {}
      
     def __init__(self, master,partable=None, **kwargs):
         '''Initialize the class.'''
@@ -32,31 +34,63 @@ class CompositionTableWindow(ctk.CTkToplevel):
         
         
         self.groups = self.load_groups(self.parameter_table)
+
+        self.load_table()
                 
+        
+
+    def load_groups(self, parameter_table):
+        '''Load the group list from the JSON file.'''
+        script_dir = os.path.dirname(__file__)
+        print(script_dir)
+        for i in range (2):
+                script_dir = os.path.dirname(script_dir)
+        json_path = script_dir+"/models/FlashCalcUNIFAC/gruposram.json"
+        print(json_path)
+        with open(json_path, 'r') as file:
+            data = json.load(file)
+        return data.get(parameter_table, [])
+
+    def load_table(self):
+        '''Load the table from a list.'''
         self.table = []
         self.table_frame = CTkXYFrame(self)
         self.table_frame.pack(fill="both", expand=True, padx=10, pady=10)
 
         # Firt row of the table: Number of components, add and subtract buttons, save button and close button
+        button_row = []
         self.row_count_label = ctk.CTkLabel(
             self.table_frame,
             text=self.number_of_components())
         self.row_count_label.grid(row=0, column=0, padx=5, pady=5)
+        button_row.append(self.row_count_label)
+
         self.add_row_button = ctk.CTkButton(
             self.table_frame, text="Add \n Component", cursor="hand2", command=self.add_row)
         self.add_row_button.grid(row=0, column=1, padx=5, pady=5)
+        button_row.append(self.add_row_button)
         
         self.subtract_row_button = ctk.CTkButton(
             self.table_frame, text="Subtract \n Component", cursor="hand2", command=self.subtract_row)
         self.subtract_row_button.grid(row=0, column=2, padx=5, pady=5)
+        button_row.append(self.subtract_row_button)
 
         self.save_button = ctk.CTkButton(
-            self.table_frame, text="Save", cursor="hand2")
+            self.table_frame,
+            text="Save",
+            cursor="hand2",
+            command=self.save_table)
         self.save_button.grid(row=0, column=3, padx=5, pady=5)
+        button_row.append(self.save_button)
 
         self.close_button = ctk.CTkButton(
-            self.table_frame, text="Close", cursor="hand2", command=self.destroy)
+            self.table_frame,
+            text="Close",
+            cursor="hand2",
+            command=self.destroy)
         self.close_button.grid(row=0, column=4, padx=5, pady=5)
+        button_row.append(self.close_button)
+        self.table.append(button_row)
 
         line_row = []
         for col in range(13):  # Assuming 13 columns for the table
@@ -72,18 +106,6 @@ class CompositionTableWindow(ctk.CTkToplevel):
         # Import, Component, Group, 10 groups
         # Export, Name,Number, 10 numbers
         self.add_row()
-
-    def load_groups(self, parameter_table):
-        '''Load the group list from the JSON file.'''
-        script_dir = os.path.dirname(__file__)
-        print(script_dir)
-        for i in range (2):
-                script_dir = os.path.dirname(script_dir)
-        json_path = script_dir+"/models/FlashCalcUNIFAC/gruposram.json"
-        print(json_path)
-        with open(json_path, 'r') as file:
-            data = json.load(file)
-        return data.get(parameter_table, [])
 
     def number_of_components(self):
         '''Return the number of components in the table.'''
@@ -160,9 +182,35 @@ class CompositionTableWindow(ctk.CTkToplevel):
         '''Subtract a pair of rows from the table.'''
         if self.table:
             for i in range(3):
-                if len(self.table) > 1:
+                if len(self.table) > 2:
                     row = self.table.pop()
                     for entry in row:
                         entry.destroy()
         self.row_count_label.configure(
             text=self.number_of_components())
+    
+    def save_table(self):
+        '''Save the table to a list'''
+        self.composition_dict = {}
+        print(f"Saving a table of {len(self.table)} rows...")
+        print(f"There are {(len(self.table)-2)/3} components in the table.")
+        print()
+        #Note: In a future, add something to avoid repeated groups!!
+        for i in range(2, len(self.table), 3):
+            component_number = int((i+1)/3)
+            name = self.table[i+1][1].get()
+            groups = {}
+            for col in range(3, 13):
+                group = self.table[i][col].get()
+                # Remove the No group option
+                if "None" in group:
+                    continue
+                number = self.table[i+1][col].get()
+                groups[group] = number
+                print(col, group, number)
+            self.composition_dict[component_number] = {
+            "name": name,
+            "groups": groups
+            }
+        print(self.composition_dict)
+        self.master.composition_dict = self.composition_dict
