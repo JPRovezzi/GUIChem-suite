@@ -354,7 +354,8 @@ class FlashTableWindow(ctk.CTkToplevel):
                         if sum(current_combination) <= int(condition[1]):
                             values.append(current_combination[:])
                     case "==":
-                        if sum(current_combination) == int(condition[1]):
+                        if (self.float_to_intx100(sum(current_combination)) == 
+                            self.float_to_intx100(condition[1])):
                             values.append(current_combination[:])
                     case "!=":
                         if sum(current_combination) != int(condition[1]):
