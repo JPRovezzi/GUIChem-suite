@@ -126,12 +126,15 @@ class FlashTableWindow(ctk.CTkToplevel):
         row2 = []
 
         # temperature spinbox
-        t_spinbox = tk.Spinbox(self.table_frame,
-                              from_= self.intx100_to_float(self.t_min),
-                              to = self.intx100_to_float(self.t_max),
-                              increment = self.intx100_to_float(
-                                  self.t_step),
-                              width = 5)
+        t_spinbox = tk.Spinbox(
+            self.table_frame,
+            from_= self.intx100_to_float(self.t_min),
+            to = self.intx100_to_float(self.t_max),
+            increment = self.intx100_to_float(self.t_step),
+
+
+
+            width = 5)
 
         # If the table has more than 3 rows,
         # copy the value from the previous row
@@ -147,12 +150,12 @@ class FlashTableWindow(ctk.CTkToplevel):
         row2.append(t_spinbox)
 
         # pressure spinbox
-        pressure_box = tk.Spinbox(self.table_frame,
-                              from_= self.intx100_to_float(self.p_min),
-                              to = self.intx100_to_float(self.p_max),
-                              increment = self.intx100_to_float(
-                                  self.p_step),
-                              width = 5)
+        pressure_box = tk.Spinbox(
+            self.table_frame,
+            from_= self.intx100_to_float(self.p_min),
+            to = self.intx100_to_float(self.p_max),
+            increment = self.intx100_to_float(self.p_step),
+            width = 5)
         # If the table has more than 3 rows,
         # copy the value from the previous row
         if len(self.table) > (self.fixed_rows + 3) :
@@ -168,12 +171,15 @@ class FlashTableWindow(ctk.CTkToplevel):
 
         # z spinboxes
         for col in range(z_colmin,z_colmax):
-            z_box = tk.Spinbox(self.table_frame,
-                                    from_=self.intx100_to_float(self.z_min),
-                                    to=self.intx100_to_float(self.z_max),
-                                    increment=self.intx100_to_float(
-                                        self.z_step),
-                                    width=5)
+            z_box = tk.Spinbox(
+                self.table_frame,
+                from_=self.intx100_to_float(self.z_min),
+                to=self.intx100_to_float(self.z_max),
+                increment=self.intx100_to_float(self.z_step),
+    
+    
+
+                width=5)
             # If the table has more than 3 rows,
             # copy the value from the previous row
             if len(self.table) > (self.fixed_rows + 3) :
@@ -207,10 +213,14 @@ class FlashTableWindow(ctk.CTkToplevel):
         def check_values():
             '''Check the values in the table.'''
             for index,label in enumerate(labels):
-                print(f"index={index}, label={label}")
                 if index == 0:
                     continue
+                print(f"Checking row with index={index} for label={label}...")
                 # Check if the values are numbers:
+                print("Checking if the values are numbers...")
+                print(f"Step value: {step_value_row[index].get()}")
+                print(f"Final value: {final_value_row[index].get()}")
+                print(f"Starting value: {starting_value_row[index].get()}")
                 try:
                     float(starting_value_row[index].get())
                 except ValueError:
@@ -234,6 +244,10 @@ class FlashTableWindow(ctk.CTkToplevel):
                         0, self.intx100_to_float(0))
 
                 # Check if the values are within the limits:
+                print("Checking if the values are within the limits...")
+                print(f"Step value: {step_value_row[index].get()}")
+                print(f"Final value: {final_value_row[index].get()}")
+                print(f"Starting value: {starting_value_row[index].get()}")
                 if ((self.float_to_intx100(starting_value_row[index].get()) <
                     from_values[index-1]) or
                     (self.float_to_intx100(starting_value_row[index].get()) >
@@ -258,24 +272,32 @@ class FlashTableWindow(ctk.CTkToplevel):
                     step_value_row[index].insert(
                         0, self.intx100_to_float(0))
 
-                if self.float_to_intx100(step_value_row[index].get()) < step_values[index-1]:
+                if (self.float_to_intx100(step_value_row[index].get()) < step_values[index-1] and self.float_to_intx100(step_value_row[index].get()) != 0):
                     print(f'''{step_value_row[index].get()} is less than
                      {self.intx100_to_float(step_values[index-1])}!''')
                     step_value_row[index].delete(
                         0, tk.END)
                     step_value_row[index].insert(
                         0, self.intx100_to_float(step_values[index-1]))
-
                 # Check if the final value is greater than the starting value:
+                print("Checking if the final value is greater than the starting value...")
+                print(f"Step value: {step_value_row[index].get()}")
+                print(f"Final value: {final_value_row[index].get()}")
+                print(f"Starting value: {starting_value_row[index].get()}")
                 if (self.float_to_intx100(final_value_row[index].get()) <
                     self.float_to_intx100(starting_value_row[index].get())):
                     print(f'''{final_value_row[index].get()} is less than
                      {starting_value_row[index].get()}!''')
                     final_value_row[index].delete(0, tk.END)
                     final_value_row[index].insert(
-                        0, starting_value_row[index].get())
+                        0,
+                        self.intx100_to_float(starting_value_row[index].get()))
                 # Check if the step value is greater than the difference
                 # between the final and starting values:
+                print("Checking if the step value is greater than the difference between the final and starting values...")
+                print(f"Step value: {step_value_row[index].get()}")
+                print(f"Final value: {final_value_row[index].get()}")
+                print(f"Starting value: {starting_value_row[index].get()}")
                 if (self.float_to_intx100(step_value_row[index].get()) >
                     (self.float_to_intx100(final_value_row[index].get()) -
                     self.float_to_intx100(starting_value_row[index].get()))):
@@ -345,11 +367,12 @@ class FlashTableWindow(ctk.CTkToplevel):
             print(self.auto_list)
             # Add the auto-filled values into rows
             for index,label in enumerate(labels):
-                print(f"index={index}, label={label}")
+                #print(f"index={index}, label={label}")
                 if index == 0:
                     continue
                 self.auto_list.append([])
                 auto_values=label
+                print(self.auto_list)
 
                 # If the step value is not zero,
                 # fill the list with the values
@@ -464,6 +487,9 @@ class FlashTableWindow(ctk.CTkToplevel):
                 from_ = self.intx100_to_float(from_value),
                 to = self.intx100_to_float(to_values[i]),
                 increment = self.intx100_to_float(step_values[i]),
+    
+    
+
                 width=5)
 
             initial_box.grid(
@@ -488,6 +514,9 @@ class FlashTableWindow(ctk.CTkToplevel):
                 from_ = self.intx100_to_float(from_values[i]),
                 to = self.intx100_to_float(to_value),
                 increment = self.intx100_to_float(step_values[i]),
+    
+    
+
                 width=5)
 
             final_box.grid(
@@ -511,6 +540,9 @@ class FlashTableWindow(ctk.CTkToplevel):
                 from_= 0,
                 to = self.intx100_to_float(to_values[i]),
                 increment = self.intx100_to_float(step_value),
+    
+    
+
                 width=5)
             step_box.grid(
                 row=len(self.table) + 1,
