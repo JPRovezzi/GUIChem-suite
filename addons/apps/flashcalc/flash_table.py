@@ -35,8 +35,8 @@ class FlashTableWindow(ctk.CTkToplevel):
     flash_list = [] # List of flashes with T,P, and z values
     auto_list = [] # List of autofilled values
     z_values = [] # List of z values that sum to 1
-    show_TPZ = True # Show the temperature, pressure and z values in the table
-    show_ZMatrix = False # Show the z matrix in the table
+    show_tpz = True # Show the temperature, pressure and z values in the table
+    show_zmatrix = True # Show the z matrix in the table
 
     labels = []
 
@@ -50,7 +50,8 @@ class FlashTableWindow(ctk.CTkToplevel):
     p_step = 10 # 0.1 bar
     z_min = 0 # 0
     z_max = 100 # 1
-    z_step = 5 # 0.05
+    z_step = 1 # 0.01
+    z_totalsum = 1 # 1
     from_values = []
     to_values = []
     step_values = []
@@ -380,6 +381,10 @@ class FlashTableWindow(ctk.CTkToplevel):
             self.clear_table(leave_rows=6)
             self.auto_list = []
             print(self.auto_list)
+
+            # Get the values that z must sum to
+            self.z_totalsum = float(self.sum_spinbox.get())
+
             # Add the auto-filled values into rows
             for index,label in enumerate(self.labels):
                 #print(f"index={index}, label={label}")
@@ -404,7 +409,7 @@ class FlashTableWindow(ctk.CTkToplevel):
                 else:
                     self.auto_list[index-1] = [float(self.starting_value_row[index].get())]
 
-                if self.show_TPZ:
+                if self.show_tpz:
                     print(self.auto_list)
                     print_flag = False
                     print(len(self.auto_list[index-1])-3)
@@ -434,22 +439,26 @@ class FlashTableWindow(ctk.CTkToplevel):
             self.z_values = generate_combinations(
                 input_list = self.auto_list[2:],
                 n = self.nc,
-                condition = ("==",1)) # NOTA: Para cierto numero de componentes que sum(Z)=1 dificulta la asignación de valores zi. Por ejemplo con 3 componentes para que estén los 3 valores en la tabla se necesita que Z1+Z2+Z3=1. Esto se puede lograr con 2 valores en la tabla (0.5), pero no con 3 (0.333...). No hay valor de step posible para representar 1/3. Por lo tanto, en el futuro se debe permitir que la suma de los valores sea mayor o menor a 1.
+                condition = ("==",self.z_totalsum)) # NOTA: Para cierto numero de componentes que sum(Z)=1 dificulta la asignación de valores zi. Por ejemplo con 3 componentes para que estén los 3 valores en la tabla se necesita que Z1+Z2+Z3=1. Esto se puede lograr con 2 valores en la tabla (0.5), pero no con 3 (0.333...). No hay valor de step posible para representar 1/3. Por lo tanto, en el futuro se debe permitir que la suma de los valores sea mayor o menor a 1.
 
             #print(z_values)
-            if self.show_ZMatrix:
+            if self.show_zmatrix:
                 # Add the z values to the table
+                z_values_text = ""
+                for i in range(self.nc):
+                    z_values_text += f"z{i+1};   "
+                z_values_text += "\n"
+                row = []
                 for index,z_value in enumerate(self.z_values):
-                    row = []
-                    z_values_text = ""
                     for value in z_value:
                         z_values_text += f"{value:.2f}; "
-                    label = ctk.CTkLabel(self.table_frame, text=z_values_text)
-                    label.grid(
-                    row=len(self.table) + 1, column=0, padx=5, pady=5,
-                    columnspan=self.max_columns, sticky="w")
-                    row.append(label)
-                    self.table.append(row)
+                    z_values_text += "\n"
+                label = ctk.CTkLabel(self.table_frame, text=z_values_text)
+                label.grid(
+                row=len(self.table) + 1, column=0, padx=5, pady=5,
+                columnspan=self.max_columns, sticky="w")
+                row.append(label)
+                self.table.append(row)
 
             self.nf = (len(self.z_values)*
                        len(self.auto_list[0])*
@@ -577,6 +586,19 @@ class FlashTableWindow(ctk.CTkToplevel):
             command= lambda: update_table())
         update_button.grid(row=len(self.table) + 1, column=0, padx=5, pady=5)
         auto_fill_row.append(update_button)
+        sum_label = ctk.CTkLabel(self.table_frame, text="Sum of z values must be: ")
+        sum_label.grid(row=len(self.table) + 1, column=1, padx=5, pady=5)
+        self.sum_spinbox = tk.Spinbox(
+            self.table_frame,
+            from_=0,
+            to=2,
+            increment=self.intx100_to_float(self.z_step),
+            width=5)
+        self.sum_spinbox.grid(row=len(self.table) + 1, column=2, padx=5, pady=5)
+        self.sum_spinbox.delete(0,tk.END)
+        self.sum_spinbox.insert(0,1.00)
+        auto_fill_row.append(self.sum_spinbox)
+        
         self.table.append(auto_fill_row)
 
         # Add a separator row
