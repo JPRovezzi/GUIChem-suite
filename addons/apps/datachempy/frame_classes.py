@@ -392,185 +392,128 @@ class NistFrame(DataChemPyFrame):
         substances = [substance.strip() for substance in substances if substance.strip()]
         print(f"Substances: {substances}")     
         # Run the task in a separate thread
-        #threading.Thread(target=lambda: (self.run_task(), self.search_button.configure(state="normal"))).start()
+        self.run_search_task(substances)
 
 
 
 
 #--------------------------------------------------------------------------
 
-def run_task(self):
-    #start_button['state'] = 'disabled'
-    #-------------------------------
-    # Here goes everything before the main loop
-    substances = [
-        # Acidos
-        "Formic Acid", "Acetic Acid", "Trichloroacetic Acid", "Acrylic Acid", "Caprylic Acid",
-        "Capric Acid", "Lauric Acid", "Oleic Acid", "Stearic Acid", "Benzoic Acid", "Nicotinic Acid",
-        
-        # Alcoholes
-        "Methanol", "Ethanol", "1-Propanol", "Isopropanol", "1-Butanol", "Isopentanol", 
-        "Phenol", "Cyclohexanol", "Cetyl Alcohol",
-        
-        # Formiatos
-        "Methyl Formate", "Ethyl Formate", "n-Propyl Formate", "Isopropyl Formate", "Butyl Formate",
-        "Isopentyl Formate", "Phenyl Formate", "Cyclohexyl Formate", "Cetyl Formate",
-        
-        # Acetatos
-        "Methyl Acetate", "Ethyl Acetate", "n-propyl Acetate", "Isopropyl Acetate", "Butyl Acetate",
-        "Isopentyl Acetate", "Phenyl Acetate", "Cyclohexyl Acetate", "Cetyl Acetate",
-        
-        # Tricloroacetatos
-        "Methyl Trichloroacetate", "Ethyl Trichloroacetate", "n-propyl Trichloroacetate",
-        "Isopropyl Trichloroacetate", "Butyl Trichloroacetate", "Isopentyl Trichloroacetate", 
-        "Phenyl Trichloroacetate", "Cyclohexyl Trichloroacetate", "Cetyl Trichloroacetate",
-        
-        # Acrilatos
-        "Methyl Acrylate", "Ethyl Acrylate", "n-propyl Acrylate", "Isopropyl Acrylate", "Butyl Acrylate",
-        "Isopentyl Acrylate", "Phenyl Acrylate", "Cyclohexyl Acrylate", "Cetyl Acrylate",
-        
-        # Caprilatos
-        "Methyl Caprylate", "Ethyl Caprylate", "n-propyl Caprylate", "Isopropyl Caprylate", 
-        "Butyl Caprylate", "Isopentyl Caprylate", "Phenyl Caprylate", "Cyclohexyl Caprylate", "Cetyl Caprylate",
-        
-        # Capratos
-        "Methyl Caprate", "Ethyl Caprate", "n-propyl Caprate", "Isopropyl Caprate", 
-        "Butyl Caprate", "Isopentyl Caprate", "Phenyl Caprate", "Cyclohexyl Caprate", "Cetyl Caprate",
-        
-        # Lauratos
-        "Methyl Laurate", "Ethyl Laurate", "n-propyl Laurate", "Isopropyl Laurate", 
-        "Butyl Laurate", "Isopentyl Laurate", "Phenyl Laurate", "Cyclohexyl Laurate", "Cetyl Laurate",
-        
-        # Oleatos
-        "Methyl Oleate", "Ethyl Oleate", "n-propyl Oleate", "Isopropyl Oleate", "Butyl Oleate",
-        "Isopentyl Oleate", "Phenyl Oleate", "Cyclohexyl Oleate", "Cetyl Oleate",
-        
-        # Estearatos
-        "Methyl Stearate", "Ethyl Stearate", "n-propyl Stearate", "Isopropyl Stearate", "Butyl Stearate",
-        "Isopentyl Stearate", "Phenyl Stearate", "Cyclohexyl Stearate", "Cetyl Stearate",
-        
-        # Benzoatos
-        "Methyl Benzoate", "Ethyl Benzoate", "n-propyl Benzoate", "Isopropyl Benzoate", "Butyl Benzoate",
-        "Isopentyl Benzoate", "Phenyl Benzoate", "Cyclohexyl Benzoate", "Cetyl Benzoate",
-        
-        # Nicotinatos
-        "Methyl Nicotinate", "Ethyl Nicotinate", "n-propyl Nicotinate", "Isopropyl Nicotinate",
-        "Butyl Nicotinate", "Isopentyl Nicotinate", "Phenyl Nicotinate", "Cyclohexyl Nicotinate", "Cetyl Nicotinate",
+    def run_search_task(self,substances):
+        #-------------------------------
+        # Here goes everything before the main loop
+        self.search_result = {
+        }
+        substances_no_data = []
+        substances_with_data = []
+        substances_pending = []
+        search_limit = lambda x: x if len(substances) > x else len(substances)
+        search_limit = search_limit(200)
+        search_offset = 0
+        substances = substances[search_offset:search_limit]
 
-        # Solventes
-        "Toluene", "n-heptane"
-    ]
-    result = {}
-    substances_no_data = []
-    substances_with_data = []
-    substances_pending = []
-    search_limit = lambda x: x if len(substances) > x else len(substances)
-    search_limit = search_limit(200)
-    search_offset = 0
-    substances = substances[search_offset:search_limit]
+        #substances =["acetic acid"]
 
-    #substances =["acetic acid"]
-
-    def threaded_task(iterable: []):
-        def dummy_task(substance):
-            if tpe._shutdown:
-                return
-            time.sleep(1)
+        def threaded_task(iterable: []):
+            def dummy_task(substance):
+                if tpe._shutdown:
+                    return
+                time.sleep(1)
 
 
-        def inner_task(substance):
-            # Check if the thread pool executor is shutdown.
-            # If tpe.shutdown(cancel_futures=false) is called below,
-            # all the inner tasks will continue to run until it the hole
-            # process finishes. So to avoid that every full task is run,
-            # we check if the thread pool executor is shutdown to end
-            # each pending task.
-            # Also, it tracks which substances are pending.
-            if tpe._shutdown:
-                substances_pending.append(substance)
-                return
-            identifier = substance
-            search_type = 'name'
-            # URL of the webpage containing the table
-            data = self.search_id(identifier, search_type)
-            if data is None:
-                substances_no_data.append(substance)
-            else:
-                substances_with_data.append(substance)
-                result[identifier] = data
+            def inner_task(substance):
+                # Check if the thread pool executor is shutdown.
+                # If tpe.shutdown(cancel_futures=false) is called below,
+                # all the inner tasks will continue to run until it the hole
+                # process finishes. So to avoid that every full task is run,
+                # we check if the thread pool executor is shutdown to end
+                # each pending task.
+                # Also, it tracks which substances are pending.
+                if tpe._shutdown:
+                    substances_pending.append(substance)
+                    return
+                identifier = substance
+                search_type = 'name'
+                # URL of the webpage containing the table
+                data = self.search_id(identifier, search_type)
+                if data is None:
+                    substances_no_data.append(substance)
+                else:
+                    substances_with_data.append(substance)
+                    self.search_result[identifier] = data
 
 
 
-        try:
-            with ThreadPoolExecutor(max_workers=10) as tpe:
-                pbar = tqdm(
-                    tpe.map(inner_task, iterable),
-                    total=len(iterable),
-                    grab=True,
-                    desc="Main progress bar",
-                    tk_parent=self,
-                    cancel_callback=lambda: (
-                        #tpe.shutdown() is a way to stop the executor. 
-                        # If wait is True, 
-                        # it will wait for all the tasks to finish.
-                        # If cancel_futures is True, 
-                        # it will cancel all the tasks that are not finished
-                        # but it will raise a CancelledError exception.
-                        # So tpe._shudown inside the inner task is a way to check if the executor is shutdown.
-                        tpe.shutdown(wait=False,cancel_futures=False),
-                        pbar.close(),
-                        pbar._tk_window.destroy()
+            try:
+                with ThreadPoolExecutor(max_workers=10) as tpe:
+                    pbar = tqdm(
+                        tpe.map(inner_task, iterable),
+                        total=len(iterable),
+                        grab=True,
+                        desc="Main progress bar",
+                        tk_parent=self,
+                        cancel_callback=lambda: (
+                            #tpe.shutdown() is a way to stop the executor. 
+                            # If wait is True, 
+                            # it will wait for all the tasks to finish.
+                            # If cancel_futures is True, 
+                            # it will cancel all the tasks that are not finished
+                            # but it will raise a CancelledError exception.
+                            # So tpe._shudown inside the inner task is a way to check if the executor is shutdown.
+                            tpe.shutdown(wait=False,cancel_futures=False),
+                            pbar.close(),
+                            pbar._tk_window.destroy()
+                            )
                         )
-                    )
 
-                pbar._tk_window.attributes('-topmost', True)  # Keep the main progress bar on top, or it's hard to see
-                pbar._tk_window.focus_get()
-                list(pbar)
-                pbar._tk_window.destroy()
-        except CancelledError:
-            # Handle the case when the progress bar is cancelled and tpe.shutdown(cancel_futures=True) is called.
-            print("Cancelled!")
+                    pbar._tk_window.attributes('-topmost', True)  # Keep the main progress bar on top, or it's hard to see
+                    pbar._tk_window.focus_get()
+                    list(pbar)
+                    pbar._tk_window.destroy()
+            except CancelledError:
+                # Handle the case when the progress bar is cancelled and tpe.shutdown(cancel_futures=True) is called.
+                print("Cancelled!")
+                #start_button['state'] = 'normal'
+                return
+
+        
+
+        # Here comes everything after the main loop
+        def on_thread_complete():
+            print("Job done")
+            # 
+            print("-" * 50)
+            print(f"Results: {len(self.search_result)}")
+            for key, value in self.search_result.items():
+                print(key)
+            # Save the result dictionary into a JSON file
+            
+            with open("result.json", "w") as json_file:
+                json.dump(self.search_result, json_file, indent=4)
+            print("Results saved to result.json")
+            
+            
+            
+            # Print the list of substances with data
+            print("-" * 50)
+            print(f"Substances with data:{len(substances_with_data)}")
+            for substance in substances_with_data:
+                print(substance)
+            # Print the list of substances without data
+            print("-" * 50)
+            print(f"Substances without data:{len(substances_no_data)}")
+            for substance in substances_no_data:
+                print(substance)
+            # Print the list of substances pending
+            print("-" * 50)
+            print(f"Substances pending:{len(substances_pending)}")
+            for substance in substances_pending:
+                print(substance)
+            
             #start_button['state'] = 'normal'
-            return
-
-    
-
-    # Here comes everything after the main loop
-    def on_thread_complete():
-        print("Job done")
-        # 
-        print("-" * 50)
-        print(f"Results: {len(result)}")
-        for key, value in result.items():
-            print(key)
-        # Save the result dictionary into a JSON file
-        
-        with open("result.json", "w") as json_file:
-            json.dump(result, json_file, indent=4)
-        print("Results saved to result.json")
-        
-        
-        
-        # Print the list of substances with data
-        print("-" * 50)
-        print(f"Substances with data:{len(substances_with_data)}")
-        for substance in substances_with_data:
-            print(substance)
-        # Print the list of substances without data
-        print("-" * 50)
-        print(f"Substances without data:{len(substances_no_data)}")
-        for substance in substances_no_data:
-            print(substance)
-        # Print the list of substances pending
-        print("-" * 50)
-        print(f"Substances pending:{len(substances_pending)}")
-        for substance in substances_pending:
-            print(substance)
-        
-        #start_button['state'] = 'normal'
-    #threading.Thread(target=threaded_task, kwargs={'iterable': substances}).start()
-    threading.Thread(target=lambda: (threaded_task(substances), on_thread_complete())).start()
-#------------------------------------------------------------------------------
+        #threading.Thread(target=threaded_task, kwargs={'iterable': substances}).start()
+        threading.Thread(target=lambda: (threaded_task(substances), on_thread_complete())).start()
+    #------------------------------------------------------------------------------
 
 class ChemicalCompound(nist.compound.NistCompound):
     def __init__(self, *args, **kwargs):
@@ -587,16 +530,6 @@ class ChemicalCompound(nist.compound.NistCompound):
 
     def set_cTP_data(self, data):
         self.cTP_data = data
-
-if __name__ == "__main__":
-    n_thread = 10
-
-    window = tk.Tk()
-
-    start_button = tk.Button(window, text="Start", command=run_task)
-    start_button.pack()
-
-    window.mainloop()
 
 
 

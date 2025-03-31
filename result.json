@@ -1,0 +1,106 @@
+{
+    "ethane": {
+        "C74840": {
+            "ID": "C74840",
+            "name": "Ethane",
+            "synonyms": [
+                "Bimethyl",
+                "Dimethyl",
+                "Ethyl hydride",
+                "Methylmethane",
+                "C2H6",
+                "UN 1035",
+                "UN 1961"
+            ],
+            "formula": "C2H6",
+            "mol_weight": 30.069,
+            "inchi": "InChI=1S/C2H6/c1-2/h1-2H3",
+            "inchi_key": "OTMSDBZUPAUEDD-UHFFFAOYSA-N",
+            "cas_rn": "74-84-0",
+            "mol_refs": {
+                "mol2D": "https://webbook.nist.gov/cgi/cbook.cgi?Str2File=C74840",
+                "mol3D": "https://webbook.nist.gov/cgi/cbook.cgi?Str3File=C74840"
+            },
+            "data_refs": {
+                "cTG": "https://webbook.nist.gov/cgi/cbook.cgi?ID=C74840&Mask=1#Thermo-Gas",
+                "cTC": "https://webbook.nist.gov/cgi/cbook.cgi?ID=C74840&Mask=2#Thermo-Condensed",
+                "cTP": "https://webbook.nist.gov/cgi/cbook.cgi?ID=C74840&Mask=4#Thermo-Phase",
+                "cTR": "https://webbook.nist.gov/cgi/cbook.cgi?ID=C74840&Mask=8#Thermo-React",
+                "cSO": "https://webbook.nist.gov/cgi/cbook.cgi?ID=C74840&Mask=10#Solubility",
+                "cIE": "https://webbook.nist.gov/cgi/cbook.cgi?ID=C74840&Mask=20#Ion-Energetics",
+                "cIC": "https://webbook.nist.gov/cgi/cbook.cgi?ID=C74840&Mask=40#Ion-Cluster",
+                "cIR": "https://webbook.nist.gov/cgi/cbook.cgi?ID=C74840&Mask=80#IR-Spec",
+                "cMS": "https://webbook.nist.gov/cgi/cbook.cgi?ID=C74840&Mask=200#Mass-Spec",
+                "cES": "https://webbook.nist.gov/cgi/cbook.cgi?ID=C74840&Mask=800#Electronic-Spec",
+                "Fluid Properties": "https://webbook.nist.gov/cgi/fluid.cgi?ID=C74840&Action=Page"
+            },
+            "nist_public_refs": {
+                "Microwave spectra (on physics lab web site)": "https://physics.nist.gov/cgi-bin/MolSpec/mole.pl?prefix=hydro&molecule=C2H6&cas=74-84-0&type=fancy&clear=1",
+                "Electron-Impact Ionization Cross Sections (on physics web site)": "https://physics.nist.gov/cgi-bin/Ionization/table.pl?ionization=C2H6",
+                "Gas Phase Kinetics Database": "https://kinetics.nist.gov/kinetics/rpSearch?cas=74840",
+                "Reference simulation": "http://www.cstl.nist.gov/srs/ETHANE/index.htm"
+            },
+            "nist_subscription_refs": {
+                "NIST / TRC Web Thermo Tables, \"lite\" edition (thermophysical and thermochemical data)": "https://wtt-lite.nist.gov/wtt-lite/index.html?cmp=ethane",
+                "NIST / TRC Web Thermo Tables, professional edition (thermophysical and thermochemical data)": "https://wtt-pro.nist.gov/wtt-pro/index.html?cmp=ethane"
+            },
+            "mol2D": null,
+            "mol3D": null,
+            "ir_specs": [],
+            "thz_specs": [],
+            "ms_specs": [],
+            "uv_specs": []
+        }
+    },
+    "methane": {
+        "C74828": {
+            "ID": "C74828",
+            "name": "Methane",
+            "synonyms": [
+                "Marsh gas",
+                "Methyl hydride",
+                "CH4",
+                "Fire Damp",
+                "R 50",
+                "Biogas",
+                "R 50 (refrigerant)"
+            ],
+            "formula": "CH4",
+            "mol_weight": 16.0425,
+            "inchi": "InChI=1S/CH4/h1H4",
+            "inchi_key": "VNWKTOKETHGBQD-UHFFFAOYSA-N",
+            "cas_rn": "74-82-8",
+            "mol_refs": {
+                "mol2D": "https://webbook.nist.gov/cgi/cbook.cgi?Str2File=C74828",
+                "mol3D": "https://webbook.nist.gov/cgi/cbook.cgi?Str3File=C74828"
+            },
+            "data_refs": {
+                "cTG": "https://webbook.nist.gov/cgi/cbook.cgi?ID=C74828&Mask=1#Thermo-Gas",
+                "cTP": "https://webbook.nist.gov/cgi/cbook.cgi?ID=C74828&Mask=4#Thermo-Phase",
+                "cTR": "https://webbook.nist.gov/cgi/cbook.cgi?ID=C74828&Mask=8#Thermo-React",
+                "cSO": "https://webbook.nist.gov/cgi/cbook.cgi?ID=C74828&Mask=10#Solubility",
+                "cIE": "https://webbook.nist.gov/cgi/cbook.cgi?ID=C74828&Mask=20#Ion-Energetics",
+                "cIC": "https://webbook.nist.gov/cgi/cbook.cgi?ID=C74828&Mask=40#Ion-Cluster",
+                "cIR": "https://webbook.nist.gov/cgi/cbook.cgi?ID=C74828&Mask=80#IR-Spec",
+                "cMS": "https://webbook.nist.gov/cgi/cbook.cgi?ID=C74828&Mask=200#Mass-Spec",
+                "cES": "https://webbook.nist.gov/cgi/cbook.cgi?ID=C74828&Mask=800#Electronic-Spec",
+                "Fluid Properties": "https://webbook.nist.gov/cgi/fluid.cgi?ID=C74828&Action=Page"
+            },
+            "nist_public_refs": {
+                "Microwave spectra (on physics lab web site)": "https://physics.nist.gov/cgi-bin/MolSpec/mole.pl?prefix=hydro&molecule=CH4&cas=74-82-8&type=fancy&clear=1",
+                "Electron-Impact Ionization Cross Sections (on physics web site)": "https://physics.nist.gov/cgi-bin/Ionization/table.pl?ionization=CH4",
+                "Gas Phase Kinetics Database": "https://kinetics.nist.gov/kinetics/rpSearch?cas=74828"
+            },
+            "nist_subscription_refs": {
+                "NIST / TRC Web Thermo Tables, \"lite\" edition (thermophysical and thermochemical data)": "https://wtt-lite.nist.gov/wtt-lite/index.html?cmp=methane",
+                "NIST / TRC Web Thermo Tables, professional edition (thermophysical and thermochemical data)": "https://wtt-pro.nist.gov/wtt-pro/index.html?cmp=methane"
+            },
+            "mol2D": null,
+            "mol3D": null,
+            "ir_specs": [],
+            "thz_specs": [],
+            "ms_specs": [],
+            "uv_specs": []
+        }
+    }
+}
