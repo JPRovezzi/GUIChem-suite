@@ -7,10 +7,12 @@
     },
     "ADDONS": {
         "installed": [
+            "datachempy",
             "ugropygui",
             "flashcalc"
         ],
         "enabled": [
+            "datachempy",
             "ugropygui",
             "flashcalc"
         ]
