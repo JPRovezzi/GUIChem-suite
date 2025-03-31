@@ -1,0 +1,58 @@
+{
+    "Acids": [
+        "Formic Acid", "Acetic Acid", "Trichloroacetic Acid", "Acrylic Acid", "Caprylic Acid",
+        "Capric Acid", "Lauric Acid", "Oleic Acid", "Stearic Acid", "Benzoic Acid", "Nicotinic Acid"
+    ],
+    "Alcohols": [
+        "Methanol", "Ethanol", "1-Propanol", "Isopropanol", "1-Butanol", "Isopentanol", 
+        "Phenol", "Cyclohexanol", "Cetyl Alcohol"
+    ],
+    "Formiates": [
+        "Methyl Formate", "Ethyl Formate", "n-Propyl Formate", "Isopropyl Formate", "Butyl Formate",
+        "Isopentyl Formate", "Phenyl Formate", "Cyclohexyl Formate", "Cetyl Formate"
+    ],
+    "Acetates": [
+        "Methyl Acetate", "Ethyl Acetate", "n-propyl Acetate", "Isopropyl Acetate", "Butyl Acetate",
+        "Isopentyl Acetate", "Phenyl Acetate", "Cyclohexyl Acetate", "Cetyl Acetate"
+    ],
+    "Trichloroacetates": [
+        "Methyl Trichloroacetate", "Ethyl Trichloroacetate", "n-propyl Trichloroacetate",
+        "Isopropyl Trichloroacetate", "Butyl Trichloroacetate", "Isopentyl Trichloroacetate", 
+        "Phenyl Trichloroacetate", "Cyclohexyl Trichloroacetate", "Cetyl Trichloroacetate"
+    ],
+    "Acrylates": [
+        "Methyl Acrylate", "Ethyl Acrylate", "n-propyl Acrylate", "Isopropyl Acrylate", "Butyl Acrylate",
+        "Isopentyl Acrylate", "Phenyl Acrylate", "Cyclohexyl Acrylate", "Cetyl Acrylate"
+    ],
+    "Caprylates": [
+        "Methyl Caprylate", "Ethyl Caprylate", "n-propyl Caprylate", "Isopropyl Caprylate", 
+        "Butyl Caprylate", "Isopentyl Caprylate", "Phenyl Caprylate", "Cyclohexyl Caprylate", "Cetyl Caprylate"
+    ],
+    "Caprates": [
+        "Methyl Caprate", "Ethyl Caprate", "n-propyl Caprate", "Isopropyl Caprate", 
+        "Butyl Caprate", "Isopentyl Caprate", "Phenyl Caprate", "Cyclohexyl Caprate", "Cetyl Caprate"
+    ],
+    "Laurates": [
+        "Methyl Laurate", "Ethyl Laurate", "n-propyl Laurate", "Isopropyl Laurate", 
+        "Butyl Laurate", "Isopentyl Laurate", "Phenyl Laurate", "Cyclohexyl Laurate", "Cetyl Laurate"
+    ],
+    "Oleates": [
+        "Methyl Oleate", "Ethyl Oleate", "n-propyl Oleate", "Isopropyl Oleate", "Butyl Oleate",
+        "Isopentyl Oleate", "Phenyl Oleate", "Cyclohexyl Oleate", "Cetyl Oleate"
+    ],
+    "Estearates": [
+        "Methyl Stearate", "Ethyl Stearate", "n-propyl Stearate", "Isopropyl Stearate", "Butyl Stearate",
+        "Isopentyl Stearate", "Phenyl Stearate", "Cyclohexyl Stearate", "Cetyl Stearate"
+    ],
+    "Benzoates": [
+        "Methyl Benzoate", "Ethyl Benzoate", "n-propyl Benzoate", "Isopropyl Benzoate", "Butyl Benzoate",
+        "Isopentyl Benzoate", "Phenyl Benzoate", "Cyclohexyl Benzoate", "Cetyl Benzoate"
+    ],
+    "Nicotinates": [
+        "Methyl Nicotinate", "Ethyl Nicotinate", "n-propyl Nicotinate", "Isopropyl Nicotinate",
+        "Butyl Nicotinate", "Isopentyl Nicotinate", "Phenyl Nicotinate", "Cyclohexyl Nicotinate", "Cetyl Nicotinate"
+    ],
+    "Solvents": [
+        "Toluene", "n-heptane"
+    ]
+}

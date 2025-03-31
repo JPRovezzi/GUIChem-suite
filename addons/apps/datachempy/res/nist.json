@@ -1,0 +1,29 @@
+{
+    "search_parameters": [
+        "ID",
+        "name",
+        "synonyms",
+        "formula",
+        "mol_weight",
+        "inchi",
+        "inchi_key",
+        "cas_rn",
+        "mol2D",
+        "mol3D",
+        "cTG",
+        "cTC",
+        "cTP",
+        "cTR",
+        "cSO",
+        "cIE",
+        "cIR",
+        "cMS",
+        "cUV",
+        "cES",
+        "cGC",
+        "ir_specs",
+        "thz_specs",
+        "ms_specs",
+        "uv_specs"
+    ]
+}

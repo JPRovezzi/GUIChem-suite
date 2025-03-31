@@ -6,7 +6,7 @@
 # OS module provides functions to interact with the operating system.
 import os
 # Tkinter is the standard Python interface to the Tk GUI toolkit.
-from tkinter import Tk, Button
+import tkinter as tk
 # Threading is a built-in Python module that allows you to run multiple
 # threads (tasks, function calls) at once.
 import threading
@@ -90,6 +90,11 @@ class WelcomeFrame(DataChemPyFrame):
 
     def load(self, tool):
         '''Load the welcome frame with its widgets.'''
+        def select_database(option):
+            '''Select the database to use.'''
+            if option == "NIST":
+                return "NistFrame"
+            pass
 
         self.tkraise()
         self.pack_propagate(False)
@@ -97,12 +102,29 @@ class WelcomeFrame(DataChemPyFrame):
         widget_classes.TitleLabel(self, text=f"Welcome to {tool}!").pack(pady=0)
         
         script_dir = os.path.dirname(__file__)
+        json_path = os.path.join(script_dir, "res", "databases.json")
+        with open(json_path, "r") as json_file:
+            databases = json.load(json_file)
+        database_menu = ctk.CTkOptionMenu(
+            self,
+            values=databases.get("databases", []))
+        database_menu.pack(pady=10)
         
         ctk.CTkButton(
             self,
-            text="NIST Search",
+            text="New search",
             cursor="hand2",
-            command=lambda: self.master.load_module(self.tool,"NistFrame",location="frame_classes")
+            command=lambda: self.master.load_module(
+                self.tool,
+                select_database(database_menu.get()),
+                location="frame_classes")
+            ).pack(pady=10)
+        
+        ctk.CTkButton(
+            self,
+            text="Load previous search",
+            cursor="hand2",
+            command=lambda: self.open()
             ).pack(pady=10)
 
         ctk.CTkButton(
@@ -173,12 +195,14 @@ class NistFrame(DataChemPyFrame):
 
         
         # Create the buttons
-        ctk.CTkButton(
+        self.search_button = ctk.CTkButton(
             self,
-            text="Run Search",
+            text="Search",
             cursor="hand2",
-            #command=self.run_task
-            ).grid(row=3, column=0, padx=10, pady=10)
+            command= lambda: self.search_param_window()
+            )
+        self.search_button.configure(state="normal")
+        self.search_button.grid(row=3, column=0, padx=10, pady=10)
 
         ctk.CTkButton(
             self,
@@ -189,9 +213,9 @@ class NistFrame(DataChemPyFrame):
         
         ctk.CTkButton(
             self,
-            text="Close",
+            text="Go Back",
             cursor="hand2",
-            command=self.master.close_module
+            command=lambda: self.master.load_module(self.tool,"WelcomeFrame",location="frame_classes")
             ).grid(row=3, column=2, padx=10, pady=10)
         
         # Create the text box
@@ -201,44 +225,182 @@ class NistFrame(DataChemPyFrame):
         self.console.pack(fill="both", expand=True)
         self.console.insert("0.0", "This is the NIST frame. You can search for compounds here.")
         self.console.configure(state="disabled")  # Disable the text box to prevent editing
-        # Create the progress bar
-        self.progress_bar = ctk.CTkProgressBar(self, width=500)
-        self.progress_bar.grid(row=5, column=0, columnspan=3, padx=10, pady=10)
-        self.progress_bar.set(0)  # Set the progress bar to 0%
-        # Create the label for the progress bar
-        self.progress_label = ctk.CTkLabel(self, text="Progress: 0%")
-        self.progress_label.grid(row=6, column=0, columnspan=3, padx=10, pady=10)
 
+    # Define the functions:
+    def search_id(self,identifier, search_type):
+        '''Searches the NIST Chemistry WebBook for the compound with the given identifier.'''
+        search = nist.run_search(
+            identifier= identifier,
+            search_type= search_type)
 
-# Define the functions:
-def search_id(identifier, search_type):
-    '''Searches the NIST Chemistry WebBook for the compound with the given identifier.'''
-    search = nist.run_search(
-        identifier= identifier,
-        search_type= search_type)
-
-    if search.success:
-        if search.num_compounds == 0:
+        if search.success:
+            if search.num_compounds == 0:
+                print(
+                    "\n",
+                    f"Error: No results found for '{identifier}'."
+                    )
+                return None
+            identifier_dict = {}
+            for compound_id in search.compound_ids:
+                identifier_dict[compound_id] = nist.get_compound(compound_id).__dict__
+                identifier_dict[compound_id].pop('nist_response') #To avoid an error when saving the data
+            return identifier_dict
+        else:
             print(
                 "\n",
-                f"Error: No results found for '{identifier}'."
-                )
+                f"Search for '{identifier}' failed.")
             return None
-        identifier_dict = {}
-        for compound_id in search.compound_ids:
-            identifier_dict[compound_id] = nist.get_compound(compound_id).__dict__
-            identifier_dict[compound_id].pop('nist_response') #To avoid an error when saving the data
-        return identifier_dict
-    else:
-        print(
-            "\n",
-            f"Search for '{identifier}' failed.")
-        return None
+
+    def search_param_window(self):
+        '''Creates a window to search for the parameters of the compound.'''
+        def select_all_parameters():
+            '''Selects all the parameters to search for.'''
+            for parameter in checkboxes:
+                checkboxes[parameter].select()
+            select_all.select()
+            return None
+
+        def deselect_all_parameters():
+            '''Deselects all the parameters to search for.'''
+            for parameter in checkboxes:
+                checkboxes[parameter].deselect()
+            select_all.deselect()
+            return None
+
+        def close_window(run =False):
+            '''Closes the window.'''
+            self.search_button.configure(state="normal")
+            param_window.destroy()
+            if run:
+                self.run_search()
+            return None
+ 
+        # Disable the search button in order to avoid multiple clicks
+        self.search_button.configure(state="disabled")
+
+        # Create a new window.
+        # This window will be used to select the parameters to search for.
+        # It will be a top level window, so it will be on top of the main window.        
+        param_window = ctk.CTkToplevel(self)
+        # Set the title and size of the window
+        param_window.title("Search Parameters")
+        param_window.geometry("640x480")
+        # Set the window to be resizable
+        param_window.resizable(True, True)
+        # Set the window to be always on top
+        param_window.attributes('-topmost', True)
+        # Set the focus on the window
+        param_window.focus_get()
+        # Set the actions when the window is closed
+        # This is to avoid the window to be closed and the search button to be left disabled.
+        param_window.protocol("WM_DELETE_WINDOW", lambda: [
+            param_window.destroy(),
+            self.search_button.configure(state="normal"),
+            ])
+        
+        # Create the widgets:
+
+        # Create a label
+        label = ctk.CTkLabel(param_window, text="Select the parameters to search for:")
+        label.grid(row=0, column=0, columnspan = 3, padx=10, pady=10)
+
+        # Create a checkbox for each parameter
+
+        # Load the parameters from the JSON file
+        script_dir = os.path.dirname(__file__)
+        json_path = os.path.join(script_dir, "res", "nist.json")
+
+        with open(json_path, "r") as json_file:
+            data = json.load(json_file)
+            parameters = data.get("search_parameters", [])
+        checkboxes = {}
+
+        # Create a frame to hold the checkboxes
+        checkbox_frame = CTkXYFrame(param_window, width=640, height=300)
+        checkbox_frame.grid(row=1, column=0, columnspan=2, padx=10, pady=10)
+
+        number_of_columns = 5
+        for index, parameter in enumerate(parameters):
+            if index % number_of_columns == 0:
+                row = (index // number_of_columns)
+                column = 0
+            else:
+                row = (index // number_of_columns)
+                column = index % number_of_columns
+
+            # Create a checkbox for each parameter
+            checkboxes[parameter] = ctk.CTkCheckBox(
+                checkbox_frame,
+                text=parameter)
+            checkboxes[parameter].grid(row=row, column=column, padx=10, pady=10)
+        
+        # Create a checkbox to select all parameters
+        select_all = ctk.CTkCheckBox(
+            checkbox_frame,
+            text="Select All",
+            command=lambda: (
+                (select_all_parameters() if select_all.get() else deselect_all_parameters())
+            ))
+        select_all.grid(row=(len(parameters)//number_of_columns)+1, column=0, padx=10, pady=10)
+        # Create a button to close the window
+        close_button = ctk.CTkButton(
+            param_window,
+            text="Close",
+            command=lambda:close_window()
+            )
+        close_button.grid(row=2, column=1, padx=10, pady=10)
+        
+        # Create a button to search for the parameters
+        run_button = ctk.CTkButton(
+            param_window,
+            text="Run",
+            command=lambda: close_window(run=True)
+            )
+        run_button.grid(row=2, column=0, padx=10, pady=10)
+
+    def run_search(self):
+        '''Runs the search for the parameters.'''
+        if self.search_type.get():
+            # Load the JSON file from a file dialog
+            json_path = tk.filedialog.askopenfilename(
+                title="Select a JSON file",
+                filetypes=[("JSON files", "*.json")]
+            )
+            # Check if the file exists
+            if not json_path:
+                return None
+            # Load the JSON file
+            with open(json_path, "r") as json_file:
+                data = json.load(json_file)
+                # Get the list of keys from the JSON file
+                keys = list(data.keys())
+                # Get the substance for each category
+                substances = []
+                for key in keys:
+                    # Get the list of substances for each category
+                    substances += data[key]
+                # Remove the empty strings from the list
+                substances = [substance.strip() for substance in substances if substance.strip()]
+        else:
+            # Get the input from the text box
+            input_text = self.input_text.get()
+            # Split the input text by semicolon
+            substances = input_text.split(";")
+            # Remove the empty strings from the list
+            substances = [substance.strip() for substance in substances if substance.strip()]
+        # Remove the empty strings from the list
+        substances = [substance.strip() for substance in substances if substance.strip()]
+        print(f"Substances: {substances}")     
+        # Run the task in a separate thread
+        #threading.Thread(target=lambda: (self.run_task(), self.search_button.configure(state="normal"))).start()
+
+
+
 
 #--------------------------------------------------------------------------
 
-def run_task():
-    start_button['state'] = 'disabled'
+def run_task(self):
+    #start_button['state'] = 'disabled'
     #-------------------------------
     # Here goes everything before the main loop
     substances = [
@@ -330,7 +492,7 @@ def run_task():
             identifier = substance
             search_type = 'name'
             # URL of the webpage containing the table
-            data = search_id(identifier, search_type)
+            data = self.search_id(identifier, search_type)
             if data is None:
                 substances_no_data.append(substance)
             else:
@@ -346,7 +508,7 @@ def run_task():
                     total=len(iterable),
                     grab=True,
                     desc="Main progress bar",
-                    tk_parent=window,
+                    tk_parent=self,
                     cancel_callback=lambda: (
                         #tpe.shutdown() is a way to stop the executor. 
                         # If wait is True, 
@@ -368,7 +530,7 @@ def run_task():
         except CancelledError:
             # Handle the case when the progress bar is cancelled and tpe.shutdown(cancel_futures=True) is called.
             print("Cancelled!")
-            start_button['state'] = 'normal'
+            #start_button['state'] = 'normal'
             return
 
     
@@ -405,7 +567,7 @@ def run_task():
         for substance in substances_pending:
             print(substance)
         
-        start_button['state'] = 'normal'
+        #start_button['state'] = 'normal'
     #threading.Thread(target=threaded_task, kwargs={'iterable': substances}).start()
     threading.Thread(target=lambda: (threaded_task(substances), on_thread_complete())).start()
 #------------------------------------------------------------------------------
@@ -429,9 +591,9 @@ class ChemicalCompound(nist.compound.NistCompound):
 if __name__ == "__main__":
     n_thread = 10
 
-    window = Tk()
+    window = tk.Tk()
 
-    start_button = Button(window, text="Start", command=run_task)
+    start_button = tk.Button(window, text="Start", command=run_task)
     start_button.pack()
 
     window.mainloop()
