@@ -144,6 +144,15 @@ class NistFrame(DataChemPyFrame):
     load, save, open.'''
     master=None
     tool=None
+
+    # The following variables are used to store the search results
+    # The search result is a dictionary with the following structure:
+    search_result = {}
+    # The search_refs are the references to search for in the NIST 
+    # database.
+    search_refs = []
+
+
     def __init__(self, master, tool,**kwargs):
         '''Initialize the class.'''
         super().__init__(master, tool,**kwargs)
@@ -153,7 +162,84 @@ class NistFrame(DataChemPyFrame):
         self.pack_propagate(False)
         self.pack(pady=0, expand=True)
         if os.name == 'nt':
-            pywinstyles.set_opacity(self, color="#000000")  
+            pywinstyles.set_opacity(self, color="#000000")
+
+    def data_extract(self,url):
+        '''Gets the cTP value for the given list of substances.'''
+        if not isinstance(url, str):
+            print('The url is a non string type: ' + url.__class__.__name__)
+            return None
+        if len(url) == 0:
+            print('The url is empty')
+            return None
+        # Fetch the webpage
+        try:
+            response = requests.get(url,timeout = 20)
+        except:
+            print(f"Error: Unable to connect to {url}.")
+            return None
+        html_content = response.text
+        # Check if the request was successful
+        if response.status_code != 200:
+            print(f"Failed to retrieve the webpage: {response.status_code}")
+            return None
+        # Print the URL to verify
+        #print(f"URL: {url}")
+        # Print the response content (optional)
+        # print(response.text)
+        # Check if the response contains HTML content
+        if 'text/html' not in response.headers.get('Content-Type', ''):
+            print("The response does not contain HTML content.")
+            return None
+        # Print the response content (optional)
+        # print(response.text)
+        # Parse the HTML content using BeautifulSoup
+        soup = BeautifulSoup(html_content, 'html.parser')
+
+        # Locate the table (adjust based on your needs, e.g., by class or id)
+        # If you want to find a specific table, you can use more specific selectors
+        # For example, if the table has a class name 'data-table':
+        # table = soup.find('table', class_='data-table')
+        # To find a table by id:
+        # table = soup.find('table', id='my-table-id')
+        # to finde more than one table
+        # table = soup.find_all('table', class_='data-table')
+        # If you want to find a table by id:
+        # table = soup.find_all('table', id='my-table-id')
+        # If you want to find a table by class:
+        # table = soup.find_all('table', class_='data-table')
+        # If you want to find a table by attribute:
+        # table = soup.find_all('table', attrs={'data-type': 'my-table'})
+        tables = soup.find_all('table')  # This finds the first table in the HTML
+
+        
+
+        # Extract table data
+        table_data = {}
+        
+        for index, table in enumerate(tables):  # Iterate through each table found
+            # Get the aria-label of the table
+            table_name = table.get('aria-label', f"Table {index+1}")
+            headers = []
+            table_data[table_name] = []
+            for row in table.find_all('tr'):  # Iterate through each row
+                cells = []
+                # Get the header
+                if len(headers) == 0:
+                    headers = row.find_all('th')
+                    table_data[table_name].append(
+                        [
+                            header.text.strip()
+                            for header in headers
+                            ])                          
+                cells = row.find_all('td')  # Get data cells
+                if len(cells) != 0:
+                    table_data[table_name].append(
+                        [
+                            cell.text.strip() for cell in cells
+                            ])
+        return table_data
+
     def load(self, tool):
         '''Load the NIST frame with its widgets.'''
         self.tkraise()
@@ -262,13 +348,22 @@ class NistFrame(DataChemPyFrame):
             select_all.select()
             return None
 
-        def deselect_all_parameters(exlusion_list=[]):
+        def deselect_all_parameters():
             '''Deselects all the parameters to search for.'''
             for parameter, checkbox in checkboxes.items():
                 if parameters_dict[parameter]["state"] != "disabled":
                     checkbox.deselect()
             select_all.deselect()
             return None
+
+        def get_selected_parameters():
+            '''Returns a list of the selected parameters.'''
+            selected_parameters = []
+            for parameter, checkbox in checkboxes.items():
+                if checkbox.get() == 1:
+                    selected_parameters.append(parameter)
+            self.search_refs = selected_parameters
+            return selected_parameters
 
         def close_window(run =False):
             '''Closes the window.'''
@@ -283,7 +378,8 @@ class NistFrame(DataChemPyFrame):
 
         # Create a new window.
         # This window will be used to select the parameters to search for.
-        # It will be a top level window, so it will be on top of the main window.        
+        # It will be a top level window,
+        # so it will be on top of the main window.
         param_window = ctk.CTkToplevel(self)
         # Set the title and size of the window
         param_window.title("Search Parameters")
@@ -370,7 +466,10 @@ class NistFrame(DataChemPyFrame):
         run_button = ctk.CTkButton(
             param_window,
             text="Run",
-            command=lambda: close_window(run=True)
+            command=lambda: [
+                get_selected_parameters(),
+                close_window(run=True)
+                ]
             )
         run_button.grid(row=2, column=0, padx=10, pady=10)
 
@@ -416,6 +515,7 @@ class NistFrame(DataChemPyFrame):
 #--------------------------------------------------------------------------
 
     def run_search_task(self,substances):
+        '''Runs the search for the parameters in a separate thread.'''
         #-------------------------------
         # Here goes everything before the main loop
         self.search_result = {
@@ -445,6 +545,7 @@ class NistFrame(DataChemPyFrame):
                 # we check if the thread pool executor is shutdown to end
                 # each pending task.
                 # Also, it tracks which substances are pending.
+
                 if tpe._shutdown:
                     substances_pending.append(substance)
                     return
@@ -457,8 +558,24 @@ class NistFrame(DataChemPyFrame):
                 else:
                     substances_with_data.append(substance)
                     self.search_result[identifier] = data
-
-
+                    # Search for each id of a compuound:
+                    for key,_ in data.items():
+                        # Get the ref value from the data
+                        for ref in self.search_refs:
+                            if ref in data[key]["data_refs"]:
+                                # Get the URL from the data
+                                url = data[key]["data_refs"][ref]
+                                # Check if "data_table" is in the search result
+                                # If not, create it
+                                if "data_table" not in self.search_result[identifier][key]:
+                                    self.search_result[identifier][key]["data_table"] = {}
+                                # Check if the ref is in the data_table
+                                # If not, create it
+                                if ref not in self.search_result[identifier][key]["data_table"]:
+                                    self.search_result[identifier][key]["data_table"][ref] = {}
+                                # Save the data in the data_table
+                                self.search_result[identifier][key]["data_table"][ref] = self.data_extract(url)
+                return None
 
             try:
                 with ThreadPoolExecutor(max_workers=10) as tpe:
@@ -490,14 +607,12 @@ class NistFrame(DataChemPyFrame):
                 # Handle the case when the progress bar is cancelled and tpe.shutdown(cancel_futures=True) is called.
                 print("Cancelled!")
                 #start_button['state'] = 'normal'
-                return
-
-        
+                return None
 
         # Here comes everything after the main loop
         def on_thread_complete():
             print("Job done")
-            # 
+
             print("-" * 50)
             print(f"Results: {len(self.search_result)}")
             for key, value in self.search_result.items():
@@ -525,30 +640,19 @@ class NistFrame(DataChemPyFrame):
             print(f"Substances pending:{len(substances_pending)}")
             for substance in substances_pending:
                 print(substance)
+            print("-" * 50)
+            return None
+            
             
             #start_button['state'] = 'normal'
         #threading.Thread(target=threaded_task, kwargs={'iterable': substances}).start()
-        threading.Thread(target=lambda: (threaded_task(substances), on_thread_complete())).start()
-    #------------------------------------------------------------------------------
-
-class ChemicalCompound(nist.compound.NistCompound):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.cTP = None
-        self.cTP_url = None
-        self.cTP_data = None
-
-    def set_cTP(self, cTP):
-        self.cTP = cTP
-
-    def set_cTP_url(self, url):
-        self.cTP_url = url
-
-    def set_cTP_data(self, data):
-        self.cTP_data = data
-
-
-
+        threading.Thread(target=lambda: [
+            threaded_task(substances),
+            on_thread_complete()
+            ]).start()
+        print("Thread started")
+        return None
+    #--------------------------------------------------------------------------
 
 
 

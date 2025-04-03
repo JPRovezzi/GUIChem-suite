@@ -1,0 +1,128 @@
+--------------------------------------------------
+Substances with data:89
+Trichloroacetic Acid
+Formic Acid
+Lauric Acid
+Acrylic Acid
+Benzoic Acid
+Acetic Acid
+Caprylic Acid
+Stearic Acid
+Capric Acid
+Oleic Acid
+Nicotinic Acid
+Methanol
+Ethanol
+1-Propanol
+Isopropanol
+1-Butanol
+Isopentanol
+Phenol
+Cyclohexanol
+Methyl Formate
+Cetyl Alcohol
+Ethyl Formate
+n-Propyl Formate
+Phenyl Formate
+Isopropyl Formate
+Isopentyl Formate
+Butyl Formate
+Cyclohexyl Formate
+Methyl Acetate
+Ethyl Acetate
+n-propyl Acetate
+Isopropyl Acetate
+Butyl Acetate
+Isopentyl Acetate
+Phenyl Acetate
+Cyclohexyl Acetate
+Cetyl Acetate
+Methyl Trichloroacetate
+Ethyl Trichloroacetate
+n-propyl Trichloroacetate
+Isopropyl Trichloroacetate
+Isopentyl Trichloroacetate
+Butyl Trichloroacetate
+n-propyl Acrylate
+Methyl Acrylate
+Ethyl Acrylate
+Butyl Acrylate
+Isopropyl Acrylate
+Isopentyl Acrylate
+Methyl Caprylate
+Ethyl Caprylate
+Isopropyl Caprylate
+Butyl Caprylate
+Cyclohexyl Caprylate
+Methyl Caprate
+Ethyl Caprate
+Butyl Caprate
+Methyl Laurate
+Cyclohexyl Caprate
+Ethyl Laurate
+Isopropyl Laurate
+Butyl Laurate
+Isopentyl Laurate
+Methyl Oleate
+Butyl Oleate
+Ethyl Oleate
+Cetyl Oleate
+n-propyl Stearate
+Methyl Stearate
+Ethyl Stearate
+Butyl Stearate
+Isopentyl Stearate
+Isopropyl Stearate
+Cyclohexyl Stearate
+Cetyl Stearate
+n-propyl Benzoate
+Methyl Benzoate
+Ethyl Benzoate
+Butyl Benzoate
+Isopropyl Benzoate
+Isopentyl Benzoate
+Phenyl Benzoate
+Cyclohexyl Benzoate
+Ethyl Nicotinate
+Methyl Nicotinate
+Butyl Nicotinate
+Isopropyl Nicotinate
+Toluene
+n-heptane
+--------------------------------------------------
+Substances without data:32
+Cetyl Formate
+Phenyl Trichloroacetate
+Cetyl Trichloroacetate
+Cyclohexyl Trichloroacetate
+Cyclohexyl Acrylate
+Phenyl Acrylate
+n-propyl Caprylate
+Cetyl Acrylate
+Isopentyl Caprylate
+Phenyl Caprylate
+Cetyl Caprylate
+n-propyl Caprate
+Isopropyl Caprate
+Isopentyl Caprate
+Phenyl Caprate
+Cetyl Caprate
+n-propyl Laurate
+Phenyl Laurate
+Cyclohexyl Laurate
+Cetyl Laurate
+Isopropyl Oleate
+n-propyl Oleate
+Isopentyl Oleate
+Phenyl Oleate
+Cyclohexyl Oleate
+Phenyl Stearate
+Cetyl Benzoate
+n-propyl Nicotinate
+Isopentyl Nicotinate
+Phenyl Nicotinate
+Cetyl Nicotinate
+Cyclohexyl Nicotinate
+--------------------------------------------------
+Substances pending:0
+--------------------------------------------------
