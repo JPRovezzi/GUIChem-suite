@@ -15,6 +15,7 @@ import modules.image_handler as image_handler
 from modules.main_frame.functions import read_json
 import os
 import json
+import re
 #------------------------------------------------------------
 
 # Class definitions
@@ -27,6 +28,29 @@ class GoBackButton(ctk.CTkButton):
             text="BACK",
             cursor="hand2",
             **kwargs)
+class HoverInfo(tk.Menu):
+    ''' This class is a custom menu that appears when hovering over a widget
+    and disappears when the mouse leaves the widget.'''
+    # Constructor to initialize the HoverInfo object
+    def __init__(self, parent, text, command=None):
+        self._com = command  # Store the optional command to execute on "Return" key press
+        tk.Menu.__init__(self, parent, tearoff=0)  # Initialize the parent Menu class with no tear-off
+        if not isinstance(text, str):  # Check if the provided text is a string
+            raise TypeError('Trying to initialise a Hover Menu with a non string type: ' + text.__class__.__name__)
+        toktext = re.split('\n', text)  # Split the text into lines using newline as a delimiter for hover menu.
+        for t in toktext:  # Iterate over each line of text
+            self.add_command(label=t)  # Adds each line of the text as a label in the menu
+            # Bind the "Enter" event to display the hover menu
+            self.master.bind("<Enter>", self.Display)
+            # Bind the "Leave" event to remove the hover menu
+            self.master.bind("<Leave>", self.Remove)
+    # Method to display the hover menu at the mouse cursor's position
+    def Display(self, event):
+        self.post(event.x_root, event.y_root)
+
+    # Method to hide the hover menu when the mouse leaves the widget
+    def Remove(self, event):
+        self.unpost()  # Hide the menu
 
 class TitleLabel(ctk.CTkLabel):
     ''' This class is a custom label widget that is used to display the 
