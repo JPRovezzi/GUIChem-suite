@@ -1,29 +1,160 @@
 {
-    "search_parameters": [
-        "ID",
-        "name",
-        "synonyms",
-        "formula",
-        "mol_weight",
-        "inchi",
-        "inchi_key",
-        "cas_rn",
-        "mol2D",
-        "mol3D",
-        "cTG",
-        "cTC",
-        "cTP",
-        "cTR",
-        "cSO",
-        "cIE",
-        "cIR",
-        "cMS",
-        "cUV",
-        "cES",
-        "cGC",
-        "ir_specs",
-        "thz_specs",
-        "ms_specs",
-        "uv_specs"
-    ]
+    "search_parameters": {
+        "ID": {
+            "state": "disabled",
+            "selected": "True",
+            "type": "str",
+            "description": "The unique identifier for the compound in the NIST database."
+        },
+        "name": {
+            "state": "disabled",
+            "selected": "True",
+            "type": "str",
+            "description": "The name of the compound."
+        },
+        "synonyms": {
+            "state": "disabled",
+            "selected": "True",
+            "type": "list",
+            "description": "A list of synonyms for the compound."
+        },
+        "formula": {
+            "state": "disabled",
+            "selected": "True",
+            "type": "str",
+            "description": "Molecular formula."
+        },
+        "mol_weight": {
+            "state": "disabled",
+            "selected": "True",
+            "type": "float",
+            "description": "Molecular weight."
+        },
+        "inchi": {
+            "state": "disabled",
+            "selected": "True",
+            "type": "str",
+            "description": "IUPAC International Chemical Identifier (InChI) for the compound."
+        },
+        "inchi_key": {
+            "state": "disabled",
+            "selected": "True",
+            "type": "str",
+            "description": "Hashed version of the InChI (InChIKey)."
+        },
+        "cas_rn": {
+            "state": "disabled",
+            "selected": "True",
+            "type": "str",
+            "description": "Chemical Abstracts Service Registry Number (CAS RN) for the compound."
+        },
+        "mol2D": {
+            "state": "disabled",
+            "selected": "True",
+            "type": "str",
+            "description": "2D molecular structure."
+        },
+        "mol3D": {
+            "state": "disabled",
+            "selected": "True",
+            "type": "str",
+            "description": "3D molecular structure."
+        },
+        "cTG": {
+            "state": "normal",
+            "selected": "False",
+            "type": "str",
+            "description": "Gas phase data."
+        },
+        "cTC": {
+            "state": "normal",
+            "selected": "False",
+            "type": "str",
+            "description": "Condensed phase data."
+        },
+        "cTP": {
+            "state": "normal",
+            "selected": "False",
+            "type": "str",
+            "description": "Phase-change data."
+        },
+        "cTR": {
+            "state": "normal",
+            "selected": "False",
+            "type": "str",
+            "description": "Thermodynamic reaction data."
+        },
+        "cSO": {
+            "state": "normal",
+            "selected": "False",
+            "type": "str",
+            "description": "Henry's law and solubility data."
+        },
+        "cIE": {
+            "state": "normal",
+            "selected": "False",
+            "type": "str",
+            "description": "Ionization energy."
+        },
+        "cIR": {
+            "state": "normal",
+            "selected": "False",
+            "type": "str",
+            "description": "Infrared spectrum."
+        },
+        "cMS": {
+            "state": "normal",
+            "selected": "False",
+            "type": "str",
+            "description": "Mass spectrum."
+        },
+        "cUV": {
+            "state": "normal",
+            "selected": "False",
+            "type": "str",
+            "description": "UV spectrum."
+        },
+        "cES": {
+            "state": "normal",
+            "selected": "False",
+            "type": "str",
+            "description": "Electronic and vibrational energy levels."
+        },
+        "cGC": {
+            "state": "normal",
+            "selected": "False",
+            "type": "str",
+            "description": "Gas chromatography spectrum."
+        },
+        "cFP": {
+            "state": "disabled",
+            "selected": "True",
+            "type": "str",
+            "description": "Fluid Properties."
+        },
+        "ir_specs": {
+            "state": "disabled",
+            "selected": "True",
+            "type": "list",
+            "description": "Infrared spectra."
+        },
+        "thz_specs": {
+            "state": "disabled",
+            "selected": "True",
+            "type": "list",
+            "description": "Terahertz spectra."
+        },
+        "ms_specs": {
+            "state": "disabled",
+            "selected": "True",
+            "type": "list",
+            "description": "Mass spectra."
+        },
+        "uv_specs": {
+            "state": "disabled",
+            "selected": "True",
+            "type": "list",
+            "description": "UV spectra."
+        }
+    }
 }
