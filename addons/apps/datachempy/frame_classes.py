@@ -221,7 +221,7 @@ class NistFrame(DataChemPyFrame):
         # Create the text box
         self.text_frame = CTkXYFrame(self, width=500, height=50)
         self.text_frame.grid(row=4, column=0, columnspan=3, padx=10, pady=10)
-        self.console = ctk.CTkTextbox(self.text_frame, width=500, height=300)
+        self.console = widget_classes.CopyTextBox(self.text_frame, width=500, height=300)
         self.console.pack(fill="both", expand=True)
         self.console.insert("0.0", "This is the NIST frame. You can search for compounds here.")
         self.console.configure(state="disabled")  # Disable the text box to prevent editing
@@ -253,17 +253,20 @@ class NistFrame(DataChemPyFrame):
 
     def search_param_window(self):
         '''Creates a window to search for the parameters of the compound.'''
+
         def select_all_parameters():
             '''Selects all the parameters to search for.'''
-            for parameter in checkboxes:
-                checkboxes[parameter].select()
+            for parameter, checkbox in checkboxes.items():
+                if parameters_dict[parameter]["state"] != "disabled":
+                    checkbox.select()
             select_all.select()
             return None
 
-        def deselect_all_parameters():
+        def deselect_all_parameters(exlusion_list=[]):
             '''Deselects all the parameters to search for.'''
-            for parameter in checkboxes:
-                checkboxes[parameter].deselect()
+            for parameter, checkbox in checkboxes.items():
+                if parameters_dict[parameter]["state"] != "disabled":
+                    checkbox.deselect()
             select_all.deselect()
             return None
 
@@ -312,7 +315,11 @@ class NistFrame(DataChemPyFrame):
 
         with open(json_path, "r") as json_file:
             data = json.load(json_file)
-            parameters = data.get("search_parameters", [])
+            parameters_dict = data.get("search_parameters", {})
+            # Get the list of parameters from the JSON file
+            parameters_list = list(parameters_dict.keys())
+
+
         checkboxes = {}
 
         # Create a frame to hold the checkboxes
@@ -320,7 +327,8 @@ class NistFrame(DataChemPyFrame):
         checkbox_frame.grid(row=1, column=0, columnspan=2, padx=10, pady=10)
 
         number_of_columns = 5
-        for index, parameter in enumerate(parameters):
+        # Create a list of checkboxes
+        for index, parameter in enumerate(parameters_list):
             if index % number_of_columns == 0:
                 row = (index // number_of_columns)
                 column = 0
@@ -331,7 +339,15 @@ class NistFrame(DataChemPyFrame):
             # Create a checkbox for each parameter
             checkboxes[parameter] = ctk.CTkCheckBox(
                 checkbox_frame,
-                text=parameter)
+                text=parameter,
+                state=parameters_dict[parameter]["state"])
+            widget_classes.HoverInfo(
+                checkboxes[parameter],
+                text=parameters_dict[parameter]["description"])
+            if parameters_dict[parameter]["selected"] == "True":
+                checkboxes[parameter].select()
+            
+            
             checkboxes[parameter].grid(row=row, column=column, padx=10, pady=10)
         
         # Create a checkbox to select all parameters
@@ -341,7 +357,7 @@ class NistFrame(DataChemPyFrame):
             command=lambda: (
                 (select_all_parameters() if select_all.get() else deselect_all_parameters())
             ))
-        select_all.grid(row=(len(parameters)//number_of_columns)+1, column=0, padx=10, pady=10)
+        select_all.grid(row=(len(parameters_list)//number_of_columns)+1, column=0, padx=10, pady=10)
         # Create a button to close the window
         close_button = ctk.CTkButton(
             param_window,
