@@ -1,0 +1,820 @@
+2025-04-10 12:34:06,256 - INFO - Processing CAS number: 76-03-9
+2025-04-10 12:34:11,941 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:34:11,941 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:34:11,942 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:34:11,942 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:34:11,942 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:34:11,942 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:34:11,945 - INFO - Scraping completed successfully.
+2025-04-10 12:34:11,945 - INFO - Script finished.
+2025-04-10 12:34:11,945 - INFO - Processing CAS number: 64-18-6
+2025-04-10 12:34:15,054 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:34:15,054 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:34:15,054 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:34:15,054 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:34:15,054 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:34:15,055 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:34:15,057 - INFO - Scraping completed successfully.
+2025-04-10 12:34:15,057 - INFO - Script finished.
+2025-04-10 12:34:15,057 - INFO - Processing CAS number: 0143-07-07
+2025-04-10 12:34:16,235 - ERROR - Error fetching URL https://www.chemicalbook.com/ProductList_En.aspx?kwd=0143-07-07: 500 Server Error: Internal Server Error for url: https://www.chemicalbook.com/ProductList_En.aspx?kwd=0143-07-07
+2025-04-10 12:34:16,235 - ERROR - Failed to fetch the main page.
+2025-04-10 12:34:16,235 - INFO - Processing CAS number: 79-10-7
+2025-04-10 12:34:23,705 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:34:23,705 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:34:23,705 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:34:23,705 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:34:23,705 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:34:23,705 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:34:23,708 - INFO - Scraping completed successfully.
+2025-04-10 12:34:23,708 - INFO - Script finished.
+2025-04-10 12:34:23,708 - INFO - Processing CAS number: 65-85-0
+2025-04-10 12:34:30,215 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:34:30,215 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:34:30,215 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:34:30,216 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:34:30,216 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:34:30,216 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:34:30,218 - INFO - Scraping completed successfully.
+2025-04-10 12:34:30,218 - INFO - Script finished.
+2025-04-10 12:34:30,218 - INFO - Processing CAS number: 64-19-7
+2025-04-10 12:34:33,922 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:34:33,923 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:34:33,923 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:34:33,923 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:34:33,923 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:34:33,923 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:34:33,925 - INFO - Scraping completed successfully.
+2025-04-10 12:34:33,925 - INFO - Script finished.
+2025-04-10 12:34:33,925 - INFO - Processing CAS number: 0124-07-02
+2025-04-10 12:34:35,204 - ERROR - Error fetching URL https://www.chemicalbook.com/ProductList_En.aspx?kwd=0124-07-02: 500 Server Error: Internal Server Error for url: https://www.chemicalbook.com/ProductList_En.aspx?kwd=0124-07-02
+2025-04-10 12:34:35,204 - ERROR - Failed to fetch the main page.
+2025-04-10 12:34:35,204 - INFO - Processing CAS number: 57-11-4
+2025-04-10 12:34:38,991 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:34:38,991 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:34:38,991 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:34:38,991 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:34:38,991 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:34:38,992 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:34:38,994 - INFO - Scraping completed successfully.
+2025-04-10 12:34:38,994 - INFO - Script finished.
+2025-04-10 12:34:38,994 - INFO - Processing CAS number: 334-48-5
+2025-04-10 12:34:43,468 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:34:43,468 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:34:43,469 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:34:43,469 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:34:43,469 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:34:43,469 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:34:43,472 - INFO - Scraping completed successfully.
+2025-04-10 12:34:43,472 - INFO - Script finished.
+2025-04-10 12:34:43,472 - INFO - Processing CAS number: 112-80-1
+2025-04-10 12:34:47,035 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:34:47,035 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:34:47,035 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:34:47,035 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:34:47,035 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:34:47,035 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:34:47,038 - INFO - Scraping completed successfully.
+2025-04-10 12:34:47,038 - INFO - Script finished.
+2025-04-10 12:34:47,038 - INFO - Processing CAS number: 59-67-6
+2025-04-10 12:34:50,748 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:34:50,748 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:34:50,748 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:34:50,749 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:34:50,749 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:34:50,749 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:34:50,753 - INFO - Scraping completed successfully.
+2025-04-10 12:34:50,753 - INFO - Script finished.
+2025-04-10 12:34:50,753 - INFO - Processing CAS number: 67-56-1
+2025-04-10 12:34:54,461 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:34:54,461 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:34:54,461 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:34:54,461 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:34:54,462 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:34:54,462 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:34:54,467 - INFO - Scraping completed successfully.
+2025-04-10 12:34:54,467 - INFO - Script finished.
+2025-04-10 12:34:54,467 - INFO - Processing CAS number: 64-17-5
+2025-04-10 12:34:57,244 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:34:57,245 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:34:57,245 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:34:57,245 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:34:57,245 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:34:57,245 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:34:57,248 - INFO - Scraping completed successfully.
+2025-04-10 12:34:57,248 - INFO - Script finished.
+2025-04-10 12:39:57,032 - INFO - Processing CAS number: 76-03-9
+2025-04-10 12:39:59,235 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:39:59,235 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:39:59,235 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:39:59,236 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:39:59,236 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:39:59,236 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:39:59,238 - INFO - Scraping completed successfully.
+2025-04-10 12:39:59,238 - INFO - Script finished.
+2025-04-10 12:39:59,238 - INFO - Processing CAS number: 64-18-6
+2025-04-10 12:40:01,649 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:40:01,650 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:40:01,650 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:40:01,650 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:40:01,650 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:40:01,650 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:40:01,653 - INFO - Scraping completed successfully.
+2025-04-10 12:40:01,653 - INFO - Script finished.
+2025-04-10 12:40:01,653 - INFO - Processing CAS number: 0143-07-07
+2025-04-10 12:40:02,558 - ERROR - Error fetching URL https://www.chemicalbook.com/ProductList_En.aspx?kwd=0143-07-07: 500 Server Error: Internal Server Error for url: https://www.chemicalbook.com/ProductList_En.aspx?kwd=0143-07-07
+2025-04-10 12:40:02,559 - ERROR - Failed to fetch the main page.
+2025-04-10 12:40:02,559 - INFO - Processing CAS number: 79-10-7
+2025-04-10 12:40:04,921 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:40:04,922 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:40:04,922 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:40:04,922 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:40:04,922 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:40:04,922 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:40:04,924 - INFO - Scraping completed successfully.
+2025-04-10 12:40:04,924 - INFO - Script finished.
+2025-04-10 12:40:04,924 - INFO - Processing CAS number: 65-85-0
+2025-04-10 12:40:19,211 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:40:19,211 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:40:19,211 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:40:19,212 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:40:19,212 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:40:19,212 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:40:19,214 - INFO - Scraping completed successfully.
+2025-04-10 12:40:19,214 - INFO - Script finished.
+2025-04-10 12:40:19,215 - INFO - Processing CAS number: 64-19-7
+2025-04-10 12:40:21,599 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:40:21,599 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:40:21,600 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:40:21,600 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:40:21,600 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:40:21,600 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:40:21,602 - INFO - Scraping completed successfully.
+2025-04-10 12:40:21,602 - INFO - Script finished.
+2025-04-10 12:40:21,602 - INFO - Processing CAS number: 0124-07-02
+2025-04-10 12:40:22,541 - ERROR - Error fetching URL https://www.chemicalbook.com/ProductList_En.aspx?kwd=0124-07-02: 500 Server Error: Internal Server Error for url: https://www.chemicalbook.com/ProductList_En.aspx?kwd=0124-07-02
+2025-04-10 12:40:22,541 - ERROR - Failed to fetch the main page.
+2025-04-10 12:40:22,541 - INFO - Processing CAS number: 57-11-4
+2025-04-10 12:40:24,954 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:40:24,954 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:40:24,954 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:40:24,954 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:40:24,954 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:40:24,955 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:40:24,957 - INFO - Scraping completed successfully.
+2025-04-10 12:40:24,957 - INFO - Script finished.
+2025-04-10 12:40:24,957 - INFO - Processing CAS number: 334-48-5
+2025-04-10 12:40:34,860 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:40:34,860 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:40:34,860 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:40:34,861 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:40:34,861 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:40:34,861 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:40:34,863 - INFO - Scraping completed successfully.
+2025-04-10 12:40:34,863 - INFO - Script finished.
+2025-04-10 12:40:34,863 - INFO - Processing CAS number: 112-80-1
+2025-04-10 12:40:37,114 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:40:37,114 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:40:37,115 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:40:37,115 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:40:37,115 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:40:37,115 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:40:37,117 - INFO - Scraping completed successfully.
+2025-04-10 12:40:37,117 - INFO - Script finished.
+2025-04-10 12:40:37,118 - INFO - Processing CAS number: 59-67-6
+2025-04-10 12:40:40,989 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:40:40,989 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:40:40,989 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:40:40,990 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:40:40,990 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:40:40,990 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:40:40,992 - INFO - Scraping completed successfully.
+2025-04-10 12:40:40,992 - INFO - Script finished.
+2025-04-10 12:40:40,992 - INFO - Processing CAS number: 67-56-1
+2025-04-10 12:40:44,424 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:40:44,424 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:40:44,425 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:40:44,425 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:40:44,425 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:40:44,425 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:40:44,428 - INFO - Scraping completed successfully.
+2025-04-10 12:40:44,428 - INFO - Script finished.
+2025-04-10 12:40:44,428 - INFO - Processing CAS number: 64-17-5
+2025-04-10 12:40:46,717 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:40:46,717 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:40:46,717 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:40:46,718 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:40:46,718 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:40:46,718 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:40:46,721 - INFO - Scraping completed successfully.
+2025-04-10 12:40:46,721 - INFO - Script finished.
+2025-04-10 12:40:46,721 - INFO - Processing CAS number: 71-23-8
+2025-04-10 12:40:49,105 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:40:49,105 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:40:49,105 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:40:49,105 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:40:49,105 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:40:49,105 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:40:49,107 - INFO - Scraping completed successfully.
+2025-04-10 12:40:49,107 - INFO - Script finished.
+2025-04-10 12:40:49,107 - INFO - Processing CAS number: 67-63-0
+2025-04-10 12:40:52,699 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:40:52,699 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:40:52,700 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:40:52,700 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:40:52,700 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:40:52,700 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:40:52,705 - INFO - Scraping completed successfully.
+2025-04-10 12:40:52,705 - INFO - Script finished.
+2025-04-10 12:40:52,705 - INFO - Processing CAS number: 71-36-3
+2025-04-10 12:40:55,621 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:40:55,622 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:40:55,622 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:40:55,622 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:40:55,622 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:40:55,622 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:40:55,624 - INFO - Scraping completed successfully.
+2025-04-10 12:40:55,624 - INFO - Script finished.
+2025-04-10 12:40:55,624 - INFO - Processing CAS number: 123-51-3
+2025-04-10 12:41:00,127 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:41:00,127 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:41:00,127 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:41:00,128 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:41:00,128 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:41:00,128 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:41:00,130 - INFO - Scraping completed successfully.
+2025-04-10 12:41:00,130 - INFO - Script finished.
+2025-04-10 12:41:00,130 - INFO - Processing CAS number: 108-95-2
+2025-04-10 12:41:02,876 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:41:02,876 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:41:02,876 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:41:02,876 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:41:02,876 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:41:02,876 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:41:02,879 - INFO - Scraping completed successfully.
+2025-04-10 12:41:02,879 - INFO - Script finished.
+2025-04-10 12:41:02,879 - INFO - Processing CAS number: 108-93-0
+2025-04-10 12:41:05,142 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:41:05,142 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:41:05,142 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:41:05,142 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:41:05,143 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:41:05,143 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:41:05,144 - INFO - Scraping completed successfully.
+2025-04-10 12:41:05,144 - INFO - Script finished.
+2025-04-10 12:41:05,144 - INFO - Processing CAS number: 107-31-3
+2025-04-10 12:41:07,820 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:41:07,820 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:41:07,820 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:41:07,821 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:41:07,821 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:41:07,821 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:41:07,823 - INFO - Scraping completed successfully.
+2025-04-10 12:41:07,823 - INFO - Script finished.
+2025-04-10 12:41:07,823 - INFO - Processing CAS number: 36653-82-4
+2025-04-10 12:41:10,369 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:41:10,370 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:41:10,370 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:41:10,371 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:41:10,371 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:41:10,371 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:41:10,372 - INFO - Scraping completed successfully.
+2025-04-10 12:41:10,372 - INFO - Script finished.
+2025-04-10 12:41:10,372 - INFO - Processing CAS number: 109-94-4
+2025-04-10 12:41:12,824 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:41:12,824 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:41:12,824 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:41:12,824 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:41:12,824 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:41:12,824 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:41:12,826 - INFO - Scraping completed successfully.
+2025-04-10 12:41:12,826 - INFO - Script finished.
+2025-04-10 12:41:12,826 - INFO - Processing CAS number: 110-74-7
+2025-04-10 12:41:14,751 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:41:14,751 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:41:14,751 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:41:14,751 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:41:14,751 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:41:14,751 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:41:14,753 - INFO - Scraping completed successfully.
+2025-04-10 12:41:14,753 - INFO - Script finished.
+2025-04-10 12:41:14,753 - INFO - Processing CAS number: 1864-94-4
+2025-04-10 12:41:16,969 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:41:16,969 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:41:16,969 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:41:16,969 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:41:16,969 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:41:16,970 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:41:16,971 - INFO - Scraping completed successfully.
+2025-04-10 12:41:16,971 - INFO - Script finished.
+2025-04-10 12:41:16,971 - INFO - Processing CAS number: 625-55-8
+2025-04-10 12:41:19,429 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:41:19,429 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:41:19,429 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:41:19,429 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:41:19,429 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:41:19,430 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:41:19,431 - INFO - Scraping completed successfully.
+2025-04-10 12:41:19,431 - INFO - Script finished.
+2025-04-10 12:41:19,431 - INFO - Processing CAS number: 110-45-2
+2025-04-10 12:41:21,567 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:41:21,567 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:41:21,568 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:41:21,568 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:41:21,568 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:41:21,568 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:41:21,570 - INFO - Scraping completed successfully.
+2025-04-10 12:41:21,570 - INFO - Script finished.
+2025-04-10 12:41:21,570 - INFO - Processing CAS number: 592-84-7
+2025-04-10 12:41:24,065 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:41:24,065 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:41:24,065 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:41:24,065 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:41:24,065 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:41:24,065 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:41:24,067 - INFO - Scraping completed successfully.
+2025-04-10 12:41:24,067 - INFO - Script finished.
+2025-04-10 12:41:24,067 - INFO - Processing CAS number: 4351-54-6
+2025-04-10 12:41:25,842 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:41:25,842 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:41:25,842 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:41:25,842 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:41:25,842 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:41:25,843 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:41:25,843 - INFO - Scraping completed successfully.
+2025-04-10 12:41:25,843 - INFO - Script finished.
+2025-04-10 12:41:25,844 - INFO - Processing CAS number: 79-20-9
+2025-04-10 12:41:28,364 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:41:28,365 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:41:28,365 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:41:28,365 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:41:28,365 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:41:28,365 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:41:28,367 - INFO - Scraping completed successfully.
+2025-04-10 12:41:28,368 - INFO - Script finished.
+2025-04-10 12:41:28,368 - INFO - Processing CAS number: 141-78-6
+2025-04-10 12:41:31,011 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:41:31,012 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:41:31,012 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:41:31,012 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:41:31,012 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:41:31,012 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:41:31,015 - INFO - Scraping completed successfully.
+2025-04-10 12:41:31,015 - INFO - Script finished.
+2025-04-10 12:41:31,015 - INFO - Processing CAS number: 109-60-4
+2025-04-10 12:41:33,901 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:41:33,901 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:41:33,901 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:41:33,901 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:41:33,901 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:41:33,901 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:41:33,903 - INFO - Scraping completed successfully.
+2025-04-10 12:41:33,903 - INFO - Script finished.
+2025-04-10 12:41:33,903 - INFO - Processing CAS number: 108-21-4
+2025-04-10 12:41:55,546 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:41:55,546 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:41:55,546 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:41:55,546 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:41:55,546 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:41:55,547 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:41:55,549 - INFO - Scraping completed successfully.
+2025-04-10 12:41:55,549 - INFO - Script finished.
+2025-04-10 12:41:55,549 - INFO - Processing CAS number: 123-86-4
+2025-04-10 12:42:00,843 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:42:00,843 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:42:00,843 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:42:00,844 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:42:00,844 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:42:00,844 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:42:00,846 - INFO - Scraping completed successfully.
+2025-04-10 12:42:00,846 - INFO - Script finished.
+2025-04-10 12:42:00,846 - INFO - Processing CAS number: 123-92-2
+2025-04-10 12:42:06,919 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:42:06,919 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:42:06,919 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:42:06,920 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:42:06,920 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:42:06,920 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:42:06,923 - INFO - Scraping completed successfully.
+2025-04-10 12:42:06,923 - INFO - Script finished.
+2025-04-10 12:42:06,923 - INFO - Processing CAS number: 122-79-2
+2025-04-10 12:42:09,358 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:42:09,358 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:42:09,358 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:42:09,358 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:42:09,359 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:42:09,359 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:42:09,360 - INFO - Scraping completed successfully.
+2025-04-10 12:42:09,360 - INFO - Script finished.
+2025-04-10 12:42:09,360 - INFO - Processing CAS number: 622-45-7
+2025-04-10 12:42:11,544 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:42:11,544 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:42:11,544 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:42:11,545 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:42:11,545 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:42:11,545 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:42:11,546 - INFO - Scraping completed successfully.
+2025-04-10 12:42:11,546 - INFO - Script finished.
+2025-04-10 12:42:11,546 - INFO - Processing CAS number: 629-70-9
+2025-04-10 12:42:14,032 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:42:14,032 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:42:14,032 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:42:14,032 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:42:14,033 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:42:14,033 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:42:14,034 - INFO - Scraping completed successfully.
+2025-04-10 12:42:14,034 - INFO - Script finished.
+2025-04-10 12:42:14,034 - INFO - Processing CAS number: 598-99-2
+2025-04-10 12:42:16,329 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:42:16,329 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:42:16,329 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:42:16,329 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:42:16,329 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:42:16,329 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:42:16,331 - INFO - Scraping completed successfully.
+2025-04-10 12:42:16,331 - INFO - Script finished.
+2025-04-10 12:42:16,331 - INFO - Processing CAS number: 515-84-4
+2025-04-10 12:42:18,590 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:42:18,590 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:42:18,590 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:42:18,591 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:42:18,591 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:42:18,591 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:42:18,592 - INFO - Scraping completed successfully.
+2025-04-10 12:42:18,592 - INFO - Script finished.
+2025-04-10 12:42:18,592 - INFO - Processing CAS number: 13313-91-2
+2025-04-10 12:42:20,642 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:42:20,642 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:42:20,643 - INFO - Scraping completed successfully.
+2025-04-10 12:42:20,643 - INFO - Script finished.
+2025-04-10 12:42:20,643 - INFO - Processing CAS number: 3974-99-0
+2025-04-10 12:42:22,874 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:42:22,874 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:42:22,875 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:42:22,875 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:42:22,875 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:42:22,875 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:42:22,876 - INFO - Scraping completed successfully.
+2025-04-10 12:42:22,876 - INFO - Script finished.
+2025-04-10 12:42:22,876 - INFO - Processing CAS number: 57392-55-9
+2025-04-10 12:42:24,845 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:42:24,846 - INFO - Scraping completed successfully.
+2025-04-10 12:42:24,846 - INFO - Script finished.
+2025-04-10 12:42:24,846 - INFO - Processing CAS number: 3657-07-06
+2025-04-10 12:42:26,030 - ERROR - Error fetching URL https://www.chemicalbook.com/ProductList_En.aspx?kwd=3657-07-06: 500 Server Error: Internal Server Error for url: https://www.chemicalbook.com/ProductList_En.aspx?kwd=3657-07-06
+2025-04-10 12:42:26,031 - ERROR - Failed to fetch the main page.
+2025-04-10 12:42:26,031 - INFO - Processing CAS number: 925-60-0
+2025-04-10 12:42:30,299 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:42:30,299 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:42:30,300 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:42:30,300 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:42:30,300 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:42:30,300 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:42:30,301 - INFO - Scraping completed successfully.
+2025-04-10 12:42:30,301 - INFO - Script finished.
+2025-04-10 12:42:30,301 - INFO - Processing CAS number: 96-33-3
+2025-04-10 12:42:31,409 - ERROR - Failed to extract href from div.
+2025-04-10 12:42:31,410 - INFO - Processing CAS number: 140-88-5
+2025-04-10 12:42:33,631 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:42:33,631 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:42:33,631 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:42:33,632 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:42:33,632 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:42:33,632 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:42:33,634 - INFO - Scraping completed successfully.
+2025-04-10 12:42:33,634 - INFO - Script finished.
+2025-04-10 12:42:33,634 - INFO - Processing CAS number: 141-32-2
+2025-04-10 12:42:36,610 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:42:36,610 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:42:36,610 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:42:36,610 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:42:36,610 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:42:36,610 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:42:36,612 - INFO - Scraping completed successfully.
+2025-04-10 12:42:36,612 - INFO - Script finished.
+2025-04-10 12:42:36,612 - INFO - Processing CAS number: 0689-12-3
+2025-04-10 12:42:37,444 - ERROR - Error fetching URL https://www.chemicalbook.com/ProductList_En.aspx?kwd=0689-12-3: 500 Server Error: Internal Server Error for url: https://www.chemicalbook.com/ProductList_En.aspx?kwd=0689-12-3
+2025-04-10 12:42:37,444 - ERROR - Failed to fetch the main page.
+2025-04-10 12:42:37,445 - INFO - Processing CAS number: 4245-35-6
+2025-04-10 12:42:39,456 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:42:39,456 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:42:39,456 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:42:39,457 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:42:39,457 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:42:39,457 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:42:39,458 - INFO - Scraping completed successfully.
+2025-04-10 12:42:39,458 - INFO - Script finished.
+2025-04-10 12:42:39,458 - INFO - Processing CAS number: 0111-11-5
+2025-04-10 12:42:40,439 - ERROR - Error fetching URL https://www.chemicalbook.com/ProductList_En.aspx?kwd=0111-11-5: 500 Server Error: Internal Server Error for url: https://www.chemicalbook.com/ProductList_En.aspx?kwd=0111-11-5
+2025-04-10 12:42:40,440 - ERROR - Failed to fetch the main page.
+2025-04-10 12:42:40,440 - INFO - Processing CAS number: 106-32-1
+2025-04-10 12:42:42,917 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:42:42,917 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:42:42,917 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:42:42,918 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:42:42,918 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:42:42,918 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:42:42,919 - INFO - Scraping completed successfully.
+2025-04-10 12:42:42,919 - INFO - Script finished.
+2025-04-10 12:42:42,919 - INFO - Processing CAS number: 5458-59-3
+2025-04-10 12:42:44,853 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:42:44,854 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:42:44,854 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:42:44,854 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:42:44,854 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:42:44,854 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:42:44,855 - INFO - Scraping completed successfully.
+2025-04-10 12:42:44,855 - INFO - Script finished.
+2025-04-10 12:42:44,855 - INFO - Processing CAS number: 589-75-3
+2025-04-10 12:42:46,841 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:42:46,841 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:42:46,841 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:42:46,842 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:42:46,842 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:42:46,842 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:42:46,843 - INFO - Scraping completed successfully.
+2025-04-10 12:42:46,843 - INFO - Script finished.
+2025-04-10 12:42:46,843 - INFO - Processing CAS number: 1551-42-4
+2025-04-10 12:42:48,714 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:42:48,715 - INFO - Scraping completed successfully.
+2025-04-10 12:42:48,715 - INFO - Script finished.
+2025-04-10 12:42:48,715 - INFO - Processing CAS number: 110-42-9
+2025-04-10 12:42:51,050 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:42:51,050 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:42:51,050 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:42:51,050 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:42:51,051 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:42:51,051 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:42:51,052 - INFO - Scraping completed successfully.
+2025-04-10 12:42:51,052 - INFO - Script finished.
+2025-04-10 12:42:51,052 - INFO - Processing CAS number: 110-38-3
+2025-04-10 12:42:53,576 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:42:53,576 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:42:53,577 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:42:53,577 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:42:53,577 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:42:53,577 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:42:53,579 - INFO - Scraping completed successfully.
+2025-04-10 12:42:53,579 - INFO - Script finished.
+2025-04-10 12:42:53,579 - INFO - Processing CAS number: 30673-36-0
+2025-04-10 12:42:55,685 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:42:55,685 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:42:55,685 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:42:55,685 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:42:55,685 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:42:55,686 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:42:55,686 - INFO - Scraping completed successfully.
+2025-04-10 12:42:55,686 - INFO - Script finished.
+2025-04-10 12:42:55,687 - INFO - Processing CAS number: 111-82-0
+2025-04-10 12:43:01,260 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:43:01,260 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:43:01,261 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:43:01,261 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:43:01,261 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:43:01,261 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:43:01,262 - INFO - Scraping completed successfully.
+2025-04-10 12:43:01,263 - INFO - Script finished.
+2025-04-10 12:43:01,263 - INFO - Processing CAS number: 1551-40-2
+2025-04-10 12:43:04,665 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:43:04,666 - INFO - Scraping completed successfully.
+2025-04-10 12:43:04,666 - INFO - Script finished.
+2025-04-10 12:43:04,666 - INFO - Processing CAS number: 106-33-2
+2025-04-10 12:43:18,295 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:43:18,296 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:43:18,296 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:43:18,296 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:43:18,296 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:43:18,296 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:43:18,298 - INFO - Scraping completed successfully.
+2025-04-10 12:43:18,298 - INFO - Script finished.
+2025-04-10 12:43:18,298 - INFO - Processing CAS number: 10233-13-3
+2025-04-10 12:43:22,978 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:43:22,978 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:43:22,978 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:43:22,978 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:43:22,978 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:43:22,978 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:43:22,979 - INFO - Scraping completed successfully.
+2025-04-10 12:43:22,979 - INFO - Script finished.
+2025-04-10 12:43:22,979 - INFO - Processing CAS number: 106-18-3
+2025-04-10 12:43:30,036 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:43:30,037 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:43:30,037 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:43:30,037 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:43:30,037 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:43:30,037 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:43:30,039 - INFO - Scraping completed successfully.
+2025-04-10 12:43:30,039 - INFO - Script finished.
+2025-04-10 12:43:30,039 - INFO - Processing CAS number: 6309-51-9
+2025-04-10 12:43:34,292 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:43:34,292 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:43:34,292 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:43:34,293 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:43:34,293 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:43:34,293 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:43:34,294 - INFO - Scraping completed successfully.
+2025-04-10 12:43:34,294 - INFO - Script finished.
+2025-04-10 12:43:34,294 - INFO - Processing CAS number: 112-62-9
+2025-04-10 12:43:37,867 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:43:37,867 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:43:37,867 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:43:37,867 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:43:37,868 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:43:37,868 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:43:37,869 - INFO - Scraping completed successfully.
+2025-04-10 12:43:37,869 - INFO - Script finished.
+2025-04-10 12:43:37,869 - INFO - Processing CAS number: 142-77-8
+2025-04-10 12:43:40,292 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:43:40,293 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:43:40,293 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:43:40,293 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:43:40,293 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:43:40,293 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:43:40,294 - INFO - Scraping completed successfully.
+2025-04-10 12:43:40,295 - INFO - Script finished.
+2025-04-10 12:43:40,295 - INFO - Processing CAS number: 111-62-6
+2025-04-10 12:43:42,666 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:43:42,666 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:43:42,666 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:43:42,666 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:43:42,666 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:43:42,666 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:43:42,668 - INFO - Scraping completed successfully.
+2025-04-10 12:43:42,668 - INFO - Script finished.
+2025-04-10 12:43:42,668 - INFO - Processing CAS number: 22393-86-8
+2025-04-10 12:43:44,766 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:43:44,766 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:43:44,766 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:43:44,766 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:43:44,767 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:43:44,767 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:43:44,768 - INFO - Scraping completed successfully.
+2025-04-10 12:43:44,768 - INFO - Script finished.
+2025-04-10 12:43:44,768 - INFO - Processing CAS number: 3624-12-2
+2025-04-10 12:43:46,547 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:43:46,548 - INFO - Scraping completed successfully.
+2025-04-10 12:43:46,548 - INFO - Script finished.
+2025-04-10 12:43:46,548 - INFO - Processing CAS number: 112-61-8
+2025-04-10 12:43:48,819 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:43:48,819 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:43:48,819 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:43:48,819 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:43:48,819 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:43:48,819 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:43:48,821 - INFO - Scraping completed successfully.
+2025-04-10 12:43:48,821 - INFO - Script finished.
+2025-04-10 12:43:48,821 - INFO - Processing CAS number: 111-61-5
+2025-04-10 12:43:51,284 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:43:51,284 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:43:51,285 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:43:51,285 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:43:51,285 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:43:51,285 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:43:51,286 - INFO - Scraping completed successfully.
+2025-04-10 12:43:51,286 - INFO - Script finished.
+2025-04-10 12:43:51,286 - INFO - Processing CAS number: 123-95-5
+2025-04-10 12:43:53,660 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:43:53,660 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:43:53,660 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:43:53,660 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:43:53,661 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:43:53,661 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:43:53,664 - INFO - Scraping completed successfully.
+2025-04-10 12:43:53,664 - INFO - Script finished.
+2025-04-10 12:43:53,664 - INFO - Processing CAS number: 627-88-3
+2025-04-10 12:43:55,674 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:43:55,674 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:43:55,674 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:43:55,674 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:43:55,675 - INFO - Scraping completed successfully.
+2025-04-10 12:43:55,675 - INFO - Script finished.
+2025-04-10 12:43:55,675 - INFO - Processing CAS number: 0112-10-7
+2025-04-10 12:43:56,585 - ERROR - Error fetching URL https://www.chemicalbook.com/ProductList_En.aspx?kwd=0112-10-7: 500 Server Error: Internal Server Error for url: https://www.chemicalbook.com/ProductList_En.aspx?kwd=0112-10-7
+2025-04-10 12:43:56,586 - ERROR - Failed to fetch the main page.
+2025-04-10 12:43:56,586 - INFO - Processing CAS number: 0104-07-04
+2025-04-10 12:43:57,399 - ERROR - Error fetching URL https://www.chemicalbook.com/ProductList_En.aspx?kwd=0104-07-04: 500 Server Error: Internal Server Error for url: https://www.chemicalbook.com/ProductList_En.aspx?kwd=0104-07-04
+2025-04-10 12:43:57,399 - ERROR - Failed to fetch the main page.
+2025-04-10 12:43:57,400 - INFO - Processing CAS number: 1190-63-2
+2025-04-10 12:43:59,549 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:43:59,549 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:43:59,549 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:43:59,549 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:43:59,549 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:43:59,550 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:43:59,551 - INFO - Scraping completed successfully.
+2025-04-10 12:43:59,551 - INFO - Script finished.
+2025-04-10 12:43:59,551 - INFO - Processing CAS number: 2315-68-6
+2025-04-10 12:44:01,817 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:44:01,817 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:44:01,817 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:44:01,817 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:44:01,818 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:44:01,818 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:44:01,819 - INFO - Scraping completed successfully.
+2025-04-10 12:44:01,819 - INFO - Script finished.
+2025-04-10 12:44:01,819 - INFO - Processing CAS number: 93-58-3
+2025-04-10 12:44:04,555 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:44:04,555 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:44:04,555 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:44:04,555 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:44:04,555 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:44:04,556 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:44:04,557 - INFO - Scraping completed successfully.
+2025-04-10 12:44:04,557 - INFO - Script finished.
+2025-04-10 12:44:04,557 - INFO - Processing CAS number: 93-89-0
+2025-04-10 12:44:07,001 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:44:07,001 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:44:07,002 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:44:07,002 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:44:07,002 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:44:07,002 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:44:07,004 - INFO - Scraping completed successfully.
+2025-04-10 12:44:07,004 - INFO - Script finished.
+2025-04-10 12:44:07,004 - INFO - Processing CAS number: 136-60-7
+2025-04-10 12:44:09,204 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:44:09,204 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:44:09,204 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:44:09,204 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:44:09,204 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:44:09,205 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:44:09,206 - INFO - Scraping completed successfully.
+2025-04-10 12:44:09,206 - INFO - Script finished.
+2025-04-10 12:44:09,206 - INFO - Processing CAS number: 939-48-0
+2025-04-10 12:44:11,442 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:44:11,443 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:44:11,443 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:44:11,443 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:44:11,443 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:44:11,444 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:44:11,444 - INFO - Scraping completed successfully.
+2025-04-10 12:44:11,445 - INFO - Script finished.
+2025-04-10 12:44:11,445 - INFO - Processing CAS number: 94-46-2
+2025-04-10 12:44:13,629 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:44:13,629 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:44:13,629 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:44:13,630 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:44:13,630 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:44:13,630 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:44:13,631 - INFO - Scraping completed successfully.
+2025-04-10 12:44:13,631 - INFO - Script finished.
+2025-04-10 12:44:13,631 - INFO - Processing CAS number: 93-99-2
+2025-04-10 12:44:15,816 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:44:15,816 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:44:15,817 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:44:15,817 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:44:15,817 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:44:15,817 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:44:15,818 - INFO - Scraping completed successfully.
+2025-04-10 12:44:15,818 - INFO - Script finished.
+2025-04-10 12:44:15,818 - INFO - Processing CAS number: 2412-73-9
+2025-04-10 12:44:17,855 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:44:17,855 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:44:17,856 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:44:17,856 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:44:17,856 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:44:17,856 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:44:17,857 - INFO - Scraping completed successfully.
+2025-04-10 12:44:17,857 - INFO - Script finished.
+2025-04-10 12:44:17,857 - INFO - Processing CAS number: 614-18-6
+2025-04-10 12:44:20,431 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:44:20,431 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:44:20,431 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:44:20,431 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:44:20,432 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:44:20,432 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:44:20,433 - INFO - Scraping completed successfully.
+2025-04-10 12:44:20,433 - INFO - Script finished.
+2025-04-10 12:44:20,433 - INFO - Processing CAS number: 93-60-7
+2025-04-10 12:44:22,634 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:44:22,634 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:44:22,634 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:44:22,634 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:44:22,635 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:44:22,635 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:44:22,636 - INFO - Scraping completed successfully.
+2025-04-10 12:44:22,636 - INFO - Script finished.
+2025-04-10 12:44:22,636 - INFO - Processing CAS number: 6938-06-03
+2025-04-10 12:44:40,608 - ERROR - Error fetching URL https://www.chemicalbook.com/ProductList_En.aspx?kwd=6938-06-03: 500 Server Error: Internal Server Error for url: https://www.chemicalbook.com/ProductList_En.aspx?kwd=6938-06-03
+2025-04-10 12:44:40,609 - ERROR - Failed to fetch the main page.
+2025-04-10 12:44:40,609 - INFO - Processing CAS number: 553-60-6
+2025-04-10 12:44:47,906 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:44:47,906 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:44:47,906 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:44:47,907 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:44:47,907 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:44:47,907 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:44:47,908 - INFO - Scraping completed successfully.
+2025-04-10 12:44:47,908 - INFO - Script finished.
+2025-04-10 12:44:47,908 - INFO - Processing CAS number: 108-88-3
+2025-04-10 12:44:49,398 - ERROR - Failed to extract href from div.
+2025-04-10 12:44:49,398 - INFO - Processing CAS number: 142-82-5
+2025-04-10 12:44:56,811 - INFO - Skipping table 0 due to keyword 'suppliers list'
+2025-04-10 12:44:56,811 - INFO - Skipping table 1 due to keyword 'company name'
+2025-04-10 12:44:56,811 - INFO - Skipping table 2 due to keyword 'company name'
+2025-04-10 12:44:56,811 - INFO - Skipping table 3 due to keyword 'company name'
+2025-04-10 12:44:56,811 - INFO - Skipping table 4 due to keyword 'company name'
+2025-04-10 12:44:56,811 - INFO - Skipping table 5 due to keyword 'company name'
+2025-04-10 12:44:56,813 - INFO - Scraping completed successfully.
+2025-04-10 12:44:56,813 - INFO - Script finished.
+2025-04-10 12:45:52,517 - INFO - Data saved to chemicalbook_data/chemicalbook_data.json
+2025-04-10 13:07:49,174 - INFO - Data saved to chemicalbook_data/chemicalbook_data.csv
