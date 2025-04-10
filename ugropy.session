@@ -1,1 +1,1 @@
-<MoleculeData><Name>3,4-dihydroxybenzaldehyde</Name><SMILES>C1=CC(=C(C=C1C=O)O)O</SMILES><MolecularFormula>C7H6O3</MolecularFormula><UNIFACSubgroups>{'ACH': 3, 'AC': 1, 'ACOH': 2, 'HCO': 1}</UNIFACSubgroups></MoleculeData>
+<MoleculeData><Name>sorbic acid</Name><SMILES>CC=CC=CC(=O)O</SMILES><MolecularFormula>C6H8O2</MolecularFormula><UNIFACSubgroups>{'CH3': 1, 'CH=CH': 2, 'COOH': 1}</UNIFACSubgroups></MoleculeData>
